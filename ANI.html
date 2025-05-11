@@ -1,0 +1,222 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATHENA AI - Refined Smooth Opening Animation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;400&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Playfair Display', serif;
+      color: #111111;
+      user-select: none;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+      perspective: 800px;
+    }
+
+    /* Helmet wrapper with smooth fade, scale and subtle 3D tilt */
+    .helmet-wrapper {
+      width: 96px;
+      height: 96px;
+      opacity: 0;
+      transform: scale(0.85) rotateX(15deg) rotateY(-10deg);
+      animation: helmetFadeScaleRotate 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      will-change: transform, opacity;
+      background: transparent;
+      box-shadow: none;
+      transition: filter 0.3s ease;
+    }
+    @media (min-width: 640px) {
+      .helmet-wrapper {
+        width: 144px;
+        height: 144px;
+      }
+    }
+    .helmet-wrapper:hover {
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.12));
+      cursor: default;
+    }
+
+    .helmet-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: transparent;
+      border-radius: 0;
+      display: block;
+      transform: scaleX(-1);
+      /* Flip horizontally to face left */
+      filter: drop-shadow(0 0 3px rgba(0,0,0,0.1));
+      transition: filter 0.3s ease;
+    }
+    .helmet-wrapper:hover .helmet-img {
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.18));
+    }
+
+    @keyframes helmetFadeScaleRotate {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) rotateX(15deg) rotateY(-10deg);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1) rotateX(0deg) rotateY(0deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotateX(5deg) rotateY(-5deg);
+      }
+    }
+
+    /* Text container with requested design and smooth fade/slide */
+    .text-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: textFadeUp 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation-delay: 3.6s;
+      will-change: transform, opacity;
+      user-select: text;
+    }
+
+    @keyframes textFadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ATHENA text styling */
+    .athena-text {
+      font-weight: 100;
+      font-size: 1.875rem; /* text-3xl */
+      letter-spacing: 0.12em;
+      color: #111111;
+      user-select: text;
+      font-family: 'Playfair Display', serif;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    @media (min-width: 640px) {
+      .athena-text {
+        font-size: 2.25rem; /* text-4xl */
+      }
+    }
+    .athena-text:hover {
+      color: #000000;
+      cursor: default;
+    }
+
+    /* AI badge styling */
+    .ai-badge {
+      background: #000000;
+      color: #ffffff;
+      font-weight: 600;
+      width: 36px; /* w-9 */
+      height: 36px; /* h-9 */
+      border-radius: 9999px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.25rem; /* text-xl */
+      user-select: text;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: translateX(20px);
+      animation: aiSlideIn 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation-delay: 4.95s;
+      box-shadow: 0 0 6px rgba(0,0,0,0.15);
+      will-change: transform, opacity, box-shadow;
+    }
+    .ai-badge:hover {
+      background-color: #222222;
+      box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      cursor: default;
+    }
+    @media (min-width: 640px) {
+      .ai-badge {
+        width: 40px; /* w-10 */
+        height: 40px; /* h-10 */
+        font-size: 1.5rem; /* text-2xl */
+      }
+    }
+
+    @keyframes aiSlideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Subtle elegant underline animation below text */
+    .underline {
+      width: 0;
+      height: 2px;
+      background: #111111;
+      margin: 0 auto;
+      margin-top: 0;
+      border-radius: 1px;
+      animation: underlineExpand 2.2s ease forwards;
+      animation-delay: 5.8s;
+      will-change: width;
+    }
+    @keyframes underlineExpand {
+      to {
+        width: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main aria-label="ATHENA AI opening animation" class="container" role="main">
+    <div aria-hidden="true" class="helmet-wrapper" tabindex="-1">
+      <img
+        src="https://storage.googleapis.com/a1aa/image/49508cd8-f9f8-4247-0ee2-4c5cdfd1efc9.jpg"
+        alt="Black outline drawing of a Spartan helmet facing left with a crest on top, transparent background"
+        class="helmet-img"
+        decoding="async"
+        draggable="false"
+        loading="lazy"
+        width="144"
+        height="144"
+      />
+    </div>
+    <div class="text-row">
+      <span class="athena-text select-text" aria-label="ATHENA">
+        ATHENA
+      </span>
+      <span class="ai-badge select-text" aria-label="Artificial Intelligence">
+        AI
+      </span>
+    </div>
+    <div aria-hidden="true" class="underline"></div>
+  </main>
+
+  <script>
+    // Redirect to chat.html after 10 seconds
+    setTimeout(() => {
+      window.location.href = 'chat.html';
+    }, 10000);
+  </script>
+</body>
+</html>
