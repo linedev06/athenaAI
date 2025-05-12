@@ -38,7 +38,8 @@
  </head>
  <body class="bg-gray-900 text-gray-300 font-sans min-h-screen flex">
   <!-- Notification container -->
-  <div id="notification-container" aria-live="polite" aria-atomic="true"></div>
+  <div aria-atomic="true" aria-live="polite" id="notification-container">
+  </div>
   <!-- Sidebar -->
   <aside class="fixed top-0 left-0 h-full w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
    <div class="flex items-center justify-center h-20 border-b border-gray-700 px-4">
@@ -51,37 +52,43 @@
     <ul class="space-y-1 px-2">
      <li>
       <button aria-current="page" class="w-full flex items-center px-3 py-2 rounded-md text-indigo-400 bg-gray-700 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-visao">
-       <i class="fas fa-tachometer-alt mr-3 text-indigo-400" aria-hidden="true"></i>
+       <i aria-hidden="true" class="fas fa-tachometer-alt mr-3 text-indigo-400">
+       </i>
        Visão Geral
       </button>
      </li>
      <li>
       <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-processos">
-       <i class="fas fa-briefcase mr-3" aria-hidden="true"></i>
+       <i aria-hidden="true" class="fas fa-briefcase mr-3">
+       </i>
        Processos
       </button>
      </li>
      <li>
       <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-clientes">
-       <i class="fas fa-users mr-3" aria-hidden="true"></i>
+       <i aria-hidden="true" class="fas fa-users mr-3">
+       </i>
        Clientes
       </button>
      </li>
      <li>
       <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-precificacao">
-       <i class="fas fa-dollar-sign mr-3" aria-hidden="true"></i>
+       <i aria-hidden="true" class="fas fa-dollar-sign mr-3">
+       </i>
        Precificação
       </button>
      </li>
      <li>
       <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-alertas">
-       <i class="fas fa-exclamation-triangle mr-3" aria-hidden="true"></i>
+       <i aria-hidden="true" class="fas fa-exclamation-triangle mr-3">
+       </i>
        Alertas
       </button>
      </li>
      <li>
       <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-relatorios">
-       <i class="fas fa-file-alt mr-3" aria-hidden="true"></i>
+       <i aria-hidden="true" class="fas fa-file-alt mr-3">
+       </i>
        Relatórios
       </button>
      </li>
@@ -96,36 +103,48 @@
    <!-- Visão Geral content -->
    <section class="space-y-6" id="content-visao">
     <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
-     <i class="fas fa-tachometer-alt mr-2" aria-hidden="true"></i>Visão Geral
+     <i aria-hidden="true" class="fas fa-tachometer-alt mr-2">
+     </i>
+     Visão Geral
     </h2>
     <div aria-label="Painel de indicadores financeiros e operacionais" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
      <!-- Card: Gráfico de rentabilidade total -->
      <div aria-labelledby="rentabilidade-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
       <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
-       <i class="fas fa-coins mr-2" aria-hidden="true"></i>Rentabilidade Total (Ganhos x Custos)
+       <i aria-hidden="true" class="fas fa-coins mr-2">
+       </i>
+       Rentabilidade Total (Ganhos x Custos)
       </h3>
       <div class="flex-1 relative">
-       <canvas aria-label="Gráfico de barras mostrando ganhos e custos mensais" id="chartRentabilidade" role="img" class="w-full h-full">
+       <canvas aria-label="Gráfico de barras mostrando ganhos e custos mensais" class="w-full h-full" id="chartRentabilidade" role="img">
        </canvas>
       </div>
       <div class="mt-4 flex flex-wrap gap-3">
-       <button aria-label="Ver detalhes do gráfico de rentabilidade" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="button" id="btnDetalhesRentabilidade">
-        <i class="fas fa-search mr-2" aria-hidden="true"></i>Ver detalhes
+       <button aria-label="Ver detalhes do gráfico de rentabilidade" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" id="btnDetalhesRentabilidade" type="button">
+        <i aria-hidden="true" class="fas fa-search mr-2">
+        </i>
+        Ver detalhes
        </button>
-       <button aria-label="Exportar gráfico de rentabilidade" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" type="button" id="exportRentabilidade">
-        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       <button aria-label="Exportar gráfico de rentabilidade" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" id="exportRentabilidade" type="button">
+        <i aria-hidden="true" class="fas fa-file-export mr-2">
+        </i>
+        Exportar
        </button>
       </div>
      </div>
      <!-- Card: Ranking de processos -->
      <div aria-labelledby="ranking-processos-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
       <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
-       <i class="fas fa-list-ol mr-2" aria-hidden="true"></i>Ranking de Processos Mais Lucrativos e Deficitários
+       <i aria-hidden="true" class="fas fa-list-ol mr-2">
+       </i>
+       Ranking de Processos Mais Lucrativos e Deficitários
       </h3>
       <div class="flex-1 flex flex-col md:flex-row md:space-x-6 overflow-y-auto max-h-[calc(100%-56px)]">
        <div class="flex-1 mb-4 md:mb-0">
         <h4 class="text-indigo-300 font-semibold mb-1 select-none flex items-center">
-         <i class="fas fa-arrow-up mr-2 text-green-400" aria-hidden="true"></i>Mais Lucrativos
+         <i aria-hidden="true" class="fas fa-arrow-up mr-2 text-green-400">
+         </i>
+         Mais Lucrativos
         </h4>
         <ol class="list-decimal list-inside space-y-1 text-gray-300 text-sm max-h-48 overflow-y-auto pr-2">
          <li>
@@ -172,7 +191,9 @@
        </div>
        <div class="flex-1">
         <h4 class="text-indigo-300 font-semibold mb-1 select-none flex items-center">
-         <i class="fas fa-arrow-down mr-2 text-red-500" aria-hidden="true"></i>Mais Deficitários
+         <i aria-hidden="true" class="fas fa-arrow-down mr-2 text-red-500">
+         </i>
+         Mais Deficitários
         </h4>
         <ol class="list-decimal list-inside space-y-1 text-gray-300 text-sm max-h-48 overflow-y-auto pr-2">
          <li>
@@ -219,23 +240,31 @@
        </div>
       </div>
       <div class="mt-4 flex flex-wrap gap-3">
-       <button aria-label="Filtrar ranking de processos por sócio" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="button" id="btnFiltrarSocio">
-        <i class="fas fa-filter mr-2" aria-hidden="true"></i>Filtrar por sócio
+       <button aria-label="Filtrar ranking de processos por sócio" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" id="btnFiltrarSocio" type="button">
+        <i aria-hidden="true" class="fas fa-filter mr-2">
+        </i>
+        Filtrar por sócio
        </button>
-       <button aria-label="Exportar ranking de processos" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" type="button" id="exportRanking">
-        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       <button aria-label="Exportar ranking de processos" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" id="exportRanking" type="button">
+        <i aria-hidden="true" class="fas fa-file-export mr-2">
+        </i>
+        Exportar
        </button>
       </div>
      </div>
      <!-- Card: Lista de clientes com prejuízo e lucro -->
      <div aria-labelledby="clientes-lucro-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
       <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
-       <i class="fas fa-user-friends mr-2" aria-hidden="true"></i>Clientes com Prejuízo e Lucro
+       <i aria-hidden="true" class="fas fa-user-friends mr-2">
+       </i>
+       Clientes com Prejuízo e Lucro
       </h3>
       <div class="flex-1 flex flex-col md:flex-row md:space-x-6 overflow-y-auto max-h-[calc(100%-56px)]">
        <div class="flex-1 mb-4 md:mb-0">
         <h4 class="text-indigo-300 font-semibold mb-1 select-none flex items-center">
-         <i class="fas fa-arrow-up mr-2 text-green-400" aria-hidden="true"></i>Clientes com Lucro
+         <i aria-hidden="true" class="fas fa-arrow-up mr-2 text-green-400">
+         </i>
+         Clientes com Lucro
         </h4>
         <ul class="list-disc list-inside text-gray-300 text-sm max-h-48 overflow-y-auto pr-2 space-y-1">
          <li>
@@ -272,7 +301,9 @@
        </div>
        <div class="flex-1">
         <h4 class="text-indigo-300 font-semibold mb-1 select-none flex items-center">
-         <i class="fas fa-arrow-down mr-2 text-red-500" aria-hidden="true"></i>Clientes com Prejuízo
+         <i aria-hidden="true" class="fas fa-arrow-down mr-2 text-red-500">
+         </i>
+         Clientes com Prejuízo
         </h4>
         <ul class="list-disc list-inside text-gray-300 text-sm max-h-48 overflow-y-auto pr-2 space-y-1">
          <li>
@@ -309,36 +340,48 @@
        </div>
       </div>
       <div class="mt-4 flex flex-wrap gap-3">
-       <button aria-label="Simular novo valor para clientes" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="button" id="btnSimularClientes">
-        <i class="fas fa-calculator mr-2" aria-hidden="true"></i>Simular novo valor
+       <button aria-label="Simular novo valor para clientes" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" id="btnSimularClientes" type="button">
+        <i aria-hidden="true" class="fas fa-calculator mr-2">
+        </i>
+        Simular novo valor
        </button>
-       <button aria-label="Exportar lista de clientes" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" type="button" id="exportClientes">
-        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       <button aria-label="Exportar lista de clientes" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" id="exportClientes" type="button">
+        <i aria-hidden="true" class="fas fa-file-export mr-2">
+        </i>
+        Exportar
        </button>
       </div>
      </div>
      <!-- Card: Análise de tempo gasto por tipo de ação -->
      <div aria-labelledby="tempo-acao-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
       <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
-       <i class="fas fa-clock mr-2" aria-hidden="true"></i>Análise de Tempo Gasto por Tipo de Ação
+       <i aria-hidden="true" class="fas fa-clock mr-2">
+       </i>
+       Análise de Tempo Gasto por Tipo de Ação
       </h3>
       <div class="flex-1 relative">
-       <canvas aria-label="Gráfico de pizza mostrando tempo gasto por tipo de ação" id="chartTempoAcao" role="img" class="w-full h-full">
+       <canvas aria-label="Gráfico de pizza mostrando tempo gasto por tipo de ação" class="w-full h-full" id="chartTempoAcao" role="img">
        </canvas>
       </div>
       <div class="mt-4 flex flex-wrap gap-3">
        <button aria-label="Ver detalhes da análise de tempo gasto" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="button">
-        <i class="fas fa-search mr-2" aria-hidden="true"></i>Ver detalhes
+        <i aria-hidden="true" class="fas fa-search mr-2">
+        </i>
+        Ver detalhes
        </button>
-       <button aria-label="Exportar gráfico de tempo gasto" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" type="button" id="exportTempoAcao">
-        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       <button aria-label="Exportar gráfico de tempo gasto" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" id="exportTempoAcao" type="button">
+        <i aria-hidden="true" class="fas fa-file-export mr-2">
+        </i>
+        Exportar
        </button>
       </div>
      </div>
      <!-- Card: Alertas de desperdício ou risco -->
      <div aria-labelledby="alertas-risco-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
       <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
-       <i class="fas fa-exclamation-triangle mr-2" aria-hidden="true"></i>Alertas de Desperdício ou Risco
+       <i aria-hidden="true" class="fas fa-exclamation-triangle mr-2">
+       </i>
+       Alertas de Desperdício ou Risco
       </h3>
       <div class="flex-1 overflow-y-auto max-h-[calc(100%-56px)] pr-2">
        <ul class="list-disc list-inside text-red-500 text-sm space-y-3">
@@ -348,7 +391,7 @@
           Ação Trabalhista - Pereira
          </span>
          consome 22h/mês e gera apenas R$200
-         <button aria-label="Ver detalhes do alerta para processo Ação Trabalhista - Pereira" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Ação Trabalhista - Pereira">
+         <button aria-label="Ver detalhes do alerta para processo Ação Trabalhista - Pereira" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" data-alert="Ação Trabalhista - Pereira" type="button">
           Ver detalhes
          </button>
         </li>
@@ -358,7 +401,7 @@
           Cobrança - Empresa Y
          </span>
          consome 18h/mês e gera R$500
-         <button aria-label="Ver detalhes do alerta para processo Cobrança - Empresa Y" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Cobrança - Empresa Y">
+         <button aria-label="Ver detalhes do alerta para processo Cobrança - Empresa Y" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" data-alert="Cobrança - Empresa Y" type="button">
           Ver detalhes
          </button>
         </li>
@@ -368,7 +411,7 @@
           Revisão Contratual - Santos
          </span>
          consome 15h/mês e gera R$300
-         <button aria-label="Ver detalhes do alerta para processo Revisão Contratual - Santos" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Revisão Contratual - Santos">
+         <button aria-label="Ver detalhes do alerta para processo Revisão Contratual - Santos" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" data-alert="Revisão Contratual - Santos" type="button">
           Ver detalhes
          </button>
         </li>
@@ -378,7 +421,7 @@
           Inventário - Costa
          </span>
          consome 20h/mês e gera R$400
-         <button aria-label="Ver detalhes do alerta para processo Inventário - Costa" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Inventário - Costa">
+         <button aria-label="Ver detalhes do alerta para processo Inventário - Costa" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" data-alert="Inventário - Costa" type="button">
           Ver detalhes
          </button>
         </li>
@@ -388,25 +431,31 @@
           Contrato Imobiliário - Almeida
          </span>
          consome 17h/mês e gera R$350
-         <button aria-label="Ver detalhes do alerta para processo Contrato Imobiliário - Almeida" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Contrato Imobiliário - Almeida">
+         <button aria-label="Ver detalhes do alerta para processo Contrato Imobiliário - Almeida" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" data-alert="Contrato Imobiliário - Almeida" type="button">
           Ver detalhes
          </button>
         </li>
        </ul>
       </div>
       <div class="mt-4 flex flex-wrap gap-3">
-       <button aria-label="Ver todos os alertas" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 flex items-center" type="button" id="btnVerTodosAlertas">
-        <i class="fas fa-bell mr-2" aria-hidden="true"></i>Ver todos os alertas
+       <button aria-label="Ver todos os alertas" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 flex items-center" id="btnVerTodosAlertas" type="button">
+        <i aria-hidden="true" class="fas fa-bell mr-2">
+        </i>
+        Ver todos os alertas
        </button>
-       <button aria-label="Exportar alertas" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400 flex items-center" type="button" id="exportAlertas">
-        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       <button aria-label="Exportar alertas" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400 flex items-center" id="exportAlertas" type="button">
+        <i aria-hidden="true" class="fas fa-file-export mr-2">
+        </i>
+        Exportar
        </button>
       </div>
      </div>
      <!-- Card: Sugestão de valor ideal de cobrança -->
      <div aria-labelledby="sugestao-cobranca-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
       <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
-       <i class="fas fa-chart-line mr-2" aria-hidden="true"></i>Sugestão de Valor Ideal de Cobrança por Tipo de Processo
+       <i aria-hidden="true" class="fas fa-chart-line mr-2">
+       </i>
+       Sugestão de Valor Ideal de Cobrança por Tipo de Processo
       </h3>
       <div class="flex-1 overflow-y-auto max-h-[calc(100%-56px)]">
        <table class="w-full text-sm text-gray-300 border-collapse border border-gray-700">
@@ -438,8 +487,10 @@
            4.200
           </td>
           <td class="border border-gray-600 px-3 py-2 text-center">
-           <button aria-label="Simular novo valor para Ação Trabalhista" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Ação Trabalhista" data-valoratual="3500" data-valorideal="4200">
-            <i class="fas fa-calculator mr-1"></i>Simular
+           <button aria-label="Simular novo valor para Ação Trabalhista" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" data-tipo="Ação Trabalhista" data-valoratual="3500" data-valorideal="4200" type="button">
+            <i class="fas fa-calculator mr-1">
+            </i>
+            Simular
            </button>
           </td>
          </tr>
@@ -454,8 +505,10 @@
            3.100
           </td>
           <td class="border border-gray-600 px-3 py-2 text-center">
-           <button aria-label="Simular novo valor para Cobrança" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Cobrança" data-valoratual="2800" data-valorideal="3100">
-            <i class="fas fa-calculator mr-1"></i>Simular
+           <button aria-label="Simular novo valor para Cobrança" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" data-tipo="Cobrança" data-valoratual="2800" data-valorideal="3100" type="button">
+            <i class="fas fa-calculator mr-1">
+            </i>
+            Simular
            </button>
           </td>
          </tr>
@@ -470,8 +523,10 @@
            4.500
           </td>
           <td class="border border-gray-600 px-3 py-2 text-center">
-           <button aria-label="Simular novo valor para Contrato Imobiliário" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Contrato Imobiliário" data-valoratual="4000" data-valorideal="4500">
-            <i class="fas fa-calculator mr-1"></i>Simular
+           <button aria-label="Simular novo valor para Contrato Imobiliário" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" data-tipo="Contrato Imobiliário" data-valoratual="4000" data-valorideal="4500" type="button">
+            <i class="fas fa-calculator mr-1">
+            </i>
+            Simular
            </button>
           </td>
          </tr>
@@ -486,8 +541,10 @@
            3.700
           </td>
           <td class="border border-gray-600 px-3 py-2 text-center">
-           <button aria-label="Simular novo valor para Revisão Contratual" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Revisão Contratual" data-valoratual="3200" data-valorideal="3700">
-            <i class="fas fa-calculator mr-1"></i>Simular
+           <button aria-label="Simular novo valor para Revisão Contratual" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" data-tipo="Revisão Contratual" data-valoratual="3200" data-valorideal="3700" type="button">
+            <i class="fas fa-calculator mr-1">
+            </i>
+            Simular
            </button>
           </td>
          </tr>
@@ -502,8 +559,10 @@
            4.100
           </td>
           <td class="border border-gray-600 px-3 py-2 text-center">
-           <button aria-label="Simular novo valor para Inventário" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Inventário" data-valoratual="3800" data-valorideal="4100">
-            <i class="fas fa-calculator mr-1"></i>Simular
+           <button aria-label="Simular novo valor para Inventário" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" data-tipo="Inventário" data-valoratual="3800" data-valorideal="4100" type="button">
+            <i class="fas fa-calculator mr-1">
+            </i>
+            Simular
            </button>
           </td>
          </tr>
@@ -516,7 +575,9 @@
    <!-- Processos content -->
    <section aria-label="Seção Processos" class="hidden space-y-6" id="content-processos">
     <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
-     <i class="fas fa-briefcase mr-2" aria-hidden="true"></i>Processos
+     <i aria-hidden="true" class="fas fa-briefcase mr-2">
+     </i>
+     Processos
     </h2>
     <div class="bg-gray-800 rounded-lg shadow-md p-5 overflow-x-auto">
      <table class="w-full text-sm text-gray-300 border-collapse border border-gray-700">
@@ -567,7 +628,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do processo 001" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -592,7 +654,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do processo 002" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -617,7 +680,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do processo 003" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -642,7 +706,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do processo 004" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -667,7 +732,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do processo 005" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -678,7 +744,9 @@
    <!-- Clientes content -->
    <section aria-label="Seção Clientes" class="hidden space-y-6" id="content-clientes">
     <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
-     <i class="fas fa-users mr-2" aria-hidden="true"></i>Clientes
+     <i aria-hidden="true" class="fas fa-users mr-2">
+     </i>
+     Clientes
     </h2>
     <div class="bg-gray-800 rounded-lg shadow-md p-5 overflow-x-auto">
      <table class="w-full text-sm text-gray-300 border-collapse border border-gray-700">
@@ -717,7 +785,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do cliente Empresa Alpha" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -736,7 +805,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do cliente João da Silva" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -755,7 +825,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do cliente Maria Oliveira" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -774,7 +845,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do cliente Empresa Gama" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -793,7 +865,8 @@
         </td>
         <td class="border border-gray-600 px-3 py-2 text-center">
          <button aria-label="Ver detalhes do cliente Ana Santos" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+          <i aria-hidden="true" class="fas fa-eye">
+          </i>
          </button>
         </td>
        </tr>
@@ -804,7 +877,9 @@
    <!-- Precificação content -->
    <section aria-label="Seção Precificação" class="hidden space-y-6" id="content-precificacao">
     <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
-     <i class="fas fa-dollar-sign mr-2" aria-hidden="true"></i>Precificação
+     <i aria-hidden="true" class="fas fa-dollar-sign mr-2">
+     </i>
+     Precificação
     </h2>
     <div class="bg-gray-800 rounded-lg shadow-md p-5 max-w-lg">
      <form class="space-y-6" id="formPrecificacao">
@@ -846,7 +921,9 @@
        <input class="bg-gray-700 border border-gray-600 text-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" id="novo-valor" min="0" name="novo-valor" placeholder="Ex: 4200" required="" step="0.01" type="number"/>
       </div>
       <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="submit">
-       <i class="fas fa-calculator mr-2" aria-hidden="true"></i>Simular
+       <i aria-hidden="true" class="fas fa-calculator mr-2">
+       </i>
+       Simular
       </button>
      </form>
      <div aria-live="polite" class="mt-6 p-4 bg-gray-700 rounded-md text-indigo-300 hidden" id="resultado-simulacao" role="alert">
@@ -856,7 +933,9 @@
    <!-- Alertas content -->
    <section aria-label="Seção Alertas" class="hidden space-y-6" id="content-alertas">
     <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
-     <i class="fas fa-exclamation-triangle mr-2" aria-hidden="true"></i>Alertas
+     <i aria-hidden="true" class="fas fa-exclamation-triangle mr-2">
+     </i>
+     Alertas
     </h2>
     <div class="bg-gray-800 rounded-lg shadow-md p-5 max-h-[480px] overflow-y-auto">
      <p class="text-gray-400 italic text-sm select-none">
@@ -867,24 +946,34 @@
    <!-- Relatórios content -->
    <section aria-label="Seção Relatórios" class="hidden space-y-6" id="content-relatorios">
     <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
-     <i class="fas fa-file-alt mr-2" aria-hidden="true"></i>Relatórios
+     <i aria-hidden="true" class="fas fa-file-alt mr-2">
+     </i>
+     Relatórios
     </h2>
     <div class="bg-gray-800 rounded-lg shadow-md p-5">
      <p class="text-gray-400 mb-4">
       Aqui você pode gerar relatórios detalhados sobre a performance financeira e operacional do escritório.
      </p>
      <div class="space-y-4 max-w-md">
-      <button aria-label="Gerar relatório mensal" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" type="button" id="btnRelatorioMensal">
-       <i class="fas fa-file-alt mr-2" aria-hidden="true"></i>Gerar Relatório Mensal
+      <button aria-label="Gerar relatório mensal" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" id="btnRelatorioMensal" type="button">
+       <i aria-hidden="true" class="fas fa-file-alt mr-2">
+       </i>
+       Gerar Relatório Mensal
       </button>
-      <button aria-label="Gerar relatório anual" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" type="button" id="btnRelatorioAnual">
-       <i class="fas fa-file-alt mr-2" aria-hidden="true"></i>Gerar Relatório Anual
+      <button aria-label="Gerar relatório anual" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" id="btnRelatorioAnual" type="button">
+       <i aria-hidden="true" class="fas fa-file-alt mr-2">
+       </i>
+       Gerar Relatório Anual
       </button>
-      <button aria-label="Exportar relatórios em PDF" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" type="button" id="btnExportarPDF">
-       <i class="fas fa-file-pdf mr-2" aria-hidden="true"></i>Exportar em PDF
+      <button aria-label="Exportar relatórios em PDF" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" id="btnExportarPDF" type="button">
+       <i aria-hidden="true" class="fas fa-file-pdf mr-2">
+       </i>
+       Exportar em PDF
       </button>
-      <button aria-label="Exportar relatórios em Excel" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" type="button" id="btnExportarExcel">
-       <i class="fas fa-file-excel mr-2" aria-hidden="true"></i>Exportar em Excel
+      <button aria-label="Exportar relatórios em Excel" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" id="btnExportarExcel" type="button">
+       <i aria-hidden="true" class="fas fa-file-excel mr-2">
+       </i>
+       Exportar em Excel
       </button>
      </div>
     </div>
