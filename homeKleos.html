@@ -1,0 +1,462 @@
+<html class="scroll-smooth" lang="pt-BR">
+ <head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Kleos - Plataforma para Escritórios de Advocacia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+   href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+   rel="stylesheet"
+  />
+  <link
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+   rel="stylesheet"
+  />
+  <style>
+   body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #f8fafc;
+    scroll-behavior: smooth;
+   }
+   /* Smooth transitions for interactive elements */
+   a,
+   button {
+    transition: all 0.3s ease;
+   }
+   /* Scrollbar for charts container */
+   .charts-scroll::-webkit-scrollbar {
+    height: 8px;
+   }
+   .charts-scroll::-webkit-scrollbar-thumb {
+    background-color: #2563eb;
+    border-radius: 4px;
+   }
+   /* Logo text serif font override */
+   .logo-text {
+    font-family: serif;
+   }
+  </style>
+ </head>
+ <body class="min-h-screen flex flex-col">
+  <header
+   class="sticky top-0 z-50 bg-gradient-to-r from-indigo-900 via-indigo-800 to-indigo-900 shadow-lg"
+  >
+   <nav
+    class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between"
+    aria-label="Main navigation"
+   >
+    <div class="flex items-center space-x-4">
+     <img
+      alt="Black solid triangle shape representing the Kleos logo icon with transparent background"
+      class="w-14 h-14"
+      height="56"
+      loading="lazy"
+      src="ATHENA_AI__8_-removebg-preview.png"
+      width="56"
+     />
+     <h1
+      class="text-3xl font-extrabold tracking-wide uppercase text-white select-none logo-text"
+     >
+      KLEOS
+     </h1>
+    </div>
+    <ul
+     class="hidden md:flex space-x-12 text-indigo-300 font-semibold text-lg tracking-wide"
+    >
+     <li>
+      <a
+       class="hover:text-white focus:text-white focus:outline-none"
+       href="#benefits"
+       >Benefícios</a
+      >
+     </li>
+     <li>
+      <a
+       class="hover:text-white focus:text-white focus:outline-none"
+       href="#differential"
+       >Diferencial</a
+      >
+     </li>
+     <li>
+      <a
+       class="hover:text-white focus:text-white focus:outline-none"
+       href="#quotes"
+       >Destaques</a
+      >
+     </li>
+     <li>
+      <a
+       class="hover:text-white focus:text-white focus:outline-none"
+       href="#contact"
+       >Contato</a
+      >
+     </li>
+    </ul>
+    <button
+     aria-label="Abrir menu"
+     class="md:hidden text-indigo-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
+     id="menu-btn"
+    >
+     <i class="fas fa-bars fa-lg"></i>
+    </button>
+   </nav>
+   <div
+    class="hidden md:hidden bg-indigo-900 px-6 pb-6 space-y-5 text-indigo-300 font-semibold text-lg tracking-wide"
+    id="mobile-menu"
+   >
+    <a class="block hover:text-white focus:text-white focus:outline-none" href="#benefits"
+     >Benefícios</a
+    >
+    <a class="block hover:text-white focus:text-white focus:outline-none" href="#differential"
+     >Diferencial</a
+    >
+    <a class="block hover:text-white focus:text-white focus:outline-none" href="#quotes"
+     >Destaques</a
+    >
+    <a class="block hover:text-white focus:text-white focus:outline-none" href="#contact"
+     >Contato</a
+    >
+   </div>
+  </header>
+  <main class="flex-grow">
+   <section
+    aria-label="Apresentação principal do Kleos"
+    class="relative overflow-hidden"
+   >
+    <div
+     class="max-w-7xl mx-auto px-6 py-24 md:py-36 flex flex-col-reverse md:flex-row items-center gap-16"
+    >
+     <div class="max-w-xl text-center md:text-left space-y-8">
+        <div class="flex items-center space-x-4">  
+            <img
+            alt="Black solid triangle shape representing the Kleos logo icon with transparent background"
+            class="w-16 h-16"
+            height="64"
+            loading="lazy"
+            src="ATHENA_AI__8_-removebg-preview.png"
+            width="64"
+          />
+          
+      <h2
+       class="text-5xl md:text-6xl font-extrabold tracking-widest uppercase text-white drop-shadow-lg logo-text leading-tight"
+      >
+      
+       KLEOS
+      </h2>
+    </div>
+      
+      <p class="text-indigo-300 text-xl md:text-2xl leading-relaxed font-medium">
+       A primeira ferramenta do mercado que mostra, em tempo real, se o seu
+       escritório está ganhando ou perdendo dinheiro — e o mais importante: por
+       quê.
+      </p>
+      <a
+       href="#benefits"
+       class="inline-block mt-4 px-10 py-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500 rounded-lg font-semibold text-white shadow-lg tracking-wide"
+       >Conheça os benefícios</a
+      >
+     </div>
+     <div class="w-full max-w-xl drop-shadow-2xl">
+      <img
+       alt="Dashboard moderno do Kleos mostrando gráficos de barras, linhas e indicadores financeiros em tons de azul e cinza, representando controle financeiro para escritórios de advocacia"
+       class="rounded-3xl shadow-2xl mx-auto"
+       height="420"
+       loading="lazy"
+       src="https://storage.googleapis.com/a1aa/image/13b4a312-02e5-4b28-0f53-88e224557bb2.jpg"
+       width="700"
+      />
+     </div>
+    </div>
+    <svg
+     aria-hidden="true"
+     class="absolute bottom-0 left-0 w-full"
+     fill="none"
+     viewBox="0 0 1440 120"
+     xmlns="http://www.w3.org/2000/svg"
+    >
+     <path d="M0 80C360 120 1080 40 1440 80V120H0V80Z" fill="#1e293b"></path>
+    </svg>
+   </section>
+   <section
+    aria-label="Benefícios principais do Kleos"
+    class="max-w-7xl mx-auto px-6 py-24 md:py-32"
+    id="benefits"
+   >
+    <h3
+     class="text-4xl font-extrabold text-indigo-100 text-center mb-16 tracking-wide"
+    >
+     Benefícios principais
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
+     <article
+      class="bg-indigo-900 rounded-3xl p-10 shadow-lg hover:shadow-indigo-600 transition transform hover:-translate-y-1"
+     >
+      <div
+       class="flex items-center justify-center w-16 h-16 rounded-full bg-indigo-700 text-indigo-300 mb-6 text-2xl"
+      >
+       <i class="fas fa-balance-scale"></i>
+      </div>
+      <h4 class="text-2xl font-semibold text-white mb-4 leading-snug">
+       Mostra quanto custa e quanto rende cada processo
+      </h4>
+      <p class="text-indigo-300 leading-relaxed text-lg font-medium">
+       Saiba exatamente o custo e o retorno financeiro de cada ação jurídica,
+       para decisões mais assertivas.
+      </p>
+     </article>
+     <article
+      class="bg-indigo-900 rounded-3xl p-10 shadow-lg hover:shadow-indigo-600 transition transform hover:-translate-y-1"
+     >
+      <div
+       class="flex items-center justify-center w-16 h-16 rounded-full bg-indigo-700 text-indigo-300 mb-6 text-2xl"
+      >
+       <i class="fas fa-user-slash"></i>
+      </div>
+      <h4 class="text-2xl font-semibold text-white mb-4 leading-snug">
+       Revela clientes que dão prejuízo
+      </h4>
+      <p class="text-indigo-300 leading-relaxed text-lg font-medium">
+       Identifique quais clientes impactam negativamente seu lucro e otimize
+       sua carteira.
+      </p>
+     </article>
+     <article
+      class="bg-indigo-900 rounded-3xl p-10 shadow-lg hover:shadow-indigo-600 transition transform hover:-translate-y-1"
+     >
+      <div
+       class="flex items-center justify-center w-16 h-16 rounded-full bg-indigo-700 text-indigo-300 mb-6 text-2xl"
+      >
+       <i class="fas fa-clock"></i>
+      </div>
+      <h4 class="text-2xl font-semibold text-white mb-4 leading-snug">
+       Aponta ações que tomam tempo demais e pagam pouco
+      </h4>
+      <p class="text-indigo-300 leading-relaxed text-lg font-medium">
+       Saiba onde o tempo está sendo desperdiçado para focar no que realmente
+       gera valor.
+      </p>
+     </article>
+     <article
+      class="bg-indigo-900 rounded-3xl p-10 shadow-lg hover:shadow-indigo-600 transition transform hover:-translate-y-1"
+     >
+      <div
+       class="flex items-center justify-center w-16 h-16 rounded-full bg-indigo-700 text-indigo-300 mb-6 text-2xl"
+      >
+       <i class="fas fa-hand-holding-usd"></i>
+      </div>
+      <h4 class="text-2xl font-semibold text-white mb-4 leading-snug">
+       Ajuda o advogado a cobrar o valor certo
+      </h4>
+      <p class="text-indigo-300 leading-relaxed text-lg font-medium">
+       Defina preços justos e competitivos baseados em dados reais do seu
+       escritório.
+      </p>
+     </article>
+     <article
+      class="bg-indigo-900 rounded-3xl p-10 shadow-lg hover:shadow-indigo-600 transition transform hover:-translate-y-1"
+     >
+      <div
+       class="flex items-center justify-center w-16 h-16 rounded-full bg-indigo-700 text-indigo-300 mb-6 text-2xl"
+      >
+       <i class="fas fa-chart-line"></i>
+      </div>
+      <h4 class="text-2xl font-semibold text-white mb-4 leading-snug">
+       Indica desperdício de tempo e esforço
+      </h4>
+      <p class="text-indigo-300 leading-relaxed text-lg font-medium">
+       Visualize onde o escritório perde produtividade para agir com eficiência.
+      </p>
+     </article>
+     <article
+      class="bg-indigo-900 rounded-3xl p-10 shadow-lg hover:shadow-indigo-600 transition transform hover:-translate-y-1"
+     >
+      <div
+       class="flex items-center justify-center w-16 h-16 rounded-full bg-indigo-700 text-indigo-300 mb-6 text-2xl"
+      >
+       <i class="fas fa-cogs"></i>
+      </div>
+      <h4 class="text-2xl font-semibold text-white mb-4 leading-snug">
+       Transforme seu escritório em uma empresa real, lucrativa e bem gerida
+      </h4>
+      <p class="text-indigo-300 leading-relaxed text-lg font-medium">
+       Decisões baseadas em dados para gestão eficiente, diferente do foco do
+       mercado em IA para petições.
+      </p>
+     </article>
+    </div>
+   </section>
+   <section
+    aria-label="Diferencial do Kleos"
+    class="bg-indigo-800 py-24 px-6 rounded-t-3xl shadow-inner shadow-indigo-900"
+    id="differential"
+   >
+   <div class="max-w-6xl mx-auto bg-indigo-900 bg-opacity-80 rounded-3xl shadow-2xl border border-indigo-700 p-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div class="text-left">
+     <h3 class="text-5xl font-extrabold text-white mb-6 tracking-wide logo-text drop-shadow-lg">
+      Diferencial do Kleos
+     </h3>
+     <p class="text-indigo-300 text-lg leading-relaxed font-semibold mb-8 max-w-xl">
+      Enquanto o mercado foca em inteligência artificial para petições, o Kleos transforma seu escritório em uma empresa real, lucrativa e bem gerida, com decisões baseadas em dados.
+     </p>
+     <ul class="space-y-4 max-w-md">
+      <li class="flex items-start space-x-3">
+       <i class="fas fa-check-circle text-indigo-400 mt-1">
+       </i>
+       <span class="text-indigo-200 font-medium leading-snug">
+        Gestão baseada em dados para decisões estratégicas.
+       </span>
+      </li>
+      <li class="flex items-start space-x-3">
+       <i class="fas fa-check-circle text-indigo-400 mt-1">
+       </i>
+       <span class="text-indigo-200 font-medium leading-snug">
+        Transformação do escritório em empresa lucrativa.
+       </span>
+      </li>
+      <li class="flex items-start space-x-3">
+       <i class="fas fa-check-circle text-indigo-400 mt-1">
+       </i>
+       <span class="text-indigo-200 font-medium leading-snug">
+        Foco em eficiência e tecnologia aplicada ao direito.
+       </span>
+      </li>
+     </ul>
+    </div>
+    <div class="relative rounded-3xl overflow-hidden shadow-2xl ring-4 ring-indigo-600 ring-opacity-50 hover:ring-indigo-400 transition-all duration-500">
+     <img alt="Ilustração moderna mostrando advogados em reunião com gráficos e dados financeiros em telas digitais, simbolizando gestão eficiente e tecnologia aplicada ao direito, com ambiente corporativo moderno e tecnologia avançada" class="w-full h-auto object-cover" height="420" loading="lazy" src="https://storage.googleapis.com/a1aa/image/935d5ded-3fa0-4b21-b0f5-74056bf72667.jpg" width="600"/>
+     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-indigo-900 via-transparent p-6">
+      <p class="text-indigo-300 text-sm font-light italic drop-shadow-md">
+       Gestão eficiente e tecnologia aplicada ao direito
+      </p>
+     </div>
+    </div>
+   </div>
+   </section>
+   
+   <section class="relative">
+    <div
+      class="bg-black rounded-3xl shadow-2xl p-12 max-w-6xl mx-auto text-white"
+    >
+      <h4
+        class="text-4xl font-extrabold mb-8 tracking-wide font-sans drop-shadow-md fade-in-up delay-100"
+      >
+        Por que escolher o Kleos?
+      </h4>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div
+          class="bg-gray-900 bg-opacity-80 rounded-xl p-6 flex flex-col items-center text-center shadow-lg hover:shadow-2xl transition-shadow duration-500 cursor-default fade-in-up delay-200"
+        >
+          <div
+            class="text-5xl text-indigo-400 mb-4 transform transition-transform duration-500 hover:scale-110"
+          >
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h5 class="text-xl font-semibold mb-2">Decisões Baseadas em Dados</h5>
+          <p class="text-indigo-300 leading-relaxed">
+            Utilize análises precisas para guiar seu escritório rumo ao sucesso.
+          </p>
+        </div>
+        <div
+          class="bg-gray-900 bg-opacity-80 rounded-xl p-6 flex flex-col items-center text-center shadow-lg hover:shadow-2xl transition-shadow duration-500 cursor-default fade-in-up delay-300"
+        >
+          <div
+            class="text-5xl text-indigo-400 mb-4 transform transition-transform duration-500 hover:scale-110"
+          >
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h5 class="text-xl font-semibold mb-2">Automação Inteligente</h5>
+          <p class="text-indigo-300 leading-relaxed">
+            Otimize processos com tecnologia que entende suas necessidades.
+          </p>
+        </div>
+        <div
+          class="bg-gray-900 bg-opacity-80 rounded-xl p-6 flex flex-col items-center text-center shadow-lg hover:shadow-2xl transition-shadow duration-500 cursor-default fade-in-up delay-400"
+        >
+          <div
+            class="text-5xl text-indigo-400 mb-4 transform transition-transform duration-500 hover:scale-110"
+          >
+            <i class="fas fa-users"></i>
+          </div>
+          <h5 class="text-xl font-semibold mb-2">Suporte Personalizado</h5>
+          <p class="text-indigo-300 leading-relaxed">
+            Atendimento dedicado para garantir o melhor desempenho do seu escritório.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 h-24 bg-black rounded-b-3xl max-w-6xl mx-auto shadow-inner"></div>
+  </section>
+  
+   <section
+    aria-label="Formulário de contato para Kleos"
+    class="bg-indigo-900 py-24 px-6 rounded-b-3xl shadow-inner shadow-indigo-900"
+    id="contact"
+   >
+    <div class="max-w-3xl mx-auto text-center px-4">
+     <h3
+      class="text-4xl font-extrabold text-white mb-10 tracking-wide logo-text"
+      style="font-family: serif;"
+     >
+      Quer saber mais? Fale conosco
+     </h3>
+     <form action="#" class="space-y-8 text-left" method="POST" novalidate>
+      <label class="block text-indigo-200 font-semibold mb-3" for="name">
+       Nome
+      </label>
+      <input
+       class="w-full rounded-xl border border-indigo-700 bg-indigo-800 text-indigo-100 px-5 py-4 focus:outline-none focus:ring-4 focus:ring-indigo-500 placeholder-indigo-400"
+       id="name"
+       name="name"
+       placeholder="Seu nome completo"
+       required
+       type="text"
+      />
+      <label class="block text-indigo-200 font-semibold mb-3" for="email">
+       E-mail
+      </label>
+      <input
+       class="w-full rounded-xl border border-indigo-700 bg-indigo-800 text-indigo-100 px-5 py-4 focus:outline-none focus:ring-4 focus:ring-indigo-500 placeholder-indigo-400"
+       id="email"
+       name="email"
+       placeholder="seu@email.com"
+       required
+       type="email"
+      />
+      <label class="block text-indigo-200 font-semibold mb-3" for="message">
+       Mensagem
+      </label>
+      <textarea
+       class="w-full rounded-xl border border-indigo-700 bg-indigo-800 text-indigo-100 px-5 py-4 focus:outline-none focus:ring-4 focus:ring-indigo-500 resize-none placeholder-indigo-400"
+       id="message"
+       name="message"
+       placeholder="Escreva sua mensagem aqui"
+       required
+       rows="5"
+      ></textarea>
+      <button
+       class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-5 rounded-xl shadow-lg focus:ring-4 focus:ring-indigo-500 tracking-wide"
+       type="submit"
+      >
+       Enviar
+      </button>
+     </form>
+    </div>
+   </section>
+
+  </main>
+  <footer
+   class="bg-indigo-900 text-indigo-400 py-8 text-center text-sm select-none tracking-wide"
+  >
+   <p>© 2025 KLEOS - Prometeus Association.</p>
+  </footer>
+  <script>
+   const menuBtn = document.getElementById('menu-btn');
+   const mobileMenu = document.getElementById('mobile-menu');
+
+   menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+   });
+  </script>
+ </body>
+</html>

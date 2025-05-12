@@ -1,0 +1,1336 @@
+<html class="scroll-smooth" lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Oráculo - Painel de Controle
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <style>
+   /* Scrollbar for sidebar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1e293b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #6366f1;
+    border-radius: 10px;
+    border: 2px solid #1e293b;
+  }
+  /* Notification container */
+  #notification-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 320px;
+  }
+  </style>
+ </head>
+ <body class="bg-gray-900 text-gray-300 font-sans min-h-screen flex">
+  <!-- Notification container -->
+  <div id="notification-container" aria-live="polite" aria-atomic="true"></div>
+  <!-- Sidebar -->
+  <aside class="fixed top-0 left-0 h-full w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
+   <div class="flex items-center justify-center h-20 border-b border-gray-700 px-4">
+    <img alt="Black solid triangle shape representing the Kleos logo icon" class="w-12 h-12 flex-shrink-0 mr-3" height="48" src="ATHENA_AI__8_-removebg-preview.png" width="48"/>
+    <h1 class="font-thin tracking-wide select-none uppercase text-indigo-500 text-3xl" style="line-height: 1;">
+     KLEOS
+    </h1>
+   </div>
+   <nav class="flex-1 overflow-y-auto mt-4">
+    <ul class="space-y-1 px-2">
+     <li>
+      <button aria-current="page" class="w-full flex items-center px-3 py-2 rounded-md text-indigo-400 bg-gray-700 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-visao">
+       <i class="fas fa-tachometer-alt mr-3 text-indigo-400" aria-hidden="true"></i>
+       Visão Geral
+      </button>
+     </li>
+     <li>
+      <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-processos">
+       <i class="fas fa-briefcase mr-3" aria-hidden="true"></i>
+       Processos
+      </button>
+     </li>
+     <li>
+      <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-clientes">
+       <i class="fas fa-users mr-3" aria-hidden="true"></i>
+       Clientes
+      </button>
+     </li>
+     <li>
+      <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-precificacao">
+       <i class="fas fa-dollar-sign mr-3" aria-hidden="true"></i>
+       Precificação
+      </button>
+     </li>
+     <li>
+      <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-alertas">
+       <i class="fas fa-exclamation-triangle mr-3" aria-hidden="true"></i>
+       Alertas
+      </button>
+     </li>
+     <li>
+      <button class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="tab-relatorios">
+       <i class="fas fa-file-alt mr-3" aria-hidden="true"></i>
+       Relatórios
+      </button>
+     </li>
+    </ul>
+   </nav>
+   <div class="p-4 border-t border-gray-700 text-xs text-gray-500 select-none">
+    © 2024 Kleos
+   </div>
+  </aside>
+  <!-- Main content -->
+  <main class="ml-64 flex-1 p-6 overflow-y-auto max-h-screen" id="main-content" tabindex="0">
+   <!-- Visão Geral content -->
+   <section class="space-y-6" id="content-visao">
+    <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
+     <i class="fas fa-tachometer-alt mr-2" aria-hidden="true"></i>Visão Geral
+    </h2>
+    <div aria-label="Painel de indicadores financeiros e operacionais" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+     <!-- Card: Gráfico de rentabilidade total -->
+     <div aria-labelledby="rentabilidade-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
+      <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
+       <i class="fas fa-coins mr-2" aria-hidden="true"></i>Rentabilidade Total (Ganhos x Custos)
+      </h3>
+      <div class="flex-1 relative">
+       <canvas aria-label="Gráfico de barras mostrando ganhos e custos mensais" id="chartRentabilidade" role="img" class="w-full h-full">
+       </canvas>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-3">
+       <button aria-label="Ver detalhes do gráfico de rentabilidade" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="button" id="btnDetalhesRentabilidade">
+        <i class="fas fa-search mr-2" aria-hidden="true"></i>Ver detalhes
+       </button>
+       <button aria-label="Exportar gráfico de rentabilidade" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" type="button" id="exportRentabilidade">
+        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       </button>
+      </div>
+     </div>
+     <!-- Card: Ranking de processos -->
+     <div aria-labelledby="ranking-processos-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
+      <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
+       <i class="fas fa-list-ol mr-2" aria-hidden="true"></i>Ranking de Processos Mais Lucrativos e Deficitários
+      </h3>
+      <div class="flex-1 flex flex-col md:flex-row md:space-x-6 overflow-y-auto max-h-[calc(100%-56px)]">
+       <div class="flex-1 mb-4 md:mb-0">
+        <h4 class="text-indigo-300 font-semibold mb-1 select-none flex items-center">
+         <i class="fas fa-arrow-up mr-2 text-green-400" aria-hidden="true"></i>Mais Lucrativos
+        </h4>
+        <ol class="list-decimal list-inside space-y-1 text-gray-300 text-sm max-h-48 overflow-y-auto pr-2">
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Ação Trabalhista - Silva
+          </span>
+          -
+          Lucro: R$ 45.000
+         </li>
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Cobrança - Empresa X
+          </span>
+          -
+          Lucro: R$ 38.500
+         </li>
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Contrato Imobiliário - Souza
+          </span>
+          -
+          Lucro: R$ 32.200
+         </li>
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Revisão Contratual - Lima
+          </span>
+          -
+          Lucro: R$ 28.900
+         </li>
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Inventário - Oliveira
+          </span>
+          -
+          Lucro: R$ 25.000
+         </li>
+        </ol>
+       </div>
+       <div class="flex-1">
+        <h4 class="text-indigo-300 font-semibold mb-1 select-none flex items-center">
+         <i class="fas fa-arrow-down mr-2 text-red-500" aria-hidden="true"></i>Mais Deficitários
+        </h4>
+        <ol class="list-decimal list-inside space-y-1 text-gray-300 text-sm max-h-48 overflow-y-auto pr-2">
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Ação Trabalhista - Pereira
+          </span>
+          -
+          Prejuízo: R$ 12.000
+         </li>
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Cobrança - Empresa Y
+          </span>
+          -
+          Prejuízo: R$ 9.500
+         </li>
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Revisão Contratual - Santos
+          </span>
+          -
+          Prejuízo: R$ 7.800
+         </li>
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Inventário - Costa
+          </span>
+          -
+          Prejuízo: R$ 6.200
+         </li>
+         <li>
+          Processo:
+          <span class="font-semibold">
+           Contrato Imobiliário - Almeida
+          </span>
+          -
+          Prejuízo: R$ 5.900
+         </li>
+        </ol>
+       </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-3">
+       <button aria-label="Filtrar ranking de processos por sócio" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="button" id="btnFiltrarSocio">
+        <i class="fas fa-filter mr-2" aria-hidden="true"></i>Filtrar por sócio
+       </button>
+       <button aria-label="Exportar ranking de processos" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" type="button" id="exportRanking">
+        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       </button>
+      </div>
+     </div>
+     <!-- Card: Lista de clientes com prejuízo e lucro -->
+     <div aria-labelledby="clientes-lucro-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
+      <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
+       <i class="fas fa-user-friends mr-2" aria-hidden="true"></i>Clientes com Prejuízo e Lucro
+      </h3>
+      <div class="flex-1 flex flex-col md:flex-row md:space-x-6 overflow-y-auto max-h-[calc(100%-56px)]">
+       <div class="flex-1 mb-4 md:mb-0">
+        <h4 class="text-indigo-300 font-semibold mb-1 select-none flex items-center">
+         <i class="fas fa-arrow-up mr-2 text-green-400" aria-hidden="true"></i>Clientes com Lucro
+        </h4>
+        <ul class="list-disc list-inside text-gray-300 text-sm max-h-48 overflow-y-auto pr-2 space-y-1">
+         <li>
+          <span class="font-semibold">
+           Empresa Alpha
+          </span>
+          - Lucro: R$ 120.000
+         </li>
+         <li>
+          <span class="font-semibold">
+           João da Silva
+          </span>
+          - Lucro: R$ 85.000
+         </li>
+         <li>
+          <span class="font-semibold">
+           Maria Oliveira
+          </span>
+          - Lucro: R$ 72.500
+         </li>
+         <li>
+          <span class="font-semibold">
+           Construtora Beta
+          </span>
+          - Lucro: R$ 65.000
+         </li>
+         <li>
+          <span class="font-semibold">
+           Carlos Pereira
+          </span>
+          - Lucro: R$ 58.000
+         </li>
+        </ul>
+       </div>
+       <div class="flex-1">
+        <h4 class="text-indigo-300 font-semibold mb-1 select-none flex items-center">
+         <i class="fas fa-arrow-down mr-2 text-red-500" aria-hidden="true"></i>Clientes com Prejuízo
+        </h4>
+        <ul class="list-disc list-inside text-gray-300 text-sm max-h-48 overflow-y-auto pr-2 space-y-1">
+         <li>
+          <span class="font-semibold">
+           Empresa Gama
+          </span>
+          - Prejuízo: R$ 15.000
+         </li>
+         <li>
+          <span class="font-semibold">
+           Ana Santos
+          </span>
+          - Prejuízo: R$ 9.000
+         </li>
+         <li>
+          <span class="font-semibold">
+           José Almeida
+          </span>
+          - Prejuízo: R$ 7.200
+         </li>
+         <li>
+          <span class="font-semibold">
+           Loja Delta
+          </span>
+          - Prejuízo: R$ 6.500
+         </li>
+         <li>
+          <span class="font-semibold">
+           Fernanda Costa
+          </span>
+          - Prejuízo: R$ 5.800
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-3">
+       <button aria-label="Simular novo valor para clientes" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="button" id="btnSimularClientes">
+        <i class="fas fa-calculator mr-2" aria-hidden="true"></i>Simular novo valor
+       </button>
+       <button aria-label="Exportar lista de clientes" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" type="button" id="exportClientes">
+        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       </button>
+      </div>
+     </div>
+     <!-- Card: Análise de tempo gasto por tipo de ação -->
+     <div aria-labelledby="tempo-acao-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
+      <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
+       <i class="fas fa-clock mr-2" aria-hidden="true"></i>Análise de Tempo Gasto por Tipo de Ação
+      </h3>
+      <div class="flex-1 relative">
+       <canvas aria-label="Gráfico de pizza mostrando tempo gasto por tipo de ação" id="chartTempoAcao" role="img" class="w-full h-full">
+       </canvas>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-3">
+       <button aria-label="Ver detalhes da análise de tempo gasto" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="button">
+        <i class="fas fa-search mr-2" aria-hidden="true"></i>Ver detalhes
+       </button>
+       <button aria-label="Exportar gráfico de tempo gasto" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 flex items-center" type="button" id="exportTempoAcao">
+        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       </button>
+      </div>
+     </div>
+     <!-- Card: Alertas de desperdício ou risco -->
+     <div aria-labelledby="alertas-risco-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
+      <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
+       <i class="fas fa-exclamation-triangle mr-2" aria-hidden="true"></i>Alertas de Desperdício ou Risco
+      </h3>
+      <div class="flex-1 overflow-y-auto max-h-[calc(100%-56px)] pr-2">
+       <ul class="list-disc list-inside text-red-500 text-sm space-y-3">
+        <li>
+         Processo
+         <span class="font-semibold">
+          Ação Trabalhista - Pereira
+         </span>
+         consome 22h/mês e gera apenas R$200
+         <button aria-label="Ver detalhes do alerta para processo Ação Trabalhista - Pereira" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Ação Trabalhista - Pereira">
+          Ver detalhes
+         </button>
+        </li>
+        <li>
+         Processo
+         <span class="font-semibold">
+          Cobrança - Empresa Y
+         </span>
+         consome 18h/mês e gera R$500
+         <button aria-label="Ver detalhes do alerta para processo Cobrança - Empresa Y" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Cobrança - Empresa Y">
+          Ver detalhes
+         </button>
+        </li>
+        <li>
+         Processo
+         <span class="font-semibold">
+          Revisão Contratual - Santos
+         </span>
+         consome 15h/mês e gera R$300
+         <button aria-label="Ver detalhes do alerta para processo Revisão Contratual - Santos" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Revisão Contratual - Santos">
+          Ver detalhes
+         </button>
+        </li>
+        <li>
+         Processo
+         <span class="font-semibold">
+          Inventário - Costa
+         </span>
+         consome 20h/mês e gera R$400
+         <button aria-label="Ver detalhes do alerta para processo Inventário - Costa" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Inventário - Costa">
+          Ver detalhes
+         </button>
+        </li>
+        <li>
+         Processo
+         <span class="font-semibold">
+          Contrato Imobiliário - Almeida
+         </span>
+         consome 17h/mês e gera R$350
+         <button aria-label="Ver detalhes do alerta para processo Contrato Imobiliário - Almeida" class="ml-2 text-indigo-400 hover:text-indigo-600 underline text-xs focus:outline-none" type="button" data-alert="Contrato Imobiliário - Almeida">
+          Ver detalhes
+         </button>
+        </li>
+       </ul>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-3">
+       <button aria-label="Ver todos os alertas" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 flex items-center" type="button" id="btnVerTodosAlertas">
+        <i class="fas fa-bell mr-2" aria-hidden="true"></i>Ver todos os alertas
+       </button>
+       <button aria-label="Exportar alertas" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400 flex items-center" type="button" id="exportAlertas">
+        <i class="fas fa-file-export mr-2" aria-hidden="true"></i>Exportar
+       </button>
+      </div>
+     </div>
+     <!-- Card: Sugestão de valor ideal de cobrança -->
+     <div aria-labelledby="sugestao-cobranca-title" class="bg-gray-800 rounded-lg shadow-md p-5 flex flex-col h-96" role="region">
+      <h3 class="text-lg font-semibold text-indigo-400 mb-3 select-none flex items-center">
+       <i class="fas fa-chart-line mr-2" aria-hidden="true"></i>Sugestão de Valor Ideal de Cobrança por Tipo de Processo
+      </h3>
+      <div class="flex-1 overflow-y-auto max-h-[calc(100%-56px)]">
+       <table class="w-full text-sm text-gray-300 border-collapse border border-gray-700">
+        <thead>
+         <tr class="bg-gray-700">
+          <th class="border border-gray-600 px-3 py-2 text-left">
+           Tipo de Processo
+          </th>
+          <th class="border border-gray-600 px-3 py-2 text-right">
+           Valor Atual (R$)
+          </th>
+          <th class="border border-gray-600 px-3 py-2 text-right">
+           Valor Ideal (R$)
+          </th>
+          <th class="border border-gray-600 px-3 py-2 text-center">
+           Ação
+          </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr class="hover:bg-gray-700">
+          <td class="border border-gray-600 px-3 py-2">
+           Ação Trabalhista
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right">
+           3.500
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right font-semibold text-indigo-400">
+           4.200
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-center">
+           <button aria-label="Simular novo valor para Ação Trabalhista" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Ação Trabalhista" data-valoratual="3500" data-valorideal="4200">
+            <i class="fas fa-calculator mr-1"></i>Simular
+           </button>
+          </td>
+         </tr>
+         <tr class="hover:bg-gray-700">
+          <td class="border border-gray-600 px-3 py-2">
+           Cobrança
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right">
+           2.800
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right font-semibold text-indigo-400">
+           3.100
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-center">
+           <button aria-label="Simular novo valor para Cobrança" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Cobrança" data-valoratual="2800" data-valorideal="3100">
+            <i class="fas fa-calculator mr-1"></i>Simular
+           </button>
+          </td>
+         </tr>
+         <tr class="hover:bg-gray-700">
+          <td class="border border-gray-600 px-3 py-2">
+           Contrato Imobiliário
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right">
+           4.000
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right font-semibold text-indigo-400">
+           4.500
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-center">
+           <button aria-label="Simular novo valor para Contrato Imobiliário" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Contrato Imobiliário" data-valoratual="4000" data-valorideal="4500">
+            <i class="fas fa-calculator mr-1"></i>Simular
+           </button>
+          </td>
+         </tr>
+         <tr class="hover:bg-gray-700">
+          <td class="border border-gray-600 px-3 py-2">
+           Revisão Contratual
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right">
+           3.200
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right font-semibold text-indigo-400">
+           3.700
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-center">
+           <button aria-label="Simular novo valor para Revisão Contratual" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Revisão Contratual" data-valoratual="3200" data-valorideal="3700">
+            <i class="fas fa-calculator mr-1"></i>Simular
+           </button>
+          </td>
+         </tr>
+         <tr class="hover:bg-gray-700">
+          <td class="border border-gray-600 px-3 py-2">
+           Inventário
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right">
+           3.800
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-right font-semibold text-indigo-400">
+           4.100
+          </td>
+          <td class="border border-gray-600 px-3 py-2 text-center">
+           <button aria-label="Simular novo valor para Inventário" class="bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 btnSimularValor" type="button" data-tipo="Inventário" data-valoratual="3800" data-valorideal="4100">
+            <i class="fas fa-calculator mr-1"></i>Simular
+           </button>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- Processos content -->
+   <section aria-label="Seção Processos" class="hidden space-y-6" id="content-processos">
+    <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
+     <i class="fas fa-briefcase mr-2" aria-hidden="true"></i>Processos
+    </h2>
+    <div class="bg-gray-800 rounded-lg shadow-md p-5 overflow-x-auto">
+     <table class="w-full text-sm text-gray-300 border-collapse border border-gray-700">
+      <thead>
+       <tr class="bg-gray-700">
+        <th class="border border-gray-600 px-3 py-2 text-left">
+         ID
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-left">
+         Cliente
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-left">
+         Tipo
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-left">
+         Status
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-right">
+         Horas Gastas
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-right">
+         Lucro (R$)
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-center">
+         Ações
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         001
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Empresa Alpha
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Ação Trabalhista
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Em andamento
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right">
+         120
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-green-400 font-semibold">
+         45.000
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do processo 001" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         002
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         João da Silva
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Cobrança
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Concluído
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right">
+         95
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-green-400 font-semibold">
+         38.500
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do processo 002" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         003
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Maria Oliveira
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Contrato Imobiliário
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Em andamento
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right">
+         110
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-green-400 font-semibold">
+         32.200
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do processo 003" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         004
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Ana Santos
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Revisão Contratual
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Em atraso
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right">
+         130
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-red-500 font-semibold">
+         -12.000
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do processo 004" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         005
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Carlos Pereira
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Inventário
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Em andamento
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right">
+         100
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-green-400 font-semibold">
+         25.000
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do processo 005" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </section>
+   <!-- Clientes content -->
+   <section aria-label="Seção Clientes" class="hidden space-y-6" id="content-clientes">
+    <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
+     <i class="fas fa-users mr-2" aria-hidden="true"></i>Clientes
+    </h2>
+    <div class="bg-gray-800 rounded-lg shadow-md p-5 overflow-x-auto">
+     <table class="w-full text-sm text-gray-300 border-collapse border border-gray-700">
+      <thead>
+       <tr class="bg-gray-700">
+        <th class="border border-gray-600 px-3 py-2 text-left">
+         ID
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-left">
+         Nome
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-left">
+         Status Financeiro
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-right">
+         Lucro/Prejuízo (R$)
+        </th>
+        <th class="border border-gray-600 px-3 py-2 text-center">
+         Ações
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         C001
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Empresa Alpha
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-green-400 font-semibold">
+         Lucro
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-green-400 font-semibold">
+         120.000
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do cliente Empresa Alpha" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         C002
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         João da Silva
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-green-400 font-semibold">
+         Lucro
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-green-400 font-semibold">
+         85.000
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do cliente João da Silva" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         C003
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Maria Oliveira
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-green-400 font-semibold">
+         Lucro
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-green-400 font-semibold">
+         72.500
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do cliente Maria Oliveira" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         C004
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Empresa Gama
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-red-500 font-semibold">
+         Prejuízo
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-red-500 font-semibold">
+         -15.000
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do cliente Empresa Gama" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+       <tr class="hover:bg-gray-700">
+        <td class="border border-gray-600 px-3 py-2">
+         C005
+        </td>
+        <td class="border border-gray-600 px-3 py-2">
+         Ana Santos
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-red-500 font-semibold">
+         Prejuízo
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-right text-red-500 font-semibold">
+         -9.000
+        </td>
+        <td class="border border-gray-600 px-3 py-2 text-center">
+         <button aria-label="Ver detalhes do cliente Ana Santos" class="text-indigo-400 hover:text-indigo-600 focus:outline-none">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+         </button>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </section>
+   <!-- Precificação content -->
+   <section aria-label="Seção Precificação" class="hidden space-y-6" id="content-precificacao">
+    <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
+     <i class="fas fa-dollar-sign mr-2" aria-hidden="true"></i>Precificação
+    </h2>
+    <div class="bg-gray-800 rounded-lg shadow-md p-5 max-w-lg">
+     <form class="space-y-6" id="formPrecificacao">
+      <div>
+       <label class="block mb-2 text-sm font-medium text-gray-300" for="tipo-processo">
+        Tipo de Processo
+       </label>
+       <select class="bg-gray-700 border border-gray-600 text-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" id="tipo-processo" name="tipo-processo" required="">
+        <option value="">
+         Selecione um tipo
+        </option>
+        <option value="acao-trabalhista">
+         Ação Trabalhista
+        </option>
+        <option value="cobranca">
+         Cobrança
+        </option>
+        <option value="contrato-imobiliario">
+         Contrato Imobiliário
+        </option>
+        <option value="revisao-contratual">
+         Revisão Contratual
+        </option>
+        <option value="inventario">
+         Inventário
+        </option>
+       </select>
+      </div>
+      <div>
+       <label class="block mb-2 text-sm font-medium text-gray-300" for="valor-atual">
+        Valor Atual (R$)
+       </label>
+       <input class="bg-gray-700 border border-gray-600 text-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" id="valor-atual" min="0" name="valor-atual" placeholder="Ex: 3500" required="" step="0.01" type="number"/>
+      </div>
+      <div>
+       <label class="block mb-2 text-sm font-medium text-gray-300" for="novo-valor">
+        Novo Valor Simulado (R$)
+       </label>
+       <input class="bg-gray-700 border border-gray-600 text-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" id="novo-valor" min="0" name="novo-valor" placeholder="Ex: 4200" required="" step="0.01" type="number"/>
+      </div>
+      <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" type="submit">
+       <i class="fas fa-calculator mr-2" aria-hidden="true"></i>Simular
+      </button>
+     </form>
+     <div aria-live="polite" class="mt-6 p-4 bg-gray-700 rounded-md text-indigo-300 hidden" id="resultado-simulacao" role="alert">
+     </div>
+    </div>
+   </section>
+   <!-- Alertas content -->
+   <section aria-label="Seção Alertas" class="hidden space-y-6" id="content-alertas">
+    <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
+     <i class="fas fa-exclamation-triangle mr-2" aria-hidden="true"></i>Alertas
+    </h2>
+    <div class="bg-gray-800 rounded-lg shadow-md p-5 max-h-[480px] overflow-y-auto">
+     <p class="text-gray-400 italic text-sm select-none">
+      Os alertas são exibidos como notificações para evitar poluição visual.
+     </p>
+    </div>
+   </section>
+   <!-- Relatórios content -->
+   <section aria-label="Seção Relatórios" class="hidden space-y-6" id="content-relatorios">
+    <h2 class="text-2xl font-semibold text-indigo-400 mb-4 select-none">
+     <i class="fas fa-file-alt mr-2" aria-hidden="true"></i>Relatórios
+    </h2>
+    <div class="bg-gray-800 rounded-lg shadow-md p-5">
+     <p class="text-gray-400 mb-4">
+      Aqui você pode gerar relatórios detalhados sobre a performance financeira e operacional do escritório.
+     </p>
+     <div class="space-y-4 max-w-md">
+      <button aria-label="Gerar relatório mensal" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" type="button" id="btnRelatorioMensal">
+       <i class="fas fa-file-alt mr-2" aria-hidden="true"></i>Gerar Relatório Mensal
+      </button>
+      <button aria-label="Gerar relatório anual" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" type="button" id="btnRelatorioAnual">
+       <i class="fas fa-file-alt mr-2" aria-hidden="true"></i>Gerar Relatório Anual
+      </button>
+      <button aria-label="Exportar relatórios em PDF" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" type="button" id="btnExportarPDF">
+       <i class="fas fa-file-pdf mr-2" aria-hidden="true"></i>Exportar em PDF
+      </button>
+      <button aria-label="Exportar relatórios em Excel" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center" type="button" id="btnExportarExcel">
+       <i class="fas fa-file-excel mr-2" aria-hidden="true"></i>Exportar em Excel
+      </button>
+     </div>
+    </div>
+   </section>
+  </main>
+  <script>
+   // Sidebar tab switching
+    const tabs = [
+      "visao",
+      "processos",
+      "clientes",
+      "precificacao",
+      "alertas",
+      "relatorios",
+    ];
+    const tabButtons = tabs.map((tab) =>
+      document.getElementById("tab-" + tab)
+    );
+    const tabContents = tabs.map(
+      (tab) => document.getElementById("content-" + tab)
+    );
+
+    tabButtons.forEach((btn, idx) => {
+      btn.addEventListener("click", () => {
+        tabButtons.forEach((b) => {
+          b.classList.remove(
+            "bg-gray-700",
+            "text-indigo-400",
+            "font-semibold"
+          );
+          b.classList.add("hover:bg-gray-700", "hover:text-indigo-400");
+          b.setAttribute("aria-current", "false");
+        });
+        tabContents.forEach((c) => c.classList.add("hidden"));
+        btn.classList.add("bg-gray-700", "text-indigo-400", "font-semibold");
+        btn.classList.remove("hover:bg-gray-700", "hover:text-indigo-400");
+        btn.setAttribute("aria-current", "page");
+        tabContents[idx].classList.remove("hidden");
+        tabContents[idx].focus();
+      });
+    });
+
+    // Chart.js charts initialization
+    const ctxRentabilidade = document
+      .getElementById("chartRentabilidade")
+      .getContext("2d");
+    const chartRentabilidade = new Chart(ctxRentabilidade, {
+      type: "bar",
+      data: {
+        labels: [
+          "Jan",
+          "Fev",
+          "Mar",
+          "Abr",
+          "Mai",
+          "Jun",
+          "Jul",
+          "Ago",
+          "Set",
+          "Out",
+          "Nov",
+          "Dez",
+        ],
+        datasets: [
+          {
+            label: "Ganhos (R$)",
+            data: [
+              45000, 38000, 42000, 46000, 48000, 50000, 52000, 51000, 53000,
+              55000, 57000, 60000,
+            ],
+            backgroundColor: "rgba(99, 102, 241, 0.8)",
+            borderRadius: 4,
+            barPercentage: 0.6,
+            categoryPercentage: 0.7,
+          },
+          {
+            label: "Custos (R$)",
+            data: [
+              30000, 32000, 31000, 33000, 34000, 35000, 36000, 35500, 37000,
+              38000, 39000, 40000,
+            ],
+            backgroundColor: "rgba(139, 92, 246, 0.8)",
+            borderRadius: 4,
+            barPercentage: 0.6,
+            categoryPercentage: 0.7,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        aspectRatio: 2,
+        animation: {
+          duration: 500,
+          easing: "easeOutQuart",
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: "#a5b4fc",
+              font: { size: 14, weight: "600" },
+            },
+          },
+          tooltip: {
+            mode: "index",
+            intersect: false,
+            backgroundColor: "#4f46e5",
+            titleColor: "#e0e7ff",
+            bodyColor: "#e0e7ff",
+          },
+        },
+        scales: {
+          x: {
+            ticks: { color: "#a5b4fc", font: { size: 13 } },
+            grid: { display: false },
+            stacked: false,
+          },
+          y: {
+            ticks: {
+              color: "#a5b4fc",
+              font: { size: 13 },
+              callback: function (value) {
+                return "R$ " + value.toLocaleString("pt-BR");
+              },
+            },
+            grid: {
+              color: "rgba(156, 163, 175, 0.2)",
+              borderDash: [5, 5],
+            },
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+    const ctxTempoAcao = document
+      .getElementById("chartTempoAcao")
+      .getContext("2d");
+    const chartTempoAcao = new Chart(ctxTempoAcao, {
+      type: "doughnut",
+      data: {
+        labels: [
+          "Audiência",
+          "Petição Inicial",
+          "Recursos",
+          "Negociação",
+          "Análise Documental",
+        ],
+        datasets: [
+          {
+            label: "Horas Gastas",
+            data: [120, 90, 60, 40, 30],
+            backgroundColor: [
+              "rgba(99, 102, 241, 0.8)",
+              "rgba(139, 92, 246, 0.8)",
+              "rgba(147, 51, 234, 0.8)",
+              "rgba(124, 58, 237, 0.8)",
+              "rgba(109, 40, 217, 0.8)",
+            ],
+            borderWidth: 1,
+            borderColor: "#1e293b",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        aspectRatio: 1.3,
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              color: "#a5b4fc",
+              font: { size: 14, weight: "600" },
+              padding: 20,
+            },
+          },
+          tooltip: {
+            backgroundColor: "#4f46e5",
+            titleColor: "#e0e7ff",
+            bodyColor: "#e0e7ff",
+          },
+        },
+      },
+    });
+
+    // Precificação form simulation
+    const formPrecificacao = document.getElementById("formPrecificacao");
+    const resultadoSimulacao = document.getElementById("resultado-simulacao");
+
+    formPrecificacao.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const tipo = formPrecificacao["tipo-processo"].value;
+      const valorAtual = parseFloat(formPrecificacao["valor-atual"].value);
+      const novoValor = parseFloat(formPrecificacao["novo-valor"].value);
+
+      if (!tipo || isNaN(valorAtual) || isNaN(novoValor)) {
+        resultadoSimulacao.textContent =
+          "Por favor, preencha todos os campos corretamente.";
+        resultadoSimulacao.classList.remove("hidden");
+        return;
+      }
+
+      const diferenca = novoValor - valorAtual;
+      const percentual = ((diferenca / valorAtual) * 100).toFixed(2);
+
+      resultadoSimulacao.innerHTML = `
+        <strong>Simulação para ${tipo
+          .replace(/-/g, " ")
+          .toUpperCase()}:</strong><br />
+        Valor Atual: R$ ${valorAtual.toLocaleString("pt-BR", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}<br />
+        Novo Valor Simulado: R$ ${novoValor.toLocaleString("pt-BR", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}<br />
+        Diferença: R$ ${diferenca.toLocaleString("pt-BR", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })} (${percentual}%)
+      `;
+      resultadoSimulacao.classList.remove("hidden");
+      showNotification("Simulação realizada com sucesso.", "success");
+    });
+
+    // Simular botão "Simular" na tabela Sugestão de Valor Ideal
+    document.querySelectorAll(".btnSimularValor").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tipo = btn.getAttribute("data-tipo");
+        const valorAtual = parseFloat(btn.getAttribute("data-valoratual"));
+        const valorIdeal = parseFloat(btn.getAttribute("data-valorideal"));
+        const diferenca = valorIdeal - valorAtual;
+        const percentual = ((diferenca / valorAtual) * 100).toFixed(2);
+
+        alert(
+          `Simulação para ${tipo}:\nValor Atual: R$ ${valorAtual.toLocaleString(
+            "pt-BR",
+            { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+          )}\nValor Ideal: R$ ${valorIdeal.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}\nDiferença: R$ ${diferenca.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })} (${percentual}%)`
+        );
+      });
+    });
+
+    // Export buttons simulate download
+    function simulateDownload(filename, content) {
+      const blob = new Blob([content], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    document.getElementById("exportRentabilidade").addEventListener("click", () => {
+      simulateDownload(
+        "rentabilidade.txt",
+        "Dados exportados do gráfico de rentabilidade (ganhos x custos)."
+      );
+      showNotification("Exportação do gráfico de rentabilidade simulada.", "info");
+    });
+
+    document.getElementById("exportRanking").addEventListener("click", () => {
+      simulateDownload(
+        "ranking_processos.txt",
+        "Dados exportados do ranking de processos mais lucrativos e deficitários."
+      );
+      showNotification("Exportação do ranking de processos simulada.", "info");
+    });
+
+    document.getElementById("exportClientes").addEventListener("click", () => {
+      simulateDownload(
+        "clientes.txt",
+        "Dados exportados da lista de clientes com prejuízo e lucro."
+      );
+      showNotification("Exportação da lista de clientes simulada.", "info");
+    });
+
+    document.getElementById("exportTempoAcao").addEventListener("click", () => {
+      simulateDownload(
+        "tempo_acao.txt",
+        "Dados exportados do gráfico de tempo gasto por tipo de ação."
+      );
+      showNotification("Exportação do gráfico de tempo gasto simulada.", "info");
+    });
+
+    document.getElementById("exportAlertas").addEventListener("click", () => {
+      simulateDownload(
+        "alertas.txt",
+        "Dados exportados dos alertas de desperdício ou risco."
+      );
+      showNotification("Exportação dos alertas simulada.", "info");
+    });
+
+    document.getElementById("btnRelatorioMensal").addEventListener("click", () => {
+      showNotification("Geração do relatório mensal simulada.", "success");
+    });
+    document.getElementById("btnRelatorioAnual").addEventListener("click", () => {
+      showNotification("Geração do relatório anual simulada.", "success");
+    });
+    document.getElementById("btnExportarPDF").addEventListener("click", () => {
+      showNotification("Exportação dos relatórios em PDF simulada.", "info");
+    });
+    document.getElementById("btnExportarExcel").addEventListener("click", () => {
+      showNotification("Exportação dos relatórios em Excel simulada.", "info");
+    });
+
+    // Filtrar ranking por sócio (simulação)
+    document.getElementById("btnFiltrarSocio").addEventListener("click", () => {
+      showNotification("Filtro por sócio ativado (simulação).", "info");
+    });
+
+    // Simular novo valor para clientes (simulação)
+    document.getElementById("btnSimularClientes").addEventListener("click", () => {
+      showNotification("Simulação de novo valor para clientes ativada (simulação).", "info");
+    });
+
+    // Alertas "Ver detalhes" buttons show notification modal
+    document.querySelectorAll('[data-alert]').forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const alertName = btn.getAttribute("data-alert");
+        showModal(`Detalhes do alerta para o processo: ${alertName}`, `
+          <p class="mb-2">Este processo apresenta alto consumo de horas em relação ao retorno financeiro.</p>
+          <p>Recomenda-se análise detalhada para otimização ou reavaliação da cobrança.</p>
+        `);
+      });
+    });
+
+    // "Ver todos os alertas" button shows modal with all alerts summary
+    document.getElementById("btnVerTodosAlertas").addEventListener("click", () => {
+      showModal("Todos os Alertas de Desperdício ou Risco", `
+        <ul class="list-disc list-inside text-red-500 text-sm space-y-2 max-h-64 overflow-y-auto">
+          <li>Processo Ação Trabalhista - Pereira: 22h/mês, R$200</li>
+          <li>Processo Cobrança - Empresa Y: 18h/mês, R$500</li>
+          <li>Processo Revisão Contratual - Santos: 15h/mês, R$300</li>
+          <li>Processo Inventário - Costa: 20h/mês, R$400</li>
+          <li>Processo Contrato Imobiliário - Almeida: 17h/mês, R$350</li>
+          <li>Processo Cobrança - Empresa Z: 25h/mês, R$150</li>
+          <li>Processo Ação Trabalhista - Rodrigues: 30h/mês, R$400</li>
+          <li>Processo Revisão Contratual - Martins: 28h/mês, R$350</li>
+          <li>Processo Inventário - Ferreira: 22h/mês, R$300</li>
+          <li>Processo Contrato Imobiliário - Lima: 19h/mês, R$400</li>
+        </ul>
+      `);
+    });
+
+    // Notification system
+    const notificationContainer = document.getElementById("notification-container");
+
+    function showNotification(message, type = "info", duration = 4000) {
+      const colors = {
+        info: "bg-indigo-600",
+        success: "bg-green-600",
+        error: "bg-red-600",
+        warning: "bg-yellow-600 text-gray-900",
+      };
+      const iconClasses = {
+        info: "fas fa-info-circle",
+        success: "fas fa-check-circle",
+        error: "fas fa-exclamation-circle",
+        warning: "fas fa-exclamation-triangle",
+      };
+      const notification = document.createElement("div");
+      notification.className = `flex items-center space-x-3 p-4 rounded shadow-lg text-white ${colors[type] || colors.info} cursor-pointer select-none`;
+      notification.setAttribute("role", "alert");
+      notification.setAttribute("tabindex", "0");
+      notification.innerHTML = `
+        <i class="${iconClasses[type] || iconClasses.info} fa-lg" aria-hidden="true"></i>
+        <span class="flex-1">${message}</span>
+        <button aria-label="Fechar notificação" class="focus:outline-none">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      notificationContainer.appendChild(notification);
+
+      // Close on click X or notification itself
+      notification.querySelector("button").addEventListener("click", () => {
+        notificationContainer.removeChild(notification);
+      });
+      notification.addEventListener("click", (e) => {
+        if (e.target === notification) {
+          notificationContainer.removeChild(notification);
+        }
+      });
+
+      // Auto remove after duration
+      setTimeout(() => {
+        if (notification.parentNode === notificationContainer) {
+          notificationContainer.removeChild(notification);
+        }
+      }, duration);
+
+      notification.focus();
+    }
+
+    // Modal system
+    function showModal(title, contentHtml) {
+      // Create modal elements
+      const modalOverlay = document.createElement("div");
+      modalOverlay.className = "fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50";
+      modalOverlay.setAttribute("role", "dialog");
+      modalOverlay.setAttribute("aria-modal", "true");
+      modalOverlay.setAttribute("aria-labelledby", "modal-title");
+      modalOverlay.setAttribute("tabindex", "-1");
+
+      const modal = document.createElement("div");
+      modal.className = "bg-gray-800 rounded-lg shadow-lg max-w-lg w-full p-6 text-gray-300 relative";
+
+      modal.innerHTML = `
+        <h3 id="modal-title" class="text-xl font-semibold text-indigo-400 mb-4">${title}</h3>
+        <div class="mb-6">${contentHtml}</div>
+        <button aria-label="Fechar modal" class="absolute top-3 right-3 text-gray-400 hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+          <i class="fas fa-times fa-lg"></i>
+        </button>
+      `;
+
+      modalOverlay.appendChild(modal);
+      document.body.appendChild(modalOverlay);
+
+      // Focus trap and close handlers
+      const closeBtn = modal.querySelector("button");
+      closeBtn.focus();
+
+      function closeModal() {
+        document.body.removeChild(modalOverlay);
+      }
+
+      closeBtn.addEventListener("click", closeModal);
+      modalOverlay.addEventListener("click", (e) => {
+        if (e.target === modalOverlay) closeModal();
+      });
+      document.addEventListener("keydown", function escListener(e) {
+        if (e.key === "Escape") {
+          closeModal();
+          document.removeEventListener("keydown", escListener);
+        }
+      });
+    }
+  </script>
+ </body>
+</html>
