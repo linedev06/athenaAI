@@ -1,0 +1,650 @@
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+  <title>ATHENA AI - Planos e Assinaturas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+   href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&amp;family=Inter:wght@400;600&amp;display=swap"
+   rel="stylesheet"
+  />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <style>
+   /* Font families */
+   body {
+    font-family: "Inter", sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    scroll-behavior: smooth;
+    color: #222222;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+   }
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6 {
+    font-family: "Cormorant Garamond", serif;
+    color: #222222;
+   }
+   /* Header */
+   header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+    z-index: 1000;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    user-select: none;
+   }
+   .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: default;
+    user-select: text;
+   }
+   .logo-container img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    user-select: none;
+   }
+   .logo-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+   }
+   .logo-text span:first-child {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: 1.75rem;
+    letter-spacing: 0.15em;
+    color: #222222;
+    user-select: text;
+    white-space: nowrap;
+   }
+   .logo-text span:last-child {
+    background-color: #000;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.125rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: text;
+   }
+   nav {
+    margin-left: auto;
+    display: flex;
+    gap: 2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #444444;
+   }
+   nav a {
+    position: relative;
+    padding: 0.25rem 0;
+    transition: color 0.3s ease;
+    text-decoration: none;
+   }
+   nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #c2b280;
+    transition: width 0.3s ease;
+    border-radius: 1px;
+   }
+   nav a:hover,
+   nav a:focus {
+    color: #000000;
+    outline: none;
+   }
+   nav a:hover::after,
+   nav a:focus::after {
+    width: 100%;
+   }
+   nav a.login {
+    font-weight: 700;
+    color: #000000;
+    border: 1.5px solid transparent;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+   }
+   nav a.login:hover,
+   nav a.login:focus {
+    background-color: #c2b280;
+    color: #fff;
+    border-color: #c2b280;
+    outline: none;
+   }
+   /* Hamburger */
+   .hamburger {
+    display: none;
+    margin-left: auto;
+    width: 30px;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1100;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.3s ease;
+   }
+   .hamburger span {
+    position: absolute;
+    height: 3.5px;
+    width: 100%;
+    background: #222222;
+    border-radius: 3px;
+    opacity: 1;
+    left: 0;
+    transition: all 0.35s ease-in-out;
+   }
+   .hamburger span:nth-child(1) {
+    top: 0;
+   }
+   .hamburger span:nth-child(2) {
+    top: 10px;
+   }
+   .hamburger span:nth-child(3) {
+    top: 20px;
+   }
+   .hamburger.active span:nth-child(1) {
+    top: 10px;
+    transform: rotate(45deg);
+   }
+   .hamburger.active span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+   }
+   .hamburger.active span:nth-child(3) {
+    top: 10px;
+    transform: rotate(-45deg);
+   }
+   /* Mobile nav */
+   .mobile-nav {
+    position: fixed;
+    top: 72px;
+    right: 0;
+    width: 100%;
+    max-width: 320px;
+    height: calc(100vh - 72px);
+    background: #fff;
+    box-shadow: -6px 0 20px rgb(0 0 0 / 0.15);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 2rem;
+    gap: 2rem;
+    z-index: 1050;
+    user-select: none;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+   }
+   .mobile-nav.open {
+    transform: translateX(0);
+   }
+   .mobile-nav a {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #222222;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.4rem;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    border-radius: 6px;
+   }
+   .mobile-nav a:hover,
+   .mobile-nav a:focus {
+    border-color: #c2b280;
+    color: #000;
+    outline: none;
+    background-color: #f9f9f9;
+   }
+   .mobile-nav a.login {
+    font-weight: 700;
+    color: #000000;
+    border: 2px solid #c2b280;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    text-align: center;
+    margin-top: auto;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 0 rgba(194, 178, 128, 0);
+   }
+   .mobile-nav a.login:hover,
+   .mobile-nav a.login:focus {
+    background-color: #c2b280;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 6px 20px rgb(194 178 128 / 0.5);
+   }
+   /* Plans Section */
+   #plans {
+    max-width: 1100px;
+    margin: 6rem auto 8rem;
+    padding: 0 2rem;
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+   }
+   #plans article {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 12px 36px rgb(0 0 0 / 0.1);
+    flex: 1 1 320px;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 2rem 3rem;
+    position: relative;
+    user-select: none;
+    transition: box-shadow 0.3s ease;
+   }
+   #plans article:hover,
+   #plans article:focus-within {
+    box-shadow: 0 20px 48px rgb(0 0 0 / 0.15);
+    outline: none;
+   }
+   #plans article .icon {
+    width: 56px;
+    height: 56px;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    margin-bottom: 1.25rem;
+    user-select: none;
+    stroke: #c2b280;
+   }
+   #plans article h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #222222;
+    letter-spacing: 0.03em;
+   }
+   #plans article ul {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #444444;
+    margin: 0 0 2.5rem 0;
+    padding-left: 1.4rem;
+    list-style: disc;
+   }
+   #plans article ul li {
+    margin-bottom: 0.75rem;
+   }
+   #plans article button {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    padding: 0.85rem 2.5rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #c2b280;
+    color: #222222;
+    box-shadow: 0 4px 12px rgb(194 178 128 / 0.4);
+   }
+   #plans article button:hover,
+   #plans article button:focus {
+    background-color: #a8915a;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 6px 20px rgb(162 142 82 / 0.7);
+   }
+   /* Essencial */
+   #plans article.essencial {
+    border-top: 6px solid #c2b280;
+    background: #fff;
+   }
+   /* Profissional */
+   #plans article.profissional {
+    border: 1.5px solid #c2b280;
+    background: #fff;
+   }
+   #plans article.profissional:hover,
+   #plans article.profissional:focus-within {
+    box-shadow: 0 20px 48px rgb(194 178 128 / 0.3);
+   }
+   /* Executivo */
+   #plans article.executivo {
+    border: 1.5px solid #000;
+    background: #f9f7f1;
+   }
+   #plans article.executivo .badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: #c2b280;
+    color: #222;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    user-select: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+   }
+   #plans article.executivo button {
+    background-color: #222222;
+    color: #c2b280;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 12px rgb(194 178 128 / 0.4);
+   }
+   #plans article.executivo button:hover,
+   #plans article.executivo button:focus {
+    background-color: #000;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 6px 20px rgb(194 178 128 / 0.7);
+   }
+   /* Footer */
+   footer {
+    background-color: #111111;
+    color: #bbb;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    padding: 3rem 2rem 4rem;
+    text-align: center;
+    user-select: none;
+    border-top: 1px solid #333333;
+   }
+   footer nav {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+   }
+   footer nav a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    font-size: 1rem;
+   }
+   footer nav a:hover,
+   footer nav a:focus {
+    color: #c2b280;
+    outline: none;
+   }
+   footer .social {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+   }
+   footer .social a {
+    color: #bbb;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+   }
+   footer .social a:hover,
+   footer .social a:focus {
+    color: #c2b280;
+    outline: none;
+   }
+   footer p {
+    margin-top: 2rem;
+    font-size: 0.875rem;
+    color: #888888;
+    letter-spacing: 0.05em;
+   }
+   /* Responsive */
+   @media (max-width: 1024px) {
+    #plans {
+     flex-direction: column;
+     align-items: center;
+     padding: 0 1.5rem;
+    }
+    #plans article {
+     max-width: 100%;
+     flex: 1 1 auto;
+    }
+   }
+   @media (max-width: 640px) {
+    nav {
+     display: none;
+    }
+    .hamburger {
+     display: block;
+    }
+   }
+   @media (max-width: 480px) {
+    header {
+     padding: 0 1rem;
+     height: 56px;
+    }
+    .logo-container img {
+     width: 40px;
+     height: 40px;
+    }
+    .logo-text span:first-child {
+     font-size: 1.25rem;
+    }
+    .logo-text span:last-child {
+     width: 1.75rem;
+     height: 1.75rem;
+     font-size: 1rem;
+    }
+   }
+  </style>
+ </head>
+ <body>
+  <!-- Header -->
+  <header aria-label="Cabeçalho do site ATHENA AI" role="banner">
+   <div class="logo-container" aria-label="Logotipo ATHENA">
+    <img
+     alt="Black outline drawing of a Spartan helmet facing right with a crest on top"
+     aria-hidden="true"
+     decoding="async"
+     draggable="false"
+     loading="lazy"
+     src="https://storage.googleapis.com/a1aa/image/83399b9e-f54e-4715-2e1c-b5724400b7a8.jpg"
+    />
+    <div class="logo-text">
+     <span>ATHENA</span>
+     <span>AI</span>
+    </div>
+   </div>
+   <nav aria-label="Menu principal do site" role="navigation">
+    <a href="index.html" tabindex="0">Sobre</a>
+    <a href="index.html" tabindex="0">Como Funciona</a>
+    <a href="index.html" tabindex="0">Missão &amp; Visão</a>
+    <a href="index.html" tabindex="0">Soluções</a>
+    <a href="index.html" tabindex="0">Contato</a>
+    <a href="planos.html" tabindex="0">Planos</a>
+    <a class="login" href="#login" tabindex="0">Login / Área do Cliente</a>
+   </nav>
+   <button
+    aria-label="Abrir menu de navegação"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    class="hamburger"
+    id="hamburger"
+    type="button"
+   >
+    <span></span>
+    <span></span>
+    <span></span>
+   </button>
+  </header>
+  <!-- Mobile Navigation -->
+  <nav aria-label="Menu móvel" class="mobile-nav" id="mobile-menu" role="navigation" tabindex="-1">
+    <a href="index.html" tabindex="0">Sobre</a>
+    <a href="index.html" tabindex="0">Como Funciona</a>
+    <a href="index.html" tabindex="0">Missão &amp; Visão</a>
+    <a href="index.html" tabindex="0">Soluções</a>
+    <a href="index.html" tabindex="0">Contato</a>
+    <a href="planos.html" tabindex="0">Planos</a>
+    <a class="login" href="#login" tabindex="0"> Área do Cliente</a>
+   </nav>
+  <!-- Plans Section -->
+  <main id="plans" role="main" tabindex="0" aria-label="Planos e assinaturas ATHENA AI" style="margin-top:80px;">
+   <!-- Essencial -->
+   <article class="essencial" tabindex="0" aria-labelledby="essencial-title">
+    <svg
+     aria-hidden="true"
+     focusable="false"
+     class="icon"
+     xmlns="http://www.w3.org/2000/svg"
+     fill="none"
+     stroke="currentColor"
+     viewBox="0 0 24 24"
+    >
+     <path d="M6 2v7a6 6 0 0 0 12 0V2" />
+     <path d="M6 9h12" />
+     <path d="M10 14v6" />
+     <path d="M14 14v6" />
+     <path d="M8 20h8" />
+    </svg>
+    <h3 id="essencial-title">Plano Essencial – Gratuito</h3>
+    <ul>
+     <li>Acesso limitado à plataforma</li>
+     <li>Teste gratuito por 14 dias</li>
+     <li>Chatbot jurídico básico</li>
+     <li>Sem necessidade de cartão de crédito</li>
+    </ul>
+    <button type="button" aria-label="Começar gratuitamente">Começar gratuitamente</button>
+   </article>
+   <!-- Profissional -->
+   <article class="profissional" tabindex="0" aria-labelledby="profissional-title">
+    <svg
+     aria-hidden="true"
+     focusable="false"
+     class="icon"
+     xmlns="http://www.w3.org/2000/svg"
+     fill="none"
+     stroke="currentColor"
+     viewBox="0 0 24 24"
+    >
+     <rect x="3" y="7" width="18" height="10" rx="2" ry="2" />
+     <path d="M7 7V5a5 5 0 0 1 10 0v2" />
+     <circle cx="8.5" cy="13.5" r="1.5" />
+     <circle cx="15.5" cy="13.5" r="1.5" />
+     <path d="M9 17h6" />
+    </svg>
+    <h3 id="profissional-title">Plano Profissional – R$ XX/mês</h3>
+    <ul>
+     <li>Acesso ao Atena AI (análise de documentos)</li>
+     <li>Acesso ao Delphos AI (painel jurídico estratégico)</li>
+     <li>Painel visual completo</li>
+     <li>Relatórios automatizados</li>
+     <li>Suporte técnico prioritário</li>
+    </ul>
+    <button type="button" aria-label="Assinar plano Profissional">Assinar plano Profissional</button>
+   </article>
+   <!-- Executivo -->
+   <article class="executivo" tabindex="0" aria-labelledby="executivo-title">
+    <div class="badge" aria-label="Selo mais completo">Mais completo</div>
+    <svg
+     aria-hidden="true"
+     focusable="false"
+     class="icon"
+     xmlns="http://www.w3.org/2000/svg"
+     fill="none"
+     stroke="currentColor"
+     viewBox="0 0 24 24"
+    >
+     <path d="M7 21h10M12 3v18M5 10h14l-7-7-7 7z" />
+     <path d="M9 10v6" />
+     <path d="M15 10v6" />
+    </svg>
+    <h3 id="executivo-title">Plano Executivo – R$ XX/mês</h3>
+    <ul>
+     <li><strong>Tudo do plano Profissional</strong></li>
+     <li>Acesso direto a advogado pessoal</li>
+     <li>Consultorias jurídicas sob demanda</li>
+     <li>Estratégias com IA + apoio humano</li>
+     <li>Atendimento preferencial</li>
+    </ul>
+    <button type="button" aria-label="Assinar plano Executivo">Assinar plano Executivo</button>
+   </article>
+  </main>
+  <!-- Footer -->
+  <footer aria-label="Rodapé do site ATHENA AI" role="contentinfo">
+   <nav aria-label="Links institucionais">
+    <a href="#about" tabindex="0">Sobre a Prometeus</a>
+    <a href="#privacy" tabindex="0">Política de Privacidade</a>
+    <a href="#terms" tabindex="0">Termos de Uso</a>
+    <a href="#contact" tabindex="0">Contato</a>
+   </nav>
+   <div aria-label="Redes sociais" class="social">
+    <a aria-label="LinkedIn" href="https://linkedin.com" rel="noopener" tabindex="0" target="_blank">
+     <i aria-hidden="true" class="fab fa-linkedin-in"></i>
+    </a>
+    <a aria-label="Medium" href="https://medium.com" rel="noopener" tabindex="0" target="_blank">
+     <i aria-hidden="true" class="fab fa-medium-m"></i>
+    </a>
+    <a aria-label="GitHub" href="https://github.com" rel="noopener" tabindex="0" target="_blank">
+     <i aria-hidden="true" class="fab fa-github"></i>
+    </a>
+   </div>
+   <p>© 2024 Athena AI - Consciência Jurídica Invisível</p>
+  </footer>
+  <script>
+   // Hamburger menu toggle
+   const hamburger = document.getElementById("hamburger");
+   const mobileMenu = document.getElementById("mobile-menu");
+
+   hamburger.addEventListener("click", () => {
+    const expanded = hamburger.getAttribute("aria-expanded") === "true" || false;
+    hamburger.setAttribute("aria-expanded", !expanded);
+    hamburger.classList.toggle("active");
+    mobileMenu.classList.toggle("open");
+    if (!expanded) {
+     mobileMenu.focus();
+    }
+   });
+
+   // Close mobile menu on link click
+   mobileMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+     hamburger.setAttribute("aria-expanded", false);
+     hamburger.classList.remove("active");
+     mobileMenu.classList.remove("open");
+     hamburger.focus();
+    });
+   });
+
+   // Close mobile menu on Escape key
+   document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu.classList.contains("open")) {
+     hamburger.setAttribute("aria-expanded", false);
+     hamburger.classList.remove("active");
+     mobileMenu.classList.remove("open");
+     hamburger.focus();
+    }
+   });
+  </script>
+ </body>
+</html>
