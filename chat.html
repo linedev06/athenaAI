@@ -140,7 +140,7 @@
     gap: 0.5rem;
    }
    #header-content.delphos img {
-    width: 7.5rem; /* 120px larger than before */
+    width: 7.5rem;
     height: 7.5rem;
     object-fit: contain;
    }
@@ -151,18 +151,19 @@
     font-family: "Montserrat", sans-serif;
     color: black;
     font-weight: 300;
-   }
+    flex-wrap: nowrap;
+  }
    #header-content.delphos .title span:first-child {
-    font-size: 2.25rem; /* text-4xl */
-    font-weight: 300; /* font-thin */
+    font-size: 2.25rem;
+    font-weight: 300;
     letter-spacing: 0.05em;
    }
    #header-content.delphos .title span:last-child {
-    font-size: 1.5rem; /* text-2xl to match Athena's AI size */
-    font-weight: 600; /* font-semibold */
+    font-size: 1.5rem;
+    font-weight: 600;
     background-color: black;
     color: white;
-    width: 2.25rem; /* slightly smaller than Athena's 2.5rem */
+    width: 2.25rem;
     height: 2.25rem;
     border-radius: 9999px;
     display: flex;
@@ -207,6 +208,7 @@
      gap: 1rem;
      background: white;
      border-top: 1px solid #d1d5db;
+     position: relative;
     }
     textarea#user-input {
      font-size: 1.125rem;
@@ -238,6 +240,186 @@
     header#main-header {
      margin-bottom: 1.5rem;
     }
+   }
+   /* Modal styles */
+   .modal-bg {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   .modal-content {
+    background: white;
+    border-radius: 1rem;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+   }
+   .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+   }
+   .modal-close {
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+    background: transparent;
+    border: none;
+   }
+   /* Minimal input file */
+   input[type="file"] {
+    display: none;
+   }
+   /* Floating + button */
+   #upload-toggle-btn {
+    position: absolute;
+    right: 5.5rem;
+    bottom: 0.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    background-color: #000;
+    color: #fff;
+    border-radius: 9999px;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+   }
+   #upload-toggle-btn:hover {
+    background-color: #222;
+   }
+   #upload-toggle-btn.active {
+    transform: rotate(45deg);
+   }
+   /* Upload panel */
+   #upload-panel {
+    position: absolute;
+    bottom: 3.75rem;
+    right: 0.75rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    padding: 1rem 1.5rem;
+    width: 280px;
+    max-width: 90vw;
+    display: none;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 20;
+   }
+   #upload-panel label {
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+   }
+   #upload-panel label:hover {
+    background-color: #222;
+   }
+   #upload-panel p {
+    font-size: 0.875rem;
+    color: #555;
+    margin: 0;
+    text-align: center;
+   }
+   /* Risk Simulator toggle button */
+   #risk-toggle-btn {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 9.5rem;
+    background-color: #000;
+    color: #fff;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+   }
+   #risk-toggle-btn:hover {
+    background-color: #222;
+   }
+   #risk-toggle-btn.active {
+    transform: rotate(45deg);
+   }
+   /* Risk simulator panel */
+   #risk-simulator {
+    position: absolute;
+    bottom: 3.75rem;
+    right: 7.5rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    padding: 1rem 1.5rem;
+    width: 320px;
+    max-width: 90vw;
+    display: none;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 20;
+   }
+   #risk-simulator label {
+    font-weight: 600;
+    font-size: 0.9rem;
+   }
+   #risk-simulator textarea {
+    width: 100%;
+    min-height: 4rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    resize: vertical;
+   }
+   #risk-simulator button {
+    margin-top: 0.5rem;
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   }
+   #risk-simulator button:hover {
+    background-color: #222;
+   }
+   #risk-result {
+    margin-top: 0.5rem;
+    font-weight: 600;
    }
   </style>
  </head>
@@ -284,6 +466,9 @@
    >
     Modo: Athena
    </button>
+   <button id="history-btn" aria-label="Abrir histórico de conversas" title="Histórico de conversas" class="text-white absolute top-4 left-4 z-60 text-2xl hover:text-gray-300 transition-colors">
+    <i class="fas fa-scroll"></i>
+   </button>
    <header
     class="p-5 border-b border-gray-300 text-center font-semibold text-xl sm:text-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white tracking-wide select-none"
     id="chat-header"
@@ -320,7 +505,7 @@
    </section>
    <form
     aria-label="Formulário de envio de mensagem para Athena AI"
-    class="p-4 border-t border-gray-300 flex items-center gap-3 bg-white"
+    class="p-4 border-t border-gray-300 flex items-center gap-3 bg-white relative"
     id="chat-form"
     onsubmit="return false"
    >
@@ -342,7 +527,34 @@
     >
      <i class="fas fa-paper-plane text-lg"></i>
     </button>
+    <button id="upload-toggle-btn" aria-label="Abrir painel de envio de documentos" title="Enviar documentos" type="button" aria-expanded="false" aria-controls="upload-panel" class="ml-2">
+     +
+    </button>
+    <button id="risk-toggle-btn" aria-label="Abrir simulador de risco legal" title="Simulador de risco legal" type="button" aria-expanded="false" aria-controls="risk-simulator" class="ml-2">
+     <i class="fas fa-balance-scale"></i>
+    </button>
+    <div id="upload-panel" role="region" aria-hidden="true" aria-label="Painel de envio de documentos">
+     <label for="file-upload" class="file-upload-label" tabindex="0">
+      <i class="fas fa-file-upload"></i> Selecionar documento (PDF, DOC)
+     </label>
+     <input type="file" id="file-upload" accept=".pdf,.doc,.docx" />
+     <p class="text-center text-gray-600 text-sm mt-2">Envie contratos ou documentos para análise jurídica.</p>
+    </div>
+    <div id="risk-simulator" role="region" aria-hidden="true" aria-label="Simulador de Risco Legal">
+     <label for="risk-input">Descreva sua situação para análise de risco:</label>
+     <textarea id="risk-input" placeholder="Ex: Se eu fizer X, qual a chance de ser processado por Y?"></textarea>
+     <button id="risk-submit" type="button">Analisar Risco</button>
+     <div id="risk-result" aria-live="polite"></div>
+    </div>
    </form>
+   <section id="diagnostic-panel" class="hidden" aria-live="polite" aria-atomic="true" aria-label="Painel de Diagnóstico Jurídico">
+    <h3><i class="fas fa-stethoscope"></i> Raio-X Jurídico</h3>
+    <ul id="diagnostic-list">
+     <li><i class="fas fa-exclamation-triangle"></i> Áreas com maior risco: Contratos, Trabalhista</li>
+     <li><i class="fas fa-check-circle"></i> Ações recomendadas: Revisar cláusulas contratuais</li>
+     <li><i class="fas fa-list-check"></i> Checklist: Atualizar documentos legais</li>
+    </ul>
+   </section>
   </main>
   <button
    aria-label="Rolar para a última mensagem"
@@ -351,9 +563,16 @@
   >
    <i class="fas fa-chevron-down"></i>
   </button>
-  <footer class="mt-6 text-center text-gray-600 text-sm max-w-4xl px-4 select-none">
-   © 2025 Athena AI - Prometeus Association
-  </footer>
+  <!-- Histórico Modal -->
+  <div id="history-modal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="history-title">
+   <div class="modal-content">
+    <div class="modal-header">
+     <h2 id="history-title" class="text-xl font-semibold">Histórico de Conversas</h2>
+     <button class="modal-close" aria-label="Fechar histórico">&times;</button>
+    </div>
+    <div id="history-content" class="space-y-4 max-h-[60vh] overflow-y-auto"></div>
+   </div>
+  </div>
   <script>
    const chatMessages = document.getElementById("chat-messages");
    const chatForm = document.getElementById("chat-form");
@@ -363,18 +582,30 @@
    const chatContainer = document.getElementById("chat-container");
    const chatHeader = document.getElementById("chat-header");
    const headerContent = document.getElementById("header-content");
+   const fileUpload = document.getElementById("file-upload");
+   const historyBtn = document.getElementById("history-btn");
+   const historyModal = document.getElementById("history-modal");
+   const historyCloseBtn = historyModal.querySelector(".modal-close");
+   const historyContent = document.getElementById("history-content");
+   const diagnosticPanel = document.getElementById("diagnostic-panel");
+   const diagnosticList = document.getElementById("diagnostic-list");
+   const riskSimulator = document.getElementById("risk-simulator");
+   const riskInput = document.getElementById("risk-input");
+   const riskSubmit = document.getElementById("risk-submit");
+   const riskResult = document.getElementById("risk-result");
+   const uploadToggleBtn = document.getElementById("upload-toggle-btn");
+   const uploadPanel = document.getElementById("upload-panel");
+   const riskToggleBtn = document.getElementById("risk-toggle-btn");
 
-   // Variável global para modo atual
-   let currentMode = "athena"; // "athena" ou "delphos"
+   let currentMode = "athena";
+   let conversationHistory = [];
 
-   // Ajusta altura do textarea para evitar scroll interno e limitar a 3 linhas
    function autoResizeTextarea() {
     userInput.style.height = "auto";
-    const maxHeight = 4.2 * 16; // 4.2rem * 16px base font size = 67.2px max height
+    const maxHeight = 4.2 * 16;
     userInput.style.height = Math.min(userInput.scrollHeight, maxHeight) + "px";
    }
 
-   // Cria elemento de mensagem no chat com animação
    function createMessageElement(text, sender = "athena", isSystem = false) {
     const messageWrapper = document.createElement("div");
     messageWrapper.classList.add("flex", sender === "user" ? "justify-end" : "justify-start");
@@ -435,41 +666,22 @@
     return messageWrapper;
    }
 
-   // Respostas simuladas focadas no tema jurídico preventivo (Athena)
    function getAthenaResponse(question) {
     const q = question.toLowerCase();
-
     if (q.includes("contrato") && q.includes("riscos")) {
-     return (
-      "Detectei possíveis cláusulas abusivas no seu contrato. " +
-      "Imagine que você assina isso: daqui a 2 anos, seu patrimônio pode estar comprometido. " +
-      "Recomendo revisar esses pontos com atenção para evitar prejuízos futuros."
-     );
+     return "Detectei possíveis cláusulas abusivas no seu contrato. Recomendo revisar para evitar prejuízos futuros.";
     }
     if (q.includes("decisão") && (q.includes("rápida") || q.includes("velocidade"))) {
-     return (
-      "Você está priorizando velocidade em vez de segurança? " +
-      "Tomar decisões jurídicas apressadas pode gerar riscos desnecessários. " +
-      "Vamos analisar juntos as consequências para garantir escolhas estratégicas."
-     );
+     return "Tomar decisões jurídicas apressadas pode gerar riscos desnecessários. Vamos analisar juntos as consequências.";
     }
     if (q.includes("perfil")) {
-     return (
-      "Seu Perfil Legal Cognitivo indica que você tende a ser proativo, " +
-      "o que é ótimo para antecipar riscos e tomar decisões fundamentadas."
-     );
+     return "Seu Perfil Legal Cognitivo indica que você tende a ser proativo, ótimo para antecipar riscos.";
     }
     if (q.includes("ajuda") || q.includes("suporte")) {
-     return (
-      "Estou aqui para ajudar a identificar riscos jurídicos e orientar suas decisões. " +
-      "Pergunte sobre contratos, direitos trabalhistas, finanças ou qualquer dúvida legal."
-     );
+     return "Estou aqui para ajudar a identificar riscos jurídicos e orientar suas decisões.";
     }
     if (q.includes("cláusula") || q.includes("contrato")) {
-     return (
-      "Posso ajudar a identificar cláusulas abusivas ou riscos ocultos em seus contratos. " +
-      "Quer que eu analise algum documento específico?"
-     );
+     return "Posso ajudar a identificar cláusulas abusivas ou riscos ocultos em seus contratos.";
     }
     if (q.includes("obrigado") || q.includes("valeu")) {
      return "De nada! Estou sempre aqui para ajudar você a tomar decisões jurídicas mais seguras.";
@@ -477,45 +689,25 @@
     if (q.trim() === "") {
      return "Por favor, digite sua dúvida para que eu possa ajudar.";
     }
-
-    return (
-     "Interessante! Estou aqui para ajudar a antecipar riscos jurídicos e orientar suas decisões. " +
-     "Pode me perguntar sobre contratos, direitos, finanças ou dúvidas legais."
-    );
+    return "Interessante! Estou aqui para ajudar a antecipar riscos jurídicos e orientar suas decisões.";
    }
 
-   // Respostas simuladas para Delphos AI (simulação jurídica preditiva)
    function getDelphosResponse(question) {
     const q = question.toLowerCase();
-
     if (q.includes("contrato") && q.includes("riscos")) {
-     return (
-      "Analisando cenários futuros, este contrato pode gerar impactos legais em até 5 anos. " +
-      "Recomendo simular diferentes decisões para mitigar riscos futuros."
-     );
+     return "Este contrato pode gerar impactos legais em até 5 anos. Recomendo simular decisões para mitigar riscos futuros.";
     }
     if (q.includes("decisão") && (q.includes("rápida") || q.includes("velocidade"))) {
-     return (
-      "A velocidade pode comprometer a precisão preditiva. " +
-      "Sugiro avaliar as consequências jurídicas futuras antes de agir."
-     );
+     return "A velocidade pode comprometer a precisão preditiva. Avalie as consequências jurídicas futuras antes de agir.";
     }
     if (q.includes("perfil")) {
-     return (
-      "Seu Perfil Legal Cognitivo sugere uma abordagem analítica, ideal para simulações preditivas e planejamento estratégico."
-     );
+     return "Seu Perfil Legal Cognitivo sugere uma abordagem analítica, ideal para simulações preditivas.";
     }
     if (q.includes("ajuda") || q.includes("suporte")) {
-     return (
-      "No modo Delphos, ofereço simulações jurídicas preditivas para decisões futuras. " +
-      "Pergunte sobre cenários, riscos futuros ou estratégias legais."
-     );
+     return "No modo Delphos, ofereço simulações jurídicas preditivas para decisões futuras.";
     }
     if (q.includes("cláusula") || q.includes("contrato")) {
-     return (
-      "Posso simular o impacto de cláusulas contratuais em diferentes cenários futuros. " +
-      "Quer que eu faça uma análise preditiva?"
-     );
+     return "Posso simular o impacto de cláusulas contratuais em diferentes cenários futuros.";
     }
     if (q.includes("obrigado") || q.includes("valeu")) {
      return "À disposição! Sempre pronto para ajudar com previsões jurídicas avançadas.";
@@ -523,13 +715,9 @@
     if (q.trim() === "") {
      return "Por favor, digite sua dúvida para que eu possa ajudar.";
     }
-
-    return (
-     "Interessante! No modo Delphos, posso simular cenários jurídicos futuros para orientar suas decisões estratégicas."
-    );
+    return "No modo Delphos, posso simular cenários jurídicos futuros para orientar suas decisões estratégicas.";
    }
 
-   // Rola o chat para o fim
    function scrollToBottom() {
     chatMessages.scrollTo({
      top: chatMessages.scrollHeight,
@@ -537,7 +725,6 @@
     });
    }
 
-   // Verifica se o scroll está no fim para esconder ou mostrar botão
    function checkScrollPosition() {
     const threshold = 50;
     const atBottom = chatMessages.scrollHeight - chatMessages.scrollTop - chatMessages.clientHeight < threshold;
@@ -548,49 +735,12 @@
     }
    }
 
-   // Envia mensagem e processa resposta com animação suave
-   function sendMessage() {
-    const question = userInput.value.trim();
-    if (!question) return;
-
-    // Adiciona mensagem do usuário
-    const userMessage = createMessageElement(question, "user");
-    chatMessages.appendChild(userMessage);
-    scrollToBottom();
-
-    // Limpa input e ajusta altura
-    userInput.value = "";
-    autoResizeTextarea();
-
-    // Mostra "Pensando..." com animação
-    const thinkingMessage = createMessageElement("Pensando...", currentMode, true);
-    chatMessages.appendChild(thinkingMessage);
-    scrollToBottom();
-
-    // Simula resposta com delay e animação
-    setTimeout(() => {
-     chatMessages.removeChild(thinkingMessage);
-     let answer = "";
-     if (currentMode === "athena") {
-      answer = getAthenaResponse(question);
-     } else {
-      answer = getDelphosResponse(question);
-     }
-     const aiMessage = createMessageElement(answer, currentMode);
-     chatMessages.appendChild(aiMessage);
-     scrollToBottom();
-    }, 1200);
-   }
-
-   // Função para animar troca do header com fade e scale
-   function animateHeaderChange(newMode) {
+   async function animateHeaderChange(newMode) {
     return new Promise((resolve) => {
-     // Fade out current header content
      headerContent.style.transition = "opacity 0.3s ease, transform 0.3s ease";
      headerContent.style.opacity = "0";
      headerContent.style.transform = "scale(0.9)";
      setTimeout(() => {
-      // Atualiza conteúdo após fade out
       if (newMode === "delphos") {
        headerContent.classList.remove("athena");
        headerContent.classList.add("delphos");
@@ -613,17 +763,17 @@
        titleDiv.style.fontWeight = "300";
        const spanName = document.createElement("span");
        spanName.textContent = "DELPHOS";
-       spanName.style.fontSize = "1.875rem"; // text-3xl
+       spanName.style.fontSize = "1.875rem";
        spanName.style.fontWeight = "300";
        spanName.style.letterSpacing = "0.05em";
        const spanAI = document.createElement("span");
        spanAI.textContent = "AI";
-       spanAI.style.fontSize = "1.5rem"; // text-2xl
+       spanAI.style.fontSize = "1.5rem";
        spanAI.style.fontWeight = "600";
        spanAI.style.backgroundColor = "black";
        spanAI.style.color = "white";
-       spanAI.style.width = "2.5rem";
-       spanAI.style.height = "2.5rem";
+       spanAI.style.width = "2.25rem";
+       spanAI.style.height = "2.25rem";
        spanAI.style.borderRadius = "9999px";
        spanAI.style.display = "flex";
        spanAI.style.alignItems = "center";
@@ -660,7 +810,6 @@
         </div>
        `;
       }
-      // Fade in new content
       setTimeout(() => {
        headerContent.style.opacity = "1";
        headerContent.style.transform = "scale(1)";
@@ -670,7 +819,6 @@
     });
    }
 
-   // Alterna o modo entre Athena e Delphos e atualiza header imagem e texto com animação suave
    async function toggleMode() {
     if (currentMode === "athena") {
      currentMode = "delphos";
@@ -682,7 +830,6 @@
 
      await animateHeaderChange("delphos");
 
-     // Mensagem do sistema
      const systemMsg = createMessageElement(
       "Você está agora no modo Delphos AI: simulação jurídica preditiva baseada em decisões futuras.",
       "delphos",
@@ -690,6 +837,8 @@
      );
      chatMessages.appendChild(systemMsg);
      scrollToBottom();
+     updateRiskSimulatorVisibility(false);
+     toggleRiskPanel(false);
     } else {
      currentMode = "athena";
      modeToggle.textContent = "Modo: Athena";
@@ -700,7 +849,6 @@
 
      await animateHeaderChange("athena");
 
-     // Mensagem do sistema
      const systemMsg = createMessageElement(
       "Você voltou para Athena AI: assistência jurídica em tempo real.",
       "athena",
@@ -708,41 +856,222 @@
      );
      chatMessages.appendChild(systemMsg);
      scrollToBottom();
+     updateRiskSimulatorVisibility(false);
+     toggleRiskPanel(false);
     }
    }
 
-   // Eventos
-   userInput.addEventListener("input", autoResizeTextarea);
+   fileUpload.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const fileName = file.name;
+    const userMsg = createMessageElement(`Enviei o documento: ${fileName}`, "user");
+    chatMessages.appendChild(userMsg);
+    scrollToBottom();
+    setTimeout(() => {
+     const analysisMsg = createMessageElement(
+      `Análise do documento "${fileName}": Identifiquei possíveis cláusulas abusivas e riscos ocultos. Recomendo revisão detalhada.`,
+      currentMode,
+      false
+     );
+     chatMessages.appendChild(analysisMsg);
+     scrollToBottom();
+     conversationHistory.push({ role: "user", content: `Documento enviado: ${fileName}` });
+     conversationHistory.push({ role: "ai", content: analysisMsg.textContent, mode: currentMode });
+     updateDiagnosticPanel();
+    }, 1500);
+    e.target.value = "";
+    toggleUploadPanel(false);
+   });
 
+   historyBtn.addEventListener("click", () => {
+    historyContent.innerHTML = "";
+    if (conversationHistory.length === 0) {
+     historyContent.textContent = "Nenhuma conversa salva ainda.";
+    } else {
+     const grouped = conversationHistory.reduce((acc, msg) => {
+      const key = msg.mode || "Geral";
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(msg);
+      return acc;
+     }, {});
+     for (const [mode, msgs] of Object.entries(grouped)) {
+      const section = document.createElement("section");
+      const h4 = document.createElement("h4");
+      h4.textContent = mode.toUpperCase();
+      h4.className = "font-semibold mb-2";
+      section.appendChild(h4);
+      msgs.forEach((m) => {
+       const p = document.createElement("p");
+       p.textContent = (m.role === "user" ? "Você: " : "IA: ") + m.content;
+       p.className = m.role === "user" ? "text-gray-700" : "text-gray-900 italic";
+       section.appendChild(p);
+      });
+      historyContent.appendChild(section);
+     }
+    }
+    historyModal.classList.remove("hidden");
+   });
+   historyCloseBtn.addEventListener("click", () => {
+    historyModal.classList.add("hidden");
+   });
+   historyModal.addEventListener("click", (e) => {
+    if (e.target === historyModal) historyModal.classList.add("hidden");
+   });
+
+   riskSubmit.addEventListener("click", () => {
+    const input = riskInput.value.trim();
+    if (!input) {
+     riskResult.textContent = "Por favor, descreva uma situação para análise.";
+     return;
+    }
+    const score = Math.min(100, Math.floor(Math.random() * 100) + 1);
+    riskResult.textContent = `Score de risco legal estimado: ${score}%.`;
+   });
+
+   function updateDiagnosticPanel() {
+    diagnosticPanel.classList.remove("hidden");
+    const risks = [];
+    const actions = [];
+    const checklist = [];
+
+    const text = conversationHistory.map((m) => m.content.toLowerCase()).join(" ");
+
+    if (text.includes("contrato")) risks.push("Contratos");
+    if (text.includes("trabalho") || text.includes("trabalhista")) risks.push("Trabalhista");
+    if (text.includes("cláusula abusiva")) actions.push("Revisar cláusulas contratuais");
+    if (text.includes("documento") || text.includes("contrato")) checklist.push("Atualizar documentos legais");
+
+    diagnosticList.innerHTML = "";
+    if (risks.length === 0) risks.push("Nenhum risco detectado");
+    if (actions.length === 0) actions.push("Nenhuma ação recomendada");
+    if (checklist.length === 0) checklist.push("Nenhum item pendente");
+
+    const createListItem = (iconClass, text) => {
+     const li = document.createElement("li");
+     li.innerHTML = `<i class="fas ${iconClass}"></i> ${text}`;
+     return li;
+    };
+
+    diagnosticList.appendChild(createListItem("fa-exclamation-triangle", "Áreas com maior risco: " + risks.join(", ")));
+    diagnosticList.appendChild(createListItem("fa-check-circle", "Ações recomendadas: " + actions.join(", ")));
+    diagnosticList.appendChild(createListItem("fa-list-check", "Checklist: " + checklist.join(", ")));
+   }
+
+   function updateRiskSimulatorVisibility(show) {
+    if (show) {
+     riskToggleBtn.style.display = "flex";
+    } else {
+     riskToggleBtn.style.display = "none";
+     toggleRiskPanel(false);
+    }
+   }
+
+   function toggleRiskPanel(show) {
+    if (show === undefined) {
+     show = riskSimulator.style.display !== "flex";
+    }
+    if (show) {
+     riskSimulator.style.display = "flex";
+     riskToggleBtn.classList.add("active");
+     riskToggleBtn.setAttribute("aria-expanded", "true");
+    } else {
+     riskSimulator.style.display = "none";
+     riskToggleBtn.classList.remove("active");
+     riskToggleBtn.setAttribute("aria-expanded", "false");
+     riskResult.textContent = "";
+     riskInput.value = "";
+    }
+   }
+
+   function sendMessage() {
+    const question = userInput.value.trim();
+    if (!question) return;
+
+    const userMessage = createMessageElement(question, "user");
+    chatMessages.appendChild(userMessage);
+    conversationHistory.push({ role: "user", content: question });
+    scrollToBottom();
+
+    userInput.value = "";
+    autoResizeTextarea();
+
+    const thinkingMessage = createMessageElement("Pensando...", currentMode, true);
+    chatMessages.appendChild(thinkingMessage);
+    scrollToBottom();
+
+    setTimeout(() => {
+     chatMessages.removeChild(thinkingMessage);
+     let answer = "";
+     if (currentMode === "athena") {
+      answer = getAthenaResponse(question);
+     } else {
+      answer = getDelphosResponse(question);
+     }
+     const aiMessage = createMessageElement(answer, currentMode);
+     chatMessages.appendChild(aiMessage);
+     conversationHistory.push({ role: "ai", content: answer, mode: currentMode });
+     scrollToBottom();
+     updateDiagnosticPanel();
+     if (currentMode === "delphos") {
+      updateRiskSimulatorVisibility(true);
+     } else {
+      updateRiskSimulatorVisibility(false);
+     }
+    }, 1200);
+   }
+
+   uploadToggleBtn.addEventListener("click", () => {
+    toggleUploadPanel();
+   });
+
+   riskToggleBtn.addEventListener("click", () => {
+    toggleRiskPanel();
+   });
+
+   function toggleUploadPanel(show) {
+    if (show === undefined) {
+     show = uploadPanel.style.display !== "flex";
+    }
+    if (show) {
+     uploadPanel.style.display = "flex";
+     uploadToggleBtn.classList.add("active");
+     uploadToggleBtn.setAttribute("aria-expanded", "true");
+    } else {
+     uploadPanel.style.display = "none";
+     uploadToggleBtn.classList.remove("active");
+     uploadToggleBtn.setAttribute("aria-expanded", "false");
+    }
+   }
+
+   userInput.addEventListener("input", autoResizeTextarea);
    chatForm.addEventListener("submit", (e) => {
     e.preventDefault();
     sendMessage();
    });
-
    userInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
      e.preventDefault();
      sendMessage();
     }
    });
-
    chatMessages.addEventListener("scroll", checkScrollPosition);
-
    scrollBtn.addEventListener("click", () => {
     scrollToBottom();
     scrollBtn.classList.remove("visible");
     userInput.focus();
    });
-
    chatMessages.addEventListener("DOMNodeInserted", () => {
     scrollToBottom();
     checkScrollPosition();
     chatMessages.focus();
    });
+   modeToggle.addEventListener("click", async () => {
+    await toggleMode();
+    toggleUploadPanel(false);
+    toggleRiskPanel(false);
+   });
 
-   modeToggle.addEventListener("click", toggleMode);
-
-   // Inicializa altura do textarea e botão scroll
    autoResizeTextarea();
    checkScrollPosition();
   </script>
