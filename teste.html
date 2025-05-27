@@ -1,0 +1,1061 @@
+<html lang="pt-BR" class="transition-colors duration-700">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATHENA AI / DELPHOS AI Alternar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
+  <style>
+    /* Cores personalizadas para os botões */
+    .btn-attach {
+      background-color: #3a3a3c;
+      border: 1px solid #3a3a3c;
+    }
+    .btn-search {
+      background-color: #3a3a3c;
+      border: 1px solid #3a3a3c;
+    }
+    .btn-reason {
+      background-color: #3a3a3c;
+      border: 1px solid #3a3a3c;
+    }
+    .btn-summarize {
+      background-color: #3a3a3c;
+      border: 1px solid #3a3a3c;
+      color: #d97706;
+    }
+    .btn-get-advice {
+      background-color: #3a3a3c;
+      border: 1px solid #3a3a3c;
+      color: #22d3ee;
+    }
+    .btn-make-plan {
+      background-color: #3a3a3c;
+      border: 1px solid #3a3a3c;
+      color: #eab308;
+    }
+    .btn-code {
+      background-color: #3a3a3c;
+      border: 1px solid #3a3a3c;
+      color: #6366f1;
+    }
+    .btn-more {
+      background-color: #3a3a3c;
+      border: 1px solid #3a3a3c;
+      color: #a1a1aa;
+    }
+    #main-header {
+      background-color: #000000;
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: background-color 0.7s ease;
+      position: relative;
+      overflow: visible;
+    }
+    #header-name {
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      font-size: 2.25rem;
+      font-weight: 300;
+      user-select: text;
+      transition: color 0.7s ease;
+    }
+    #header-ai {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      font-weight: 700;
+      border-radius: 9999px;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: text;
+      box-shadow: 0 0 8px #ffffff88;
+      font-size: 1.25rem;
+      transition: background-color 0.7s ease, color 0.7s ease, box-shadow 0.7s ease;
+      flex-shrink: 0;
+    }
+    body {
+      background-color: #000000;
+      color: #e5e7eb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.7s ease, color 0.7s ease;
+    }
+    header {
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: gap 0.7s ease;
+      position: relative;
+      overflow: visible;
+    }
+    .logo-image {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      user-select: none;
+      flex-shrink: 0;
+      transition: filter 0.7s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .logo-text {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: gap 0.7s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .logo-name {
+      font-size: 2.25rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      user-select: text;
+      font-family: 'Montserrat', sans-serif;
+      transition: color 0.7s ease;
+    }
+    .logo-ai {
+      background-color: #000000;
+      color: #ffffff;
+      font-weight: 700;
+      border-radius: 9999px;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: text;
+      font-family: 'Montserrat', sans-serif;
+      box-shadow: 0 0 8px #ffffff88;
+      font-size: 1.25rem;
+      transition: background-color 0.7s ease, color 0.7s ease, box-shadow 0.7s ease;
+      flex-shrink: 0;
+    }
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    .btn-login {
+      background-color: #ffffff;
+      color: #000000;
+      font-weight: 600;
+      border-radius: 9999px;
+      padding: 0.375rem 1rem;
+      font-size: 0.875rem;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-login:hover {
+      background-color: #e5e7eb;
+    }
+    .btn-signup {
+      border: 1.5px solid #ffffff;
+      color: #ffffff;
+      font-weight: 600;
+      border-radius: 9999px;
+      padding: 0.375rem 1rem;
+      font-size: 0.875rem;
+      background-color: transparent;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .btn-signup:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1.5rem;
+      width: 100%;
+      max-width: 768px;
+      margin: 0 auto 3rem;
+      transition: color 0.7s ease;
+    }
+    main h1 {
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+      color: #f9fafb;
+      transition: color 0.7s ease;
+    }
+    form {
+      width: 100%;
+      background-color: #1f1f21;
+      border-radius: 1.5rem;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      transition: background-color 0.7s ease;
+    }
+    label {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      user-select: none;
+      transition: color 0.7s ease;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.75rem;
+      border: 1px solid #4b5563;
+      background-color: #111111;
+      color: #e5e7eb;
+      font-size: 1rem;
+      font-family: inherit;
+      outline-offset: 2px;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+    input[type="text"]::placeholder {
+      color: #9ca3af;
+    }
+    input[type="text"]:focus {
+      border-color: #d97706;
+      background-color: #1f1f21;
+    }
+    .form-buttons {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn-attach, .btn-search, .btn-reason {
+      background-color: #3a3a3c;
+      border: 1px solid #3a3a3c;
+      color: #d1d5db;
+      font-size: 0.75rem;
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      user-select: none;
+    }
+    .btn-attach:hover, .btn-search:hover, .btn-reason:hover {
+      background-color: #4b4b4d;
+    }
+    .btn-attach i, .btn-search i, .btn-reason i {
+      font-size: 0.75rem;
+    }
+    .btn-voice {
+      margin-left: auto;
+      background-color: #ffffff;
+      color: #000000;
+      font-weight: 600;
+      border-radius: 9999px;
+      padding: 0.25rem 1rem;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      user-select: none;
+      border: none;
+    }
+    .btn-voice:hover {
+      background-color: #e5e7eb;
+    }
+    .btn-voice i {
+      font-size: 1rem;
+    }
+    .action-buttons {
+      margin-top: 1.5rem;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      transition: color 0.7s ease;
+    }
+    .action-button {
+      background-color: #3a3a3c;
+      border: 1px solid #52525b;
+      color: #d1d5db;
+      font-size: 0.75rem;
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .action-button:hover {
+      border-color: #9ca3af;
+      color: #f9fafb;
+    }
+    .action-button i {
+      font-size: 0.75rem;
+    }
+    .btn-summarize {
+      color: #d97706;
+      border-color: #a16207;
+    }
+    .btn-summarize:hover {
+      border-color: #d97706;
+      color: #fbbf24;
+    }
+    .btn-get-advice {
+      color: #22d3ee;
+      border-color: #06b6d4;
+    }
+    .btn-get-advice:hover {
+      border-color: #22d3ee;
+      color: #67e8f9;
+    }
+    .btn-make-plan {
+      color: #eab308;
+      border-color: #ca8a04;
+    }
+    .btn-make-plan:hover {
+      border-color: #eab308;
+      color: #facc15;
+    }
+    .btn-code {
+      color: #6366f1;
+      border-color: #4f46e5;
+    }
+    .btn-code:hover {
+      border-color: #6366f1;
+      color: #818cf8;
+    }
+    .btn-more {
+      color: #a1a1aa;
+      border-color: #71717a;
+    }
+    .btn-more:hover {
+      border-color: #a1a1aa;
+      color: #d4d4d8;
+    }
+    /* Estilos do modo DELPHOS */
+    body.delphos {
+      background-color: #0f172a;
+      color: #cbd5e1;
+    }
+    body.delphos header #main-header {
+      background-color: #0f172a;
+      
+    }
+
+    body.delphos header #main-header #header-name {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 0.15em;
+    }
+    body.delphos header #main-header #header-ai {
+      background-color: #fcfcfc;
+      color: #0f172a;
+     
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+    body.delphos main h1 {
+      color: #e0e7ff;
+    }
+    body.delphos form {
+      background-color: #1e293b;
+      box-shadow: 0 4px 12px rgba(30, 41, 59, 0.9);
+    }
+    body.delphos label {
+      color: #94a3b8;
+    }
+    body.delphos input[type="text"] {
+      background-color: #0f172a;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.delphos input[type="text"]::placeholder {
+      color: #94a3b8;
+    }
+    body.delphos input[type="text"]:focus {
+      border-color: #facc15;
+      background-color: #1e293b;
+      color: #f0f9ff;
+    }
+    body.delphos .btn-attach, 
+    body.delphos .btn-search, 
+    body.delphos .btn-reason {
+      background-color: #334155;
+      border-color: #334155;
+      color: #cbd5e1;
+    }
+    body.delphos .btn-attach:hover, 
+    body.delphos .btn-search:hover, 
+    body.delphos .btn-reason:hover {
+      background-color: #475569;
+    }
+    body.delphos .btn-voice {
+      background-color: #ffffff;
+      color: #0f172a;
+    }
+    body.delphos .btn-voice:hover {
+      background-color: #ffffff;
+    }
+    body.delphos .action-buttons {
+      color: #cbd5e1;
+    }
+    body.delphos .action-button {
+      background-color: #334155;
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    body.delphos .action-button:hover {
+      border-color: #ffffff;
+      color: #e0e7ff;
+    }
+    body.delphos .btn-summarize {
+      color: #facc15;
+      border-color: #ca8a04;
+    }
+    body.delphos .btn-summarize:hover {
+      color: #fde68a;
+      border-color: #facc15;
+    }
+    body.delphos .btn-get-advice {
+      color: #38bdf8;
+      border-color: #0ea5e9;
+    }
+    body.delphos .btn-get-advice:hover {
+      color: #7dd3fc;
+      border-color: #38bdf8;
+    }
+    body.delphos .btn-make-plan {
+      color: #fbbf24;
+      border-color: #b45309;
+    }
+    body.delphos .btn-make-plan:hover {
+      color: #fde68a;
+      border-color: #fbbf24;
+    }
+    body.delphos .btn-code {
+      color: #818cf8;
+      border-color: #4338ca;
+    }
+    body.delphos .btn-code:hover {
+      color: #a5b4fc;
+      border-color: #818cf8;
+    }
+    body.delphos .btn-more {
+      color: #94a3b8;
+      border-color: #64748b;
+    }
+    body.delphos .btn-more:hover {
+      color: #cbd5e1;
+      border-color: #94a3b8;
+    }
+    /* Imagem do logo DELPHOS */
+    .delphos-logo {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      user-select: none;
+      flex-shrink: 0;
+  
+      transition: filter 0.7s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Container para logo combinada Delphos */
+    .delphos-logo-container {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      flex-shrink: 0;
+    }
+    .delphos-logo-image {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px #000000);
+      transition: filter 0.7s ease;
+      display: none; /* Esconde a imagem atrás do SVG */
+    }
+    .delphos-logo-svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 72px;
+      height: 40px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
+    }
+    /* Fade animation */
+    .fade-out {
+      animation: fadeOut 0.3s forwards;
+    }
+    .fade-in {
+      animation: fadeIn 0.3s forwards;
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Estilos personalizados para o botão de alternância */
+    #mode-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 2px solid transparent;
+      background-color: #3a3a3c;
+      color: #d1d5db;
+      cursor: pointer;
+      user-select: none;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+      min-width: 6.5rem;
+    }
+    #mode-toggle i {
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+    #mode-toggle:hover {
+      background-color: #52525b;
+      color: #f9fafb;
+      border-color: #d97706;
+      box-shadow: 0 0 12px #d97706;
+    }
+    #mode-toggle[aria-pressed="true"] {
+      background-color: #facc15;
+      color: #1e293b;
+      border-color: #b45309;
+      box-shadow: 0 0 12px #b45309;
+    }
+    #mode-toggle[aria-pressed="true"]:hover {
+      background-color: #fbbf24;
+      color: #1e293b;
+      border-color: #92400e;
+      box-shadow: 0 0 16px #92400e;
+    }
+    #mode-toggle[aria-pressed="true"] i {
+      transform: rotate(180deg);
+    }
+    /* DELPHOS modo botão alternância */
+    body.delphos #mode-toggle {
+      background-color: #334155;
+      color: #cbd5e1;
+      border-color: transparent;
+      box-shadow: 0 0 6px rgba(203, 213, 225, 0.15);
+    }
+    body.delphos #mode-toggle:hover {
+      background-color: #475569;
+      color: #e0e7ff;
+      border-color: #facc15;
+      box-shadow: 0 0 12px #facc15;
+    }
+    body.delphos #mode-toggle[aria-pressed="true"] {
+      background-color: #facc15;
+      color: #0f172a;
+      border-color: #b45309;
+      box-shadow: 0 0 12px #b45309;
+    }
+    body.delphos #mode-toggle[aria-pressed="true"]:hover {
+      background-color: #fbbf24;
+      color: #0f172a;
+      border-color: #92400e;
+      box-shadow: 0 0 16px #92400e;
+    }
+    body.delphos #mode-toggle[aria-pressed="true"] i {
+      transform: rotate(180deg);
+    }
+    /* Ajustes responsivos */
+    @media (max-width: 640px) {
+      #main-header {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+      }
+      .logo-image, .delphos-logo-image, .delphos-logo-container {
+        width: 72px;
+        height: 72px;
+      }
+      .delphos-logo-svg {
+        width: 54px;
+        height: 30px;
+      }
+      .logo-name, #header-name {
+        font-size: 1.75rem;
+      }
+      .logo-ai, #header-ai {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
+      }
+      main {
+        max-width: 100%;
+        padding: 1rem;
+      }
+      form {
+        padding: 0.75rem 1rem;
+      }
+      .action-buttons {
+        gap: 0.5rem;
+      }
+      #mode-toggle {
+        min-width: 5.5rem;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.75rem;
+      }
+      #mode-toggle i {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="main-header" class="logo-container" role="banner" aria-label="Logo ATHENA AI">
+      <img
+        id="logo-image"
+        src="https://storage.googleapis.com/a1aa/image/c15194d4-99ef-41cf-a6bc-8035c6f2d332.jpg"
+        alt="Desenho em contorno preto de um capacete espartano virado para a direita com uma crista no topo"
+        class="logo-image"
+        decoding="async"
+        loading="lazy"
+        draggable="false"
+      />
+      <div class="logo-text">
+        <span id="header-name" class="logo-name">ATHENA</span>
+        <span id="header-ai" class="logo-ai" aria-label="IA">IA</span>
+      </div>
+    </div>
+    <div class="auth-buttons">
+      <button class="btn-login" type="button">Entrar</button>
+      <button class="btn-signup" type="button">Cadastrar</button>
+      <button id="mode-toggle" class="btn-more" type="button" aria-pressed="false" aria-label="Alternar entre os modos Athena e Delphos">
+        <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+        <span class="ml-1">Delphos</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <h1 id="main-title">Como posso ajudar?</h1>
+
+    <form
+      autocomplete="off"
+      spellcheck="false"
+      role="search"
+      aria-label="Formulário para fazer perguntas"
+    >
+      <input type="text" id="query" name="query" placeholder="Pergunte qualquer coisa" autocomplete="off" />
+      <div class="form-buttons" id="form-buttons">
+        <button
+          type="button"
+          class="btn-attach"
+          aria-label="Anexar"
+        >
+          <i class="fas fa-paperclip" aria-hidden="true"></i>
+          <span>Anexar</span>
+        </button>
+        <button
+          type="button"
+          class="btn-search"
+          aria-label="Pesquisar"
+        >
+          <i class="fas fa-globe" aria-hidden="true"></i>
+          <span>Pesquisar</span>
+        </button>
+        <button
+          type="button"
+          class="btn-reason"
+          aria-label="Raciocinar"
+        >
+          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          <span>Raciocinar</span>
+        </button>
+        <button
+          type="button"
+          class="btn-voice"
+          aria-label="Entrada por voz"
+        >
+          <i class="fas fa-wave-square" aria-hidden="true"></i>
+          <span>Voz</span>
+        </button>
+      </div>
+    </form>
+
+    <div class="action-buttons" role="list" aria-label="Botões de ação" id="action-buttons">
+      <button type="button" class="action-button btn-summarize" role="listitem" aria-label="Resumir texto">
+        <i class="fas fa-file-alt" aria-hidden="true"></i>
+        <span>Resumir texto</span>
+      </button>
+      <button type="button" class="action-button btn-get-advice" role="listitem" aria-label="Obter conselho">
+        <i class="fas fa-comments" aria-hidden="true"></i>
+        <span>Obter conselho</span>
+      </button>
+      <button type="button" class="action-button btn-make-plan" role="listitem" aria-label="Fazer um plano">
+        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+        <span>Fazer um plano</span>
+      </button>
+      <button type="button" class="action-button btn-code" role="listitem" aria-label="Codificar">
+        <i class="fas fa-code" aria-hidden="true"></i>
+        <span>Codificar</span>
+      </button>
+      <button type="button" class="action-button btn-more" role="listitem" aria-label="Mais opções">
+        <span>Mais</span>
+      </button>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const body = document.body;
+      const modeToggleBtn = document.getElementById('mode-toggle');
+      let mainHeader = document.getElementById('main-header');
+      let logoImage = document.getElementById('logo-image');
+      let headerName = document.getElementById('header-name');
+      let headerAI = document.getElementById('header-ai');
+      const mainTitle = document.getElementById('main-title');
+      const formButtons = document.getElementById('form-buttons');
+
+      // Dados do modo ATHENA
+      const athena = {
+        logoSrc: "https://storage.googleapis.com/a1aa/image/c15194d4-99ef-41cf-a6bc-8035c6f2d332.jpg",
+        logoAlt: "Desenho em contorno preto de um capacete espartano virado para a direita com uma crista no topo",
+        headerName: "ATHENA",
+        headerAI: "IA",
+        headerAIAria: "IA",
+        mainTitle: "Como posso ajudar?",
+        formLabel: "Pergunte qualquer coisa",
+        formButtons: [
+          { label: "Anexar", icon: "fas fa-paperclip", aria: "Anexar" },
+          { label: "Pesquisar", icon: "fas fa-globe", aria: "Pesquisar" },
+          { label: "Raciocinar", icon: "fas fa-map-marker-alt", aria: "Raciocinar" },
+          { label: "Voz", icon: "fas fa-wave-square", aria: "Entrada por voz" }
+        ],
+        actionButtons: [
+          { label: "Resumir texto", icon: "fas fa-file-alt", classes: "btn-summarize", aria: "Resumir texto" },
+          { label: "Obter conselho", icon: "fas fa-comments", classes: "btn-get-advice", aria: "Obter conselho" },
+          { label: "Fazer um plano", icon: "fas fa-lightbulb", classes: "btn-make-plan", aria: "Fazer um plano" },
+          { label: "Codificar", icon: "fas fa-code", classes: "btn-code", aria: "Codificar" },
+          { label: "Mais", icon: "", classes: "btn-more", aria: "Mais opções" }
+        ]
+      };
+
+      // Dados do modo DELPHOS
+      const delphos = {
+        logoSrc: "https://placehold.co/96x96/png?text=Delphos+Logo",
+        logoAlt: "Ícone abstrato de olho off-white com formas sobrepostas em fundo transparente",
+        headerName: "DELPHOS",
+        headerAI: "IA",
+        headerAIAria: "IA",
+        mainTitle: "Como Delphos pode ajudar você?",
+        formLabel: "Digite sua consulta",
+        formButtons: [
+          { label: "Enviar", icon: "fas fa-upload", aria: "Enviar arquivo" },
+          { label: "Explorar", icon: "fas fa-search", aria: "Explorar" },
+          { label: "Analisar", icon: "fas fa-chart-line", aria: "Analisar" },
+          { label: "Falar", icon: "fas fa-microphone", aria: "Entrada por voz" }
+        ],
+        actionButtons: [
+          { label: "Extrair insights", icon: "fas fa-lightbulb", classes: "btn-make-plan", aria: "Extrair insights" },
+          { label: "Consultar", icon: "fas fa-comments", classes: "btn-get-advice", aria: "Consultar" },
+          { label: "Planejar estratégia", icon: "fas fa-tasks", classes: "btn-make-plan", aria: "Planejar estratégia" },
+          { label: "Desenvolver", icon: "fas fa-laptop-code", classes: "btn-code", aria: "Desenvolver" },
+          { label: "Extras", icon: "", classes: "btn-more", aria: "Extras" }
+        ]
+      };
+
+      let currentMode = 'athena';
+
+      function clearChildren(element) {
+        while (element.firstChild) {
+          element.removeChild(element.firstChild);
+        }
+      }
+
+      function createButton({ label, icon, aria, classes = "" }, isAction = false) {
+        const btn = document.createElement('button');
+        btn.type = "button";
+        btn.className = isAction ? `action-button ${classes}` : classes;
+        btn.setAttribute('aria-label', aria);
+        if (isAction) btn.setAttribute('role', 'listitem');
+        btn.style.userSelect = 'none';
+        btn.style.whiteSpace = 'nowrap';
+        btn.style.fontSize = '0.75rem';
+        btn.style.borderRadius = '9999px';
+        btn.style.padding = '0.25rem 0.75rem';
+        btn.style.display = 'flex';
+        btn.style.alignItems = 'center';
+        btn.style.gap = '0.25rem';
+        btn.style.cursor = 'pointer';
+        btn.style.transition = 'border-color 0.2s ease, color 0.2s ease';
+
+        if (icon) {
+          const i = document.createElement('i');
+          i.className = icon;
+          i.setAttribute('aria-hidden', 'true');
+          i.style.fontSize = '0.75rem';
+          btn.appendChild(i);
+        }
+        const span = document.createElement('span');
+        span.textContent = label;
+        btn.appendChild(span);
+
+        return btn;
+      }
+
+      function createDelphosLogo() {
+        const container = document.createElement('div');
+        container.className = 'delphos-logo-container';
+
+        const svgNS = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(svgNS, "svg");
+        svg.setAttribute("class", "delphos-logo-svg");
+        svg.setAttribute("viewBox", "0 0 72 40");
+        svg.setAttribute("fill", "none");
+        svg.setAttribute("role", "img");
+        svg.setAttribute("aria-label", "Ícone de olho com formas off-white");
+        svg.setAttribute("xmlns", svgNS);
+
+        const path = document.createElementNS(svgNS, "path");
+        path.setAttribute("fill", "#F9F7F1");
+        path.setAttribute("d", "M36 0C20 0 7 20 7 20s13 20 29 20 29-20 29-20-13-20-29-20zm0 34c-7.732 0-14-6.268-14-14s6.268-14 14-14 14 6.268 14 14-6.268 14-14 14z");
+        svg.appendChild(path);
+
+        const circle = document.createElementNS(svgNS, "circle");
+        circle.setAttribute("cx", "36");
+        circle.setAttribute("cy", "20");
+        circle.setAttribute("r", "7");
+        circle.setAttribute("fill", "#F9F7F1");
+        svg.appendChild(circle);
+
+        container.appendChild(svg);
+
+        return container;
+      }
+
+      function animateLogoChange(newLogoContainer, callback) {
+        if (!mainHeader) {
+          callback();
+          return;
+        }
+        mainHeader.classList.add('fade-out');
+
+        mainHeader.addEventListener('animationend', function handler() {
+          mainHeader.removeEventListener('animationend', handler);
+          mainHeader.remove();
+
+          const header = document.querySelector('header');
+          const authButtons = header.querySelector('.auth-buttons');
+          header.insertBefore(newLogoContainer, authButtons);
+
+          mainHeader = newLogoContainer;
+
+          mainHeader.classList.add('fade-in');
+
+          mainHeader.addEventListener('animationend', function handlerIn() {
+            mainHeader.removeEventListener('animationend', handlerIn);
+            mainHeader.classList.remove('fade-in');
+            callback();
+          });
+        });
+      }
+
+      function switchToMode(mode) {
+        if (mode === currentMode) return;
+        currentMode = mode;
+
+        if (mode === 'athena') {
+          body.classList.remove('delphos');
+
+          const logoContainer = document.createElement('div');
+          logoContainer.id = 'main-header';
+          logoContainer.className = 'logo-container';
+          logoContainer.setAttribute('role', 'banner');
+          logoContainer.setAttribute('aria-label', 'Logo ATHENA IA');
+
+          const img = document.createElement('img');
+          img.id = 'logo-image';
+          img.src = athena.logoSrc;
+          img.alt = athena.logoAlt;
+          img.className = 'logo-image';
+          img.decoding = 'async';
+          img.loading = 'lazy';
+          img.draggable = false;
+
+          const logoText = document.createElement('div');
+          logoText.className = 'logo-text';
+
+          const spanName = document.createElement('span');
+          spanName.id = 'header-name';
+          spanName.className = 'logo-name';
+          spanName.textContent = athena.headerName;
+
+          const spanAI = document.createElement('span');
+          spanAI.id = 'header-ai';
+          spanAI.className = 'logo-ai';
+          spanAI.setAttribute('aria-label', athena.headerAIAria);
+          spanAI.textContent = athena.headerAI;
+
+          logoText.appendChild(spanName);
+          logoText.appendChild(spanAI);
+
+          logoContainer.appendChild(img);
+          logoContainer.appendChild(logoText);
+
+          animateLogoChange(logoContainer, () => {
+            logoImage = document.getElementById('logo-image');
+            headerName = document.getElementById('header-name');
+            headerAI = document.getElementById('header-ai');
+
+            headerName.textContent = athena.headerName;
+            headerAI.textContent = athena.headerAI;
+            headerAI.setAttribute('aria-label', athena.headerAIAria);
+
+            mainTitle.textContent = athena.mainTitle;
+
+            clearChildren(formButtons);
+            athena.formButtons.forEach(btnData => {
+              const btn = createButton(btnData);
+              btn.classList.add('btn-' + btnData.label.toLowerCase().replace(/\s/g, '-'));
+              formButtons.appendChild(btn);
+            });
+
+            const actionButtons = document.getElementById('action-buttons');
+            clearChildren(actionButtons);
+            athena.actionButtons.forEach(btnData => {
+              const btn = createButton(btnData, true);
+              actionButtons.appendChild(btn);
+            });
+
+            modeToggleBtn.setAttribute('aria-pressed', 'false');
+            modeToggleBtn.innerHTML = `<i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="ml-1">Delphos</span>`;
+
+            const input = document.getElementById('query');
+            input.placeholder = "Pergunte qualquer coisa";
+          });
+        } else if (mode === 'delphos') {
+          body.classList.add('delphos');
+
+          const logoContainer = document.createElement('div');
+          logoContainer.id = 'main-header';
+          logoContainer.className = 'logo-container';
+          logoContainer.setAttribute('role', 'banner');
+          logoContainer.setAttribute('aria-label', 'Logo DELPHOS IA');
+
+          const combinedLogo = createDelphosLogo();
+
+          const logoText = document.createElement('div');
+          logoText.className = 'logo-text';
+
+          const spanName = document.createElement('span');
+          spanName.id = 'header-name';
+          spanName.className = 'logo-name';
+          spanName.textContent = delphos.headerName;
+
+          const spanAI = document.createElement('span');
+          spanAI.id = 'header-ai';
+          spanAI.className = 'logo-ai';
+          spanAI.setAttribute('aria-label', delphos.headerAIAria);
+          spanAI.textContent = delphos.headerAI;
+
+          logoText.appendChild(spanName);
+          logoText.appendChild(spanAI);
+
+          logoContainer.appendChild(combinedLogo);
+          logoContainer.appendChild(logoText);
+
+          animateLogoChange(logoContainer, () => {
+            mainHeader = document.getElementById('main-header');
+            logoImage = logoContainer.querySelector('img');
+            headerName = document.getElementById('header-name');
+            headerAI = document.getElementById('header-ai');
+
+            headerName.textContent = delphos.headerName;
+            headerAI.textContent = delphos.headerAI;
+            headerAI.setAttribute('aria-label', delphos.headerAIAria);
+
+            mainTitle.textContent = delphos.mainTitle;
+
+            clearChildren(formButtons);
+            delphos.formButtons.forEach(btnData => {
+              const btn = createButton(btnData);
+              btn.classList.add('btn-' + btnData.label.toLowerCase().replace(/\s/g, '-'));
+              formButtons.appendChild(btn);
+            });
+
+            const actionButtons = document.getElementById('action-buttons');
+            clearChildren(actionButtons);
+            delphos.actionButtons.forEach(btnData => {
+              const btn = createButton(btnData, true);
+              actionButtons.appendChild(btn);
+            });
+
+            modeToggleBtn.setAttribute('aria-pressed', 'true');
+            modeToggleBtn.innerHTML = `<i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="ml-1">Athena</span>`;
+
+            const input = document.getElementById('query');
+            input.placeholder = "Digite sua consulta";
+          });
+        }
+      }
+
+      modeToggleBtn.addEventListener('click', () => {
+        if (currentMode === 'athena') {
+          switchToMode('delphos');
+        } else {
+          switchToMode('athena');
+        }
+      });
+
+      // Inicializa no modo Athena
+      switchToMode('athena');
+    })();
+  </script>
+</body>
+</html>

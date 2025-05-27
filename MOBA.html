@@ -1,0 +1,194 @@
+<html lang="pt-BR" class="scroll-smooth" style="scroll-behavior:smooth;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChatGPT Clone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#202123] text-white min-h-screen flex flex-col justify-between">
+  <header class="flex items-center justify-between px-4 pt-4 pb-2">
+    <div class="flex items-center space-x-4">
+      <button aria-label="Nova conversa" class="text-white text-2xl">
+        <i class="fas fa-pen-nib"></i>
+      </button>
+      <div class="flex items-center space-x-1 cursor-pointer select-none">
+        <span class="font-semibold text-base">ChatGPT</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
+    <button
+      class="bg-white text-black font-semibold text-base rounded-full px-4 py-2"
+      type="button"
+    >
+      Entrar
+    </button>
+  </header>
+
+  <main class="flex flex-col items-center justify-center flex-grow px-6 text-center">
+    <h1 class="text-white font-bold text-2xl sm:text-3xl md:text-4xl mb-8">
+      Como posso ajudar?
+    </h1>
+
+    <div class="flex flex-wrap justify-center gap-4 max-w-lg mb-4">
+      <button
+        class="flex items-center gap-2 border border-gray-700 rounded-full px-4 py-2 text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 text-indigo-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+          />
+        </svg>
+        Analisar imagens
+      </button>
+      <button
+        class="flex items-center gap-2 border border-gray-700 rounded-full px-4 py-2 text-gray-400 hover:text-yellow-400 hover:border-gray-500 transition-colors"
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 text-yellow-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3v1m0 16v1m8.485-8.485l-.707.707M4.222 4.222l-.707.707M21 12h-1M4 12H3m16.485 4.485l-.707-.707M4.222 19.778l-.707-.707"
+          />
+          <circle cx="12" cy="12" r="5" stroke="none" fill="currentColor" />
+        </svg>
+        Fazer um plano
+      </button>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-4 max-w-lg mb-12">
+      <button
+        class="flex items-center gap-2 border border-gray-700 rounded-full px-4 py-2 text-gray-400 hover:text-indigo-500 hover:border-gray-500 transition-colors"
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 text-indigo-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16 18l6-6-6-6M8 6l-6 6 6 6"
+          />
+        </svg>
+        Programar
+      </button>
+      <button
+        class="flex items-center gap-2 border border-gray-700 rounded-full px-4 py-2 text-gray-400 hover:text-orange-500 hover:border-gray-500 transition-colors"
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 text-orange-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect x="9" y="7" width="6" height="10" rx="2" ry="2" />
+          <path d="M9 7v-2a3 3 0 016 0v2" />
+        </svg>
+        Resumir texto
+      </button>
+      <button
+        class="flex items-center gap-2 border border-gray-700 rounded-full px-4 py-2 text-gray-400 hover:text-gray-300 hover:border-gray-500 transition-colors"
+        type="button"
+      >
+        Mais
+      </button>
+    </div>
+  </main>
+
+  <form
+    class="flex items-center max-w-3xl mx-auto px-4 mb-4"
+    action="#"
+    method="POST"
+  >
+    <label for="input" class="sr-only">Pergunte alguma coisa</label>
+    <div
+      class="flex items-center bg-[#2a2a2a] rounded-3xl w-full py-4 px-6 space-x-4"
+    >
+      <input
+        id="input"
+        name="input"
+        type="text"
+        placeholder="Pergunte alguma coisa"
+        class="bg-transparent flex-grow text-gray-400 placeholder-gray-500 focus:outline-none text-base"
+        autocomplete="off"
+      />
+      <button
+        type="button"
+        aria-label="Enviar"
+        class="bg-gray-600 rounded-full p-3 hover:bg-gray-700 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 text-gray-300"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
+        </svg>
+      </button>
+    </div>
+  </form>
+
+  <p class="text-center text-white text-sm font-semibold px-4 mb-6 max-w-md mx-auto leading-tight">
+    Ao enviar mensagens para o ChatGPT, você aceita nossos
+    <a href="#" class="underline">Termos</a> e declara ter lido nossa
+    <a href="#" class="underline">Política de Privacidade</a>.
+  </p>
+
+</body>
+</html>
