@@ -1,0 +1,530 @@
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pandora - Registro Digital Jurídico</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<style>
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000000;
+    color: #ddd;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    letter-spacing: 0.12em;
+  }
+  /* Header background and border */
+  .header-bg {
+    background-color: rgba(26, 9, 38, 0.85);
+    border-bottom: 2px solid #3a0e58;
+    backdrop-filter: saturate(180%) blur(10px);
+  }
+  /* Nav icon color */
+  .nav-icon {
+    color: #7f3fff;
+    transition: color 0.3s ease;
+  }
+  .nav-icon:hover {
+    color: #a366ff;
+  }
+  /* Cards shadow */
+  .card-shadow {
+    box-shadow: 0 0 10px #3a0e58aa;
+  }
+  /* Scrollbar for horizontal scroll in steps */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  /* Fade-in animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Button style */
+  .btn-primary {
+    background-color: transparent;
+    border: 2px solid #7f3fff;
+    color: #7f3fff;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-radius: 0.375rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .btn-primary:hover {
+    background-color: #7f3fff;
+    color: #1a1a1a;
+  }
+  /* Mobile menu styles */
+  #mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  #mobile-menu.open {
+    max-height: 500px;
+  }
+  /* Hamburger button */
+  .hamburger {
+    cursor: pointer;
+    width: 28px;
+    height: 22px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hamburger span {
+    display: block;
+    height: 3px;
+    background: #7f3fff;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+  }
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(9.5px) rotate(45deg);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-9.5px) rotate(-45deg);
+  }
+  /* Hide desktop nav on mobile */
+  @media (max-width: 768px) {
+    nav.desktop-menu {
+      display: none;
+    }
+    #mobile-menu {
+      background-color: rgba(26, 9, 38, 0.95);
+      border-bottom: 2px solid #3a0e58;
+    }
+    #mobile-menu a {
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-top: 1px solid #3a0e58;
+      color: #7f3fff;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    #mobile-menu a:hover {
+      background-color: #3a0e58;
+      color: #a366ff;
+    }
+    #mobile-menu a i {
+      margin-right: 1rem;
+      min-width: 20px;
+      text-align: center;
+    }
+    /* Adjust logo and text size on mobile */
+    .logo-container img {
+      width: 36px !important;
+      height: 36px !important;
+    }
+    .logo-container h1 {
+      font-size: 1.5rem !important; /* approx 24px */
+      color: #4A3F61 !important;
+      line-height: 1 !important;
+    }
+  }
+  /* Show desktop nav on desktop */
+  @media (min-width: 769px) {
+    #mobile-menu {
+      display: none !important;
+    }
+  }
+</style>
+</head>
+<body class="relative min-h-screen text-gray-300">
+
+<!-- Header -->
+<header class="header-bg fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4">
+  <div class="flex items-center space-x-4 border-b border-[#4A3F61] logo-container" style="padding-bottom: 2px;" aria-label="Logotipo Pandora">
+    <img alt="Shield shaped logo with a stylized M inside, in dark purple color" height="30" src="esc.png" width="68"/>
+    <h1 class="text-[#4A3F61] text-[48px] font-normal tracking-wide leading-none select-none">
+      PANDORA
+    </h1>
+  </div>
+  <nav aria-label="Menu principal" class="desktop-menu flex space-x-10">
+    <a href="#" class="flex flex-col items-center nav-icon group" aria-current="page" title="Início">
+      <i class="fas fa-home fa-lg mb-1 transition-colors duration-300 group-hover:text-purple-400"></i>
+      <span class="text-xs tracking-widest text-purple-400 group-hover:text-purple-300">Início</span>
+    </a>
+    <a href="#" class="flex flex-col items-center nav-icon group" title="Registrar Prova">
+      <i class="fas fa-file-signature fa-lg mb-1 transition-colors duration-300 group-hover:text-purple-400"></i>
+      <span class="text-xs tracking-widest">Registrar Prova</span>
+    </a>
+    <a href="#" class="flex flex-col items-center nav-icon group" title="Minhas Provas">
+      <i class="fas fa-folder-open fa-lg mb-1 transition-colors duration-300 group-hover:text-purple-400"></i>
+      <span class="text-xs tracking-widest">Minhas Provas</span>
+    </a>
+    <a href="#" class="flex flex-col items-center nav-icon group" title="Planos">
+      <i class="fas fa-list-alt fa-lg mb-1 transition-colors duration-300 group-hover:text-purple-400"></i>
+      <span class="text-xs tracking-widest">Planos</span>
+    </a>
+    <a href="#" class="flex flex-col items-center nav-icon group" title="Login">
+      <i class="fas fa-sign-in-alt fa-lg mb-1 transition-colors duration-300 group-hover:text-purple-400"></i>
+      <span class="text-xs tracking-widest">Login</span>
+    </a>
+  </nav>
+  <button id="hamburger-btn" aria-label="Abrir menu" aria-expanded="false" class="md:hidden focus:outline-none">
+    <div class="hamburger" id="hamburger-icon" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+</header>
+
+<!-- Mobile menu -->
+<nav id="mobile-menu" aria-label="Menu principal mobile" class="md:hidden">
+  <a href="#" title="Início">
+    <i class="fas fa-home"></i> Início
+  </a>
+  <a href="#" title="Registrar Prova">
+    <i class="fas fa-file-signature"></i> Registrar Prova
+  </a>
+  <a href="#" title="Minhas Provas">
+    <i class="fas fa-folder-open"></i> Minhas Provas
+  </a>
+  <a href="#" title="Planos">
+    <i class="fas fa-list-alt"></i> Planos
+  </a>
+  <a href="#" title="Login">
+    <i class="fas fa-sign-in-alt"></i> Login
+  </a>
+</nav>
+
+<main class="pt-24">
+
+  <!-- Hero Section -->
+  <section class="relative flex flex-col items-center justify-center text-center px-8 md:px-16 py-24 md:py-32 select-none fade-in" data-fade>
+    <h1 class="text-4xl md:text-6xl max-w-4xl text-purple-300 leading-tight mb-6 tracking-widest font-normal">
+      A verdade protegida para sempre
+    </h1>
+    <p class="text-base md:text-lg max-w-3xl text-purple-200 mb-12 tracking-wide">
+      Comprove, registre e defenda seus direitos com segurança digital.
+    </p>
+    <a href="PANDORA1.html"><button class="btn-primary text-lg font-normal tracking-widest">
+      Registrar Prova Agora
+    </button></a>
+    <div class="mt-16 w-24 h-24 text-purple-400 opacity-80" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-full h-full">
+        <rect x="12" y="20" width="40" height="28" rx="4" ry="4" />
+        <path d="M20 20v-6a8 8 0 0 1 24 0v6" />
+        <circle cx="32" cy="34" r="6" />
+        <line x1="32" y1="40" x2="32" y2="48" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- O Problema -->
+  <section class="max-w-7xl mx-auto px-8 md:px-16 py-16 md:py-20 fade-in" data-fade>
+    <h2 class="text-3xl md:text-4xl text-purple-300 mb-12 tracking-widest font-normal text-center">O Problema</h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 text-center text-gray-300">
+      <div class="space-y-4">
+        <div class="mx-auto w-14 h-14 text-red-600">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-full h-full">
+            <path d="M32 12v40M20 32h24" />
+            <circle cx="32" cy="32" r="18" />
+          </svg>
+        </div>
+        <p class="text-lg tracking-wide leading-relaxed">Provas perdidas</p>
+      </div>
+      <div class="space-y-4">
+        <div class="mx-auto w-14 h-14 text-orange-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-full h-full">
+            <path d="M16 48l32-32M48 48L16 16" />
+            <rect x="20" y="20" width="24" height="24" rx="4" ry="4" />
+          </svg>
+        </div>
+        <p class="text-lg tracking-wide leading-relaxed">Fácil falsificação</p>
+      </div>
+      <div class="space-y-4">
+        <div class="mx-auto w-14 h-14 text-red-600">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-full h-full">
+            <circle cx="32" cy="32" r="18" />
+            <line x1="32" y1="14" x2="32" y2="50" />
+            <line x1="14" y1="32" x2="50" y2="32" />
+          </svg>
+        </div>
+        <p class="text-lg tracking-wide leading-relaxed">Dificuldade em provar momento exato</p>
+      </div>
+      <div class="space-y-4">
+        <div class="mx-auto w-14 h-14 text-orange-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-full h-full">
+            <path d="M20 44h24M20 20h24M20 32h24" />
+            <line x1="44" y1="20" x2="44" y2="44" />
+            <line x1="20" y1="32" x2="44" y2="32" />
+          </svg>
+        </div>
+        <p class="text-lg tracking-wide leading-relaxed">Rejeição por falta de validade</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- A Solução -->
+  <section class="px-8 md:px-16 py-16 md:py-20 fade-in" data-fade>
+    <h2 class="text-3xl md:text-4xl text-purple-300 mb-12 md:mb-16 tracking-widest font-normal text-center">A Solução: Pandora</h2>
+    <div class="max-w-6xl mx-auto overflow-x-auto scrollbar-hide">
+      <div class="flex space-x-8 min-w-[900px]">
+        <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-52 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+          <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-10 h-10">
+              <path d="M12 44h40v-24H12z" />
+              <path d="M20 44v-24" />
+              <path d="M44 44v-24" />
+              <path d="M32 44v-24" />
+            </svg>
+          </div>
+          <p class="text-center text-lg tracking-wide">Upload do arquivo</p>
+        </div>
+        <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-52 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+          <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-10 h-10">
+              <circle cx="32" cy="32" r="14" />
+              <path d="M20 32h24" />
+              <path d="M32 20v24" />
+            </svg>
+          </div>
+          <p class="text-center text-lg tracking-wide">Geração de hash + blockchain</p>
+        </div>
+        <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-52 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+          <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-10 h-10">
+              <rect x="20" y="20" width="24" height="24" rx="4" ry="4" />
+              <line x1="32" y1="20" x2="32" y2="44" />
+              <line x1="20" y1="32" x2="44" y2="32" />
+            </svg>
+          </div>
+          <p class="text-center text-lg tracking-wide">Carimbo de tempo</p>
+        </div>
+        <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-52 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+          <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-10 h-10">
+              <path d="M20 44l12-12 12 12" />
+              <path d="M32 32v12" />
+              <circle cx="32" cy="20" r="6" />
+            </svg>
+          </div>
+          <p class="text-center text-lg tracking-wide">Assinatura digital opcional</p>
+        </div>
+        <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-52 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+          <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 64 64" class="w-10 h-10">
+              <rect x="20" y="20" width="24" height="24" rx="4" ry="4" />
+              <path d="M32 20v24" />
+              <path d="M20 32h24" />
+              <path d="M44 44l8 8" />
+              <path d="M52 44v8h-8" />
+            </svg>
+          </div>
+          <p class="text-center text-lg tracking-wide">Recebimento de QR code e comprovante</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Funciona -->
+  <section class="max-w-7xl mx-auto px-8 md:px-16 py-16 md:py-20 fade-in" data-fade>
+    <h2 class="text-3xl md:text-4xl text-purple-300 mb-12 tracking-widest font-normal text-center">Como Funciona</h2>
+    <div class="flex space-x-6 overflow-x-auto scrollbar-hide min-w-[900px]">
+      <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-44 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+        <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+          <i class="fas fa-desktop fa-3x"></i>
+        </div>
+        <p class="text-center text-lg tracking-wide">Print</p>
+      </div>
+      <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-44 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+        <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+          <i class="fas fa-microphone fa-3x"></i>
+        </div>
+        <p class="text-center text-lg tracking-wide">Áudio</p>
+      </div>
+      <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-44 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+        <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+          <i class="fas fa-camera fa-3x"></i>
+        </div>
+        <p class="text-center text-lg tracking-wide">Foto</p>
+      </div>
+      <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-44 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+        <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+          <i class="fas fa-file-pdf fa-3x"></i>
+        </div>
+        <p class="text-center text-lg tracking-wide">PDF</p>
+      </div>
+      <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 w-44 card-shadow hover:shadow-purple-600 transition-shadow duration-300">
+        <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+          <i class="fas fa-video fa-3x"></i>
+        </div>
+        <p class="text-center text-lg tracking-wide">Vídeo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usos Possíveis -->
+  <section class="max-w-7xl mx-auto px-8 md:px-16 py-16 md:py-20 fade-in" data-fade>
+    <h2 class="text-3xl md:text-4xl text-purple-300 mb-12 tracking-widest font-normal text-center">Usos possíveis</h2>
+    <ul class="space-y-6 max-w-4xl mx-auto">
+      <li class="flex items-center space-x-6 bg-black bg-opacity-70 rounded-lg p-5 card-shadow hover:shadow-green-600 transition-shadow duration-300">
+        <div class="flex-shrink-0 w-10 h-10 text-green-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #22c55e);">
+          <i class="fas fa-user fa-2x"></i>
+        </div>
+        <p class="text-lg tracking-wide">Consumidores</p>
+      </li>
+      <li class="flex items-center space-x-6 bg-black bg-opacity-70 rounded-lg p-5 card-shadow hover:shadow-blue-600 transition-shadow duration-300">
+        <div class="flex-shrink-0 w-10 h-10 text-blue-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3b82f6);">
+          <i class="fas fa-shield-alt fa-2x"></i>
+        </div>
+        <p class="text-lg tracking-wide">Vítimas de assédio</p>
+      </li>
+      <li class="flex items-center space-x-6 bg-black bg-opacity-70 rounded-lg p-5 card-shadow hover:shadow-green-600 transition-shadow duration-300">
+        <div class="flex-shrink-0 w-10 h-10 text-green-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #22c55e);">
+          <i class="fas fa-store fa-2x"></i>
+        </div>
+        <p class="text-lg tracking-wide">Pequenas empresas</p>
+      </li>
+      <li class="flex items-center space-x-6 bg-black bg-opacity-70 rounded-lg p-5 card-shadow hover:shadow-blue-600 transition-shadow duration-300">
+        <div class="flex-shrink-0 w-10 h-10 text-blue-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3b82f6);">
+          <i class="fas fa-balance-scale fa-2x"></i>
+        </div>
+        <p class="text-lg tracking-wide">Escritórios de advocacia</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Diferenciais -->
+  <section class="max-w-7xl mx-auto px-8 md:px-16 py-16 md:py-20 fade-in" data-fade>
+    <h2 class="text-3xl md:text-4xl text-purple-300 mb-12 tracking-widest font-normal text-center">Diferenciais</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+      <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 card-shadow hover:shadow-purple-500 transition-shadow duration-300">
+        <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+          <i class="fas fa-ban fa-3x"></i>
+        </div>
+        <p class="text-center text-lg tracking-wide">Sem IA</p>
+      </div>
+      <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 card-shadow hover:shadow-purple-500 transition-shadow duration-300">
+        <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+          <i class="fas fa-file-signature fa-3x"></i>
+        </div>
+        <p class="text-center text-lg tracking-wide">Substitui cartório</p>
+      </div>
+      <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 card-shadow hover:shadow-purple-500 transition-shadow duration-300">
+        <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+          <i class="fas fa-history fa-3x"></i>
+        </div>
+        <p class="text-center text-lg tracking-wide">Histórico de provas</p>
+      </div>
+      <div class="flex flex-col items-center bg-black bg-opacity-70 rounded-lg p-6 card-shadow hover:shadow-purple-500 transition-shadow duration-300">
+        <div class="mb-4 text-purple-400" aria-hidden="true" style="filter: drop-shadow(0 0 4px #3a0e58);">
+          <i class="fas fa-user-friends fa-3x"></i>
+        </div>
+        <p class="text-center text-lg tracking-wide">Leigo-friendly</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modelos de Plano -->
+  <section class="max-w-7xl mx-auto px-8 md:px-16 py-16 md:py-20 bg-purple-900 bg-opacity-70 rounded-lg fade-in" data-fade>
+    <h2 class="text-3xl md:text-4xl text-purple-300 mb-12 tracking-widest font-normal text-center">Modelos de plano</h2>
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 text-gray-300">
+      <div class="bg-black bg-opacity-70 rounded-lg p-8 flex flex-col items-center card-shadow hover:shadow-blue-600 transition-shadow duration-300">
+        <h3 class="text-2xl md:text-3xl text-blue-400 mb-6 tracking-widest font-normal">Grátis</h3>
+        <p class="mb-8 text-lg tracking-wide text-center">X provas por mês</p>
+        <button class="px-8 py-3 rounded-md bg-blue-600 text-black font-normal tracking-widest hover:bg-blue-500 transition-colors duration-300 cursor-pointer">
+          Escolher Grátis
+        </button>
+      </div>
+      <div class="bg-black bg-opacity-70 rounded-lg p-8 flex flex-col items-center card-shadow hover:shadow-green-600 transition-shadow duration-300">
+        <h3 class="text-2xl md:text-3xl text-green-400 mb-6 tracking-widest font-normal">Premium</h3>
+        <p class="mb-8 text-lg tracking-wide text-center">Mais espaço, OCR, assinatura</p>
+        <button class="px-8 py-3 rounded-md bg-green-600 text-black font-normal tracking-widest hover:bg-green-500 transition-colors duration-300 cursor-pointer">
+          Escolher Premium
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-black text-gray-500 text-sm py-8 px-8 md:px-16 flex flex-col md:flex-row justify-between items-center select-none space-y-4 md:space-y-0">
+  <div class="space-x-6 flex flex-wrap justify-center md:justify-start">
+    <a href="#" class="hover:text-purple-400 transition-colors duration-300">Política de Privacidade</a>
+    <a href="#" class="hover:text-purple-400 transition-colors duration-300">Termos</a>
+    <a href="#" class="hover:text-purple-400 transition-colors duration-300">Contato</a>
+  </div>
+  <div class="flex space-x-6 text-gray-500 justify-center md:justify-end">
+    <a href="#" aria-label="Facebook" class="hover:text-purple-400 transition-colors duration-300">
+      <i class="fab fa-facebook-f fa-lg"></i>
+    </a>
+    <a href="#" aria-label="Twitter" class="hover:text-purple-400 transition-colors duration-300">
+      <i class="fab fa-twitter fa-lg"></i>
+    </a>
+    <a href="#" aria-label="LinkedIn" class="hover:text-purple-400 transition-colors duration-300">
+      <i class="fab fa-linkedin-in fa-lg"></i>
+    </a>
+    <a href="#" aria-label="Instagram" class="hover:text-purple-400 transition-colors duration-300">
+      <i class="fab fa-instagram fa-lg"></i>
+    </a>
+  </div>
+</footer>
+
+<script>
+  // Hamburger toggle
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  hamburgerBtn.addEventListener('click', () => {
+    const expanded = hamburgerBtn.getAttribute('aria-expanded') === 'true' || false;
+    hamburgerBtn.setAttribute('aria-expanded', !expanded);
+    hamburgerIcon.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Fade-in on scroll
+  const faders = document.querySelectorAll('[data-fade]');
+
+  const appearOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        return;
+      } else {
+        entry.target.classList.add('visible');
+        appearOnScroll.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+</script>
+
+</body>
+</html>

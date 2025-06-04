@@ -1,0 +1,884 @@
+<html class="scroll-smooth" lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   App Estilo Geral
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+    font-family: "Montserrat", sans-serif;
+   }
+   .active-menu-item {
+    background-color: rgba(58, 14, 88, 0.3);
+   }
+   .icon-green {
+    color: #39ff14;
+   }
+   .icon-blue {
+    color: #00d4ff;
+   }
+   .icon-lilac {
+    color: #b399ff;
+   }
+   .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+   }
+   .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+   }
+   .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #3a0e58;
+    border-radius: 3px;
+   }
+   @media (max-width: 767px) {
+    nav#sidebar {
+     width: 100vw !important;
+     height: 100vh !important;
+     position: fixed !important;
+     top: 0 !important;
+     left: 0 !important;
+     background-color: #000000;
+     border-right: none !important;
+     z-index: 50 !important;
+     transform: translateX(-100%);
+     transition: transform 0.3s ease-in-out;
+    }
+    nav#sidebar.open {
+     transform: translateX(0);
+    }
+    nav#sidebar ul li a {
+     font-size: 1.25rem;
+     padding: 1rem 2rem;
+    }
+    nav#sidebar ul li a i {
+     font-size: 1.75rem;
+     width: auto;
+     margin-right: 1rem;
+    }
+    nav#sidebar ul li a span {
+     display: inline;
+    }
+    #overlay {
+     position: fixed;
+     inset: 0;
+     background: rgba(0, 0, 0, 0.7);
+     z-index: 40;
+     display: none;
+    }
+    #overlay.active {
+     display: block;
+    }
+    .content-wrapper {
+     margin-left: 0 !important;
+    }
+   }
+  </style>
+ </head>
+ <body class="bg-black text-gray-200 min-h-screen flex flex-col">
+  <div class="flex flex-1 min-h-0 overflow-hidden">
+   <nav aria-label="Menu lateral" class="fixed top-0 left-0 h-full w-20 md:w-56 bg-black border-r border-purple-900/70 flex flex-col text-gray-300 z-30" id="sidebar">
+    <ul class="flex flex-col flex-1 mt-4 space-y-1 px-2 text-xs md:text-sm">
+     <li>
+      <a aria-current="page" class="flex items-center gap-3 px-3 py-3 rounded-md active-menu-item hover:bg-purple-900/20 transition" href="#" id="menu-inicio" tabindex="0">
+       <i aria-hidden="true" class="fas fa-home icon-lilac text-lg md:text-xl w-6 text-center"></i>
+       <span class="hidden md:inline select-none">Início</span>
+      </a>
+     </li>
+     <li>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-md hover:bg-purple-900/20 transition" href="#" id="menu-minhas-provas" tabindex="0">
+       <i aria-hidden="true" class="fas fa-folder icon-green text-lg md:text-xl w-6 text-center"></i>
+       <span class="hidden md:inline select-none">Minhas Provas</span>
+      </a>
+     </li>
+     <li>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-md hover:bg-purple-900/20 transition" href="#" id="menu-registrar-prova" tabindex="0">
+       <i aria-hidden="true" class="fas fa-upload icon-blue text-lg md:text-xl w-6 text-center"></i>
+       <span class="hidden md:inline select-none">Registrar Prova</span>
+      </a>
+     </li>
+     <li>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-md hover:bg-purple-900/20 transition" href="#" id="menu-dossies" tabindex="0">
+       <i aria-hidden="true" class="fas fa-archive icon-lilac text-lg md:text-xl w-6 text-center"></i>
+       <span class="hidden md:inline select-none">Dossiês</span>
+      </a>
+     </li>
+     <li>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-md hover:bg-purple-900/20 transition" href="#" id="menu-assinatura-digital" tabindex="0">
+       <i aria-hidden="true" class="fas fa-pen-nib icon-green text-lg md:text-xl w-6 text-center"></i>
+       <span class="hidden md:inline select-none">Assinatura Digital</span>
+      </a>
+     </li>
+     <li>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-md hover:bg-purple-900/20 transition" href="#" id="menu-seguranca" tabindex="0">
+       <i aria-hidden="true" class="fas fa-lock icon-blue text-lg md:text-xl w-6 text-center"></i>
+       <span class="hidden md:inline select-none">Segurança</span>
+      </a>
+     </li>
+     <li>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-md hover:bg-purple-900/20 transition" href="#" id="menu-configuracoes" tabindex="0">
+       <i aria-hidden="true" class="fas fa-cog icon-lilac text-lg md:text-xl w-6 text-center"></i>
+       <span class="hidden md:inline select-none">Configurações</span>
+      </a>
+     </li>
+     <li>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-md hover:bg-purple-900/20 transition" href="#" id="menu-conta" tabindex="0">
+       <i aria-hidden="true" class="fas fa-user icon-green text-lg md:text-xl w-6 text-center"></i>
+       <span class="hidden md:inline select-none">Conta</span>
+      </a>
+     </li>
+     <li>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-md hover:bg-purple-900/20 transition" href="#" id="menu-sair" tabindex="0">
+       <i aria-hidden="true" class="fas fa-sign-out-alt icon-blue text-lg md:text-xl w-6 text-center"></i>
+       <span class="hidden md:inline select-none">Sair</span>
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="overlay" tabindex="-1"></div>
+   <div class="flex flex-col flex-1 ml-20 md:ml-56 min-h-0 content-wrapper">
+    <header class="sticky top-0 z-20 bg-black border-b border-purple-900/70 flex items-center justify-between px-4 md:px-8 h-14 md:h-16">
+     <div class="flex items-center space-x-4">
+      <button aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu" class="md:hidden text-purple-600 hover:text-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600" id="btn-menu-mobile" type="button">
+       <i aria-hidden="true" class="fas fa-bars fa-lg"></i>
+      </button>
+     </div>
+     <div class="flex items-center space-x-4">
+      <button aria-label="Notificações" class="text-purple-600 hover:text-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600" id="btn-notificacoes" type="button">
+       <i aria-hidden="true" class="fas fa-bell fa-lg"></i>
+      </button>
+      <button class="hidden md:flex items-center gap-2 bg-purple-900/70 hover:bg-purple-800/90 text-white text-sm font-normal rounded-full px-3 py-1.5 shadow-md transition focus:outline-none focus:ring-2 focus:ring-purple-600" id="btn-nova-prova" type="button">
+       <i aria-hidden="true" class="fas fa-plus"></i>
+       <span>Nova Prova</span>
+      </button>
+      <div aria-label="Perfil do usuário João Silva" class="flex items-center gap-2 cursor-pointer select-none" id="btn-perfil" role="button" tabindex="0">
+       <span class="text-sm md:text-base font-normal text-gray-300">João Silva</span>
+       <img alt="Avatar do usuário João Silva, rosto masculino, cabelo castanho curto, fundo preto" class="rounded-full w-8 h-8 object-cover" height="32" src="https://storage.googleapis.com/a1aa/image/2059e894-2c53-4544-be82-016514b795ae.jpg" width="32"/>
+      </div>
+     </div>
+    </header>
+    <main class="flex flex-1 min-h-0 overflow-hidden flex-col md:flex-row" id="main-content">
+     <section class="flex-1 overflow-y-auto p-4 md:p-6 space-y-8 min-h-0" id="content-area" tabindex="0">
+      <!-- Início -->
+      <article class="block" id="section-inicio">
+       <h2 class="text-xl font-normal text-purple-400 mb-4">Início</h2>
+       <p class="text-gray-400">Bem-vindo ao painel inicial do App Estilo Geral. Use o menu para navegar entre as funcionalidades.</p>
+      </article>
+      <!-- Minhas Provas -->
+      <article class="hidden" id="section-minhas-provas">
+       <h2 class="text-xl font-normal text-purple-400 mb-4">Minhas Provas Recentes</h2>
+       <div class="flex flex-col space-y-4 overflow-x-auto md:overflow-visible" id="lista-provas" role="list"></div>
+      </article>
+      <!-- Registrar Prova -->
+      <article class="hidden" id="section-registrar-prova">
+       <h2 class="text-xl font-normal text-purple-400 mb-4">Registrar Nova Prova</h2>
+       <form class="bg-purple-900/20 border border-purple-900 rounded-lg p-6 flex flex-col md:flex-row md:items-center md:gap-6" id="form-registrar-prova" novalidate="">
+        <label class="flex flex-col items-center justify-center w-full md:w-1/2 h-40 border-2 border-dashed border-purple-700 rounded-lg cursor-pointer hover:border-purple-500 transition text-purple-300" for="file-upload">
+         <i aria-hidden="true" class="fas fa-cloud-upload-alt icon-blue text-4xl mb-2"></i>
+         <span class="text-sm md:text-base">Clique ou arraste e solte o arquivo aqui</span>
+         <input accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" class="hidden" id="file-upload" name="file-upload" required="" type="file"/>
+        </label>
+        <div aria-atomic="true" aria-live="polite" class="flex-1 mt-6 md:mt-0 text-purple-300 text-sm space-y-3" id="upload-info">
+         <p><strong>Hash Criptográfico:</strong> <span class="text-white select-all" id="hash-value">-</span></p>
+         <p><strong>Carimbo de Tempo:</strong> <span class="text-white" id="timestamp-value">-</span></p>
+         <p><strong>ID Único da Prova:</strong> <span class="text-white select-all" id="id-value">-</span></p>
+         <p><strong>Link Verificável:</strong> <a class="text-purple-400 underline hover:text-purple-300 break-all" href="#" id="link-value" rel="noopener noreferrer" target="_blank">-</a></p>
+         <div class="flex justify-center md:justify-start">
+          <img alt="QR Code representando o link verificável da prova digital" class="rounded-md" height="100" id="qr-code" src="https://storage.googleapis.com/a1aa/image/af6b2fb5-2754-42c6-9723-8d2a378abe3c.jpg" width="100"/>
+         </div>
+         <div class="flex flex-col space-y-2 mt-4">
+          <label class="inline-flex items-center gap-2 cursor-pointer">
+           <input class="form-checkbox text-purple-600" id="sign-checkbox" type="checkbox"/>
+           <span>Assinar digitalmente (gov.br ou A1)</span>
+          </label>
+          <label class="inline-flex items-center gap-2 cursor-pointer">
+           <input class="form-checkbox text-purple-600" id="public-checkbox" type="checkbox"/>
+           <span>Tornar pública</span>
+          </label>
+          <button class="mt-2 bg-purple-700 hover:bg-purple-600 text-white rounded-md px-4 py-2 w-max shadow-md transition focus:outline-none focus:ring-2 focus:ring-purple-600" disabled="" id="download-proof-btn" type="submit">Baixar comprovante</button>
+         </div>
+        </div>
+       </form>
+      </article>
+      <!-- Dossiês -->
+      <article class="hidden" id="section-dossies">
+       <h2 class="text-xl font-normal text-purple-400 mb-4">Meus Dossiês</h2>
+       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="lista-dossies"></div>
+      </article>
+      <!-- Assinatura Digital -->
+      <article class="hidden" id="section-assinatura-digital">
+       <h2 class="text-xl font-normal text-purple-400 mb-4">Assinatura Digital</h2>
+       <form class="bg-purple-900/20 border border-purple-900 rounded-lg p-6 flex flex-col md:flex-row md:items-start md:gap-6" id="form-assinatura-digital" novalidate="">
+        <label class="flex flex-col items-center justify-center w-full md:w-1/2 h-40 border-2 border-dashed border-purple-700 rounded-lg cursor-pointer hover:border-purple-500 transition text-purple-300" for="upload-doc">
+         <i aria-hidden="true" class="fas fa-file-upload icon-green text-4xl mb-2"></i>
+         <span class="text-sm md:text-base">Clique ou arraste e solte o documento para assinatura</span>
+         <input accept=".pdf,.doc,.docx" class="hidden" id="upload-doc" name="upload-doc" required="" type="file"/>
+        </label>
+        <div aria-atomic="true" aria-live="polite" class="flex-1 mt-6 md:mt-0 text-purple-300 text-sm space-y-3">
+         <fieldset class="space-y-2">
+          <legend class="text-white font-normal mb-1">Opções de assinatura:</legend>
+          <label class="inline-flex items-center gap-2 cursor-pointer">
+           <input checked="" class="form-radio text-purple-600" name="sign-option" required="" type="radio" value="govbr"/>
+           <span>Gov.br</span>
+          </label>
+          <label class="inline-flex items-center gap-2 cursor-pointer">
+           <input class="form-radio text-purple-600" name="sign-option" type="radio" value="a1"/>
+           <span>Certificado A1</span>
+          </label>
+          <label class="inline-flex items-center gap-2 cursor-pointer">
+           <input class="form-checkbox text-purple-600" id="auto-pdf" type="checkbox"/>
+           <span>Geração automática de PDF assinado</span>
+          </label>
+         </fieldset>
+         <p><strong>Hash:</strong> <span class="text-white select-all" id="sign-hash">9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08</span></p>
+         <p><strong>Link Verificável:</strong> <a class="text-purple-400 underline hover:text-purple-300 break-all" href="https://verifica.assinatura.com/9f86d081" id="sign-link" rel="noopener noreferrer" target="_blank">https://verifica.assinatura.com/9f86d081</a></p>
+         <div class="flex justify-center md:justify-start">
+          <img alt="QR Code representando o link verificável da assinatura digital" class="rounded-md" height="100" src="https://storage.googleapis.com/a1aa/image/9ceb2436-f50d-425b-13bb-e459ce3227c0.jpg" width="100"/>
+         </div>
+         <button class="mt-4 bg-purple-700 hover:bg-purple-600 text-white rounded-md px-4 py-2 w-max shadow-md transition focus:outline-none focus:ring-2 focus:ring-purple-600" id="btn-enviar-assinatura" type="submit">Enviar para Assinatura</button>
+        </div>
+       </form>
+      </article>
+      <!-- Segurança -->
+      <article class="hidden" id="section-seguranca">
+       <h2 class="text-xl font-normal text-purple-400 mb-4">Segurança e Logs</h2>
+       <div aria-label="Tabela de logs de segurança" class="bg-purple-900/20 border border-purple-900 rounded-lg p-4 max-h-[300px] overflow-y-auto scrollbar-thin text-sm text-purple-300" tabindex="0">
+        <table class="w-full table-fixed border-collapse border border-purple-800 text-left">
+         <thead>
+          <tr class="border-b border-purple-800">
+           <th class="p-2 w-1/3" scope="col">IP de acesso</th>
+           <th class="p-2 w-1/3" scope="col">Data e hora</th>
+           <th class="p-2 w-1/3" scope="col">Ação realizada</th>
+          </tr>
+         </thead>
+         <tbody id="logs-table-body"></tbody>
+        </table>
+        <div class="mt-4 flex justify-end">
+         <button class="bg-purple-700 hover:bg-purple-600 text-white rounded-md px-4 py-2 shadow-md transition focus:outline-none focus:ring-2 focus:ring-purple-600" id="download-audit-btn" type="button">Baixar histórico de auditoria</button>
+        </div>
+        <div class="mt-6 border-t border-purple-800 pt-4">
+         <div class="flex flex-col md:flex-row md:items-center md:gap-6">
+          <div class="flex items-center gap-3">
+           <button class="bg-purple-700 hover:bg-purple-600 text-white rounded-md px-4 py-2 shadow-md transition focus:outline-none focus:ring-2 focus:ring-purple-600" id="btn-2fa" type="button">Ativar 2FA</button>
+          </div>
+          <div class="mt-4 md:mt-0 flex justify-center md:justify-start">
+           <img alt="QR Code para ativação da autenticação de dois fatores (2FA)" class="rounded-md" height="120" src="https://storage.googleapis.com/a1aa/image/ad0fb589-d741-4291-2ec9-083206febbfd.jpg" width="120"/>
+          </div>
+         </div>
+        </div>
+       </div>
+      </article>
+      <!-- Configurações -->
+      <article class="hidden" id="section-configuracoes">
+       <h2 class="text-xl font-normal text-purple-400 mb-4">Configurações</h2>
+       <form class="bg-purple-900/20 border border-purple-900 rounded-lg p-6 space-y-6" id="form-configuracoes" novalidate>
+        <div>
+         <label for="theme-select" class="block text-purple-300 mb-2">Tema do aplicativo</label>
+         <select id="theme-select" class="w-full rounded-md bg-black border border-purple-700 text-purple-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-600">
+          <option value="dark" selected>Escuro</option>
+          <option value="light">Claro</option>
+         </select>
+        </div>
+        <div>
+         <label for="language-select" class="block text-purple-300 mb-2">Idioma</label>
+         <select id="language-select" class="w-full rounded-md bg-black border border-purple-700 text-purple-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-600">
+          <option value="pt-BR" selected>Português (Brasil)</option>
+          <option value="en-US">Inglês (EUA)</option>
+         </select>
+        </div>
+        <div>
+         <label class="inline-flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" id="notifications-toggle" class="form-checkbox text-purple-600" checked/>
+          <span class="text-purple-300">Ativar notificações</span>
+         </label>
+        </div>
+        <button type="submit" class="bg-purple-700 hover:bg-purple-600 text-white rounded-md px-4 py-2 shadow-md transition focus:outline-none focus:ring-2 focus:ring-purple-600">Salvar Configurações</button>
+       </form>
+      </article>
+      <!-- Conta -->
+      <article class="hidden" id="section-conta">
+       <h2 class="text-xl font-normal text-purple-400 mb-4">Conta</h2>
+       <form class="bg-purple-900/20 border border-purple-900 rounded-lg p-6 space-y-6" id="form-conta" novalidate>
+        <div>
+         <label for="nome-usuario" class="block text-purple-300 mb-2">Nome de usuário</label>
+         <input type="text" id="nome-usuario" class="w-full rounded-md bg-black border border-purple-700 text-purple-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-600" value="João Silva" required/>
+        </div>
+        <div>
+         <label for="email-usuario" class="block text-purple-300 mb-2">Email</label>
+         <input type="email" id="email-usuario" class="w-full rounded-md bg-black border border-purple-700 text-purple-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-600" value="joao.silva@example.com" required/>
+        </div>
+        <div>
+         <label for="senha-usuario" class="block text-purple-300 mb-2">Alterar senha</label>
+         <input type="password" id="senha-usuario" class="w-full rounded-md bg-black border border-purple-700 text-purple-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-600" placeholder="Nova senha"/>
+        </div>
+        <button type="submit" class="bg-purple-700 hover:bg-purple-600 text-white rounded-md px-4 py-2 shadow-md transition focus:outline-none focus:ring-2 focus:ring-purple-600">Salvar Alterações</button>
+       </form>
+      </article>
+     </section>
+     <aside aria-label="Painel de notificações" class="hidden md:flex flex-col w-80 bg-black border-l border-purple-900/70 p-4 overflow-y-auto scrollbar-thin text-sm text-purple-300" id="painel-notificacoes">
+      <h3 class="text-purple-400 font-normal mb-4">Notificações</h3>
+      <div class="space-y-3" id="lista-notificacoes" role="list"></div>
+     </aside>
+    </main>
+   </div>
+  </div>
+  <script>
+   (() => {
+    const btnMenuMobile = document.getElementById("btn-menu-mobile");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const menuItems = document.querySelectorAll("#sidebar ul li a");
+    const sections = {
+     "menu-inicio": document.getElementById("section-inicio"),
+     "menu-minhas-provas": document.getElementById("section-minhas-provas"),
+     "menu-registrar-prova": document.getElementById("section-registrar-prova"),
+     "menu-dossies": document.getElementById("section-dossies"),
+     "menu-assinatura-digital": document.getElementById("section-assinatura-digital"),
+     "menu-seguranca": document.getElementById("section-seguranca"),
+     "menu-configuracoes": document.getElementById("section-configuracoes"),
+     "menu-conta": document.getElementById("section-conta"),
+     "menu-sair": null,
+    };
+
+    function openMenu() {
+     sidebar.classList.add("open");
+     overlay.classList.add("active");
+     btnMenuMobile.setAttribute("aria-expanded", "true");
+     document.body.style.overflow = "hidden";
+    }
+    function closeMenu() {
+     sidebar.classList.remove("open");
+     overlay.classList.remove("active");
+     btnMenuMobile.setAttribute("aria-expanded", "false");
+     document.body.style.overflow = "";
+    }
+    btnMenuMobile.addEventListener("click", () => {
+     if (sidebar.classList.contains("open")) {
+      closeMenu();
+     } else {
+      openMenu();
+     }
+    });
+    overlay.addEventListener("click", () => {
+     closeMenu();
+    });
+    window.addEventListener("resize", () => {
+     if (window.innerWidth >= 768) {
+      closeMenu();
+     }
+    });
+
+    function setActiveMenu(id) {
+     menuItems.forEach((item) => {
+      if (item.id === id) {
+       item.classList.add("active-menu-item");
+       item.setAttribute("aria-current", "page");
+      } else {
+       item.classList.remove("active-menu-item");
+       item.removeAttribute("aria-current");
+      }
+     });
+    }
+    function showSection(id) {
+     Object.entries(sections).forEach(([key, section]) => {
+      if (section) {
+       if (key === id) {
+        section.classList.remove("hidden");
+        section.classList.add("block");
+       } else {
+        section.classList.add("hidden");
+        section.classList.remove("block");
+       }
+      }
+     });
+    }
+    menuItems.forEach((item) => {
+     item.addEventListener("click", (e) => {
+      e.preventDefault();
+      const id = item.id;
+      if (id === "menu-sair") {
+       // Logout funcional: limpa localStorage e redireciona para login (simulado)
+       localStorage.clear();
+       
+       // Simula redirecionamento
+       window.location.href = "pandora.html";
+       return;
+      }
+      setActiveMenu(id);
+      showSection(id);
+      closeMenu();
+     });
+    });
+
+    // Inicializa com Início ativo
+    setActiveMenu("menu-inicio");
+    showSection("menu-inicio");
+
+    // Botão Nova Prova abre Registrar Prova
+    document.getElementById("btn-nova-prova").addEventListener("click", () => {
+     setActiveMenu("menu-registrar-prova");
+     showSection("menu-registrar-prova");
+    });
+
+    // Perfil botão alerta
+    document.getElementById("btn-perfil").addEventListener("click", () => {
+     setActiveMenu("menu-conta");
+     showSection("menu-conta");
+    });
+
+    // Dados simulados para Minhas Provas
+    const provasData = [
+     {
+      id: "p1",
+      nome: "Prova de Entrega - Projeto X",
+      tipo: "PDF",
+      data: "12/04/2024 14:32",
+      status: "Válido",
+      statusColor: "text-green-400",
+      icon: "fa-file-pdf",
+      iconColor: "icon-green",
+      hash: "a3f786850e387550fdab836ed7e6dc881de23001b",
+      link: "https://verifica.prova.com/a1b2c3d4",
+     },
+     {
+      id: "p2",
+      nome: "Relatório Anual - Financeiro",
+      tipo: "DOCX",
+      data: "10/04/2024 09:15",
+      status: "Pendente",
+      statusColor: "text-yellow-400",
+      icon: "fa-file-word",
+      iconColor: "icon-blue",
+      hash: "b4f786850e387550fdab836ed7e6dc881de23002c",
+      link: "https://verifica.prova.com/b2c3d4e5",
+     },
+     {
+      id: "p3",
+      nome: "Planilha de Controle - Estoque",
+      tipo: "XLSX",
+      data: "08/04/2024 16:45",
+      status: "Válido",
+      statusColor: "text-green-400",
+      icon: "fa-file-excel",
+      iconColor: "icon-lilac",
+      hash: "c5f786850e387550fdab836ed7e6dc881de23003d",
+      link: "https://verifica.prova.com/c3d4e5f6",
+     },
+    ];
+
+    // Renderiza Minhas Provas
+    function renderProvas() {
+     const lista = document.getElementById("lista-provas");
+     lista.innerHTML = "";
+     provasData.forEach((prova) => {
+      const div = document.createElement("div");
+      div.className = "flex space-x-4 min-w-[600px] md:min-w-full";
+      div.setAttribute("role", "listitem");
+      div.innerHTML = `
+       <div class="flex-1 bg-purple-900/20 border border-purple-900 rounded-lg p-4 flex items-center gap-4">
+        <i aria-hidden="true" class="fas ${prova.icon} ${prova.iconColor} text-3xl flex-shrink-0"></i>
+        <div class="flex-1 min-w-0">
+         <p class="font-normal text-white truncate">${prova.nome}</p>
+         <p class="text-xs text-gray-400">${prova.tipo} • ${prova.data}</p>
+        </div>
+        <div aria-label="Status de integridade: ${prova.status}" class="text-xs flex items-center gap-2 whitespace-nowrap">
+         <span class="${prova.statusColor} flex items-center gap-1">
+          <i aria-hidden="true" class="fas ${
+            prova.status === "Válido" ? "fa-check-circle" : "fa-exclamation-triangle"
+           }"></i>
+          ${prova.status}
+         </span>
+        </div>
+        <div class="flex gap-2 ml-4">
+         <button aria-label="Visualizar ${prova.nome}" class="text-purple-400 hover:text-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-600" type="button" data-id="${prova.id}" data-action="visualizar">
+          <i aria-hidden="true" class="fas fa-search"></i>
+         </button>
+         <button aria-label="Baixar ${prova.nome}" class="text-purple-400 hover:text-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-600" type="button" data-id="${prova.id}" data-action="baixar">
+          <i aria-hidden="true" class="fas fa-download"></i>
+         </button>
+         <button aria-label="Copiar link ${prova.nome}" class="text-purple-400 hover:text-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-600" type="button" data-id="${prova.id}" data-action="copiar-link">
+          <i aria-hidden="true" class="fas fa-link"></i>
+         </button>
+         <button aria-label="Ver metadados ${prova.nome}" class="text-purple-400 hover:text-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-600" type="button" data-id="${prova.id}" data-action="metadados">
+          <i aria-hidden="true" class="fas fa-file-alt"></i>
+         </button>
+        </div>
+       </div>
+      `;
+      lista.appendChild(div);
+     });
+    }
+
+    // Eventos para ações das provas
+    document.getElementById("lista-provas").addEventListener("click", (e) => {
+     const btn = e.target.closest("button");
+     if (!btn) return;
+     const id = btn.getAttribute("data-id");
+     const action = btn.getAttribute("data-action");
+     const prova = provasData.find((p) => p.id === id);
+     if (!prova) return;
+
+     if (action === "visualizar") {
+      window.open(prova.link, "_blank");
+     } else if (action === "baixar") {
+      alert(`Baixando arquivo: ${prova.nome}`);
+     } else if (action === "copiar-link") {
+      navigator.clipboard.writeText(prova.link).then(() => {
+       alert("Link copiado para a área de transferência!");
+      });
+     } else if (action === "metadados") {
+      alert(
+       `Metadados da prova:\n\nNome: ${prova.nome}\nTipo: ${prova.tipo}\nData: ${prova.data}\nStatus: ${prova.status}\nHash: ${prova.hash}\nLink: ${prova.link}`
+      );
+     }
+    });
+
+    // Dados simulados para Dossiês
+    const dossiesData = [
+     {
+      id: "d1",
+      nome: "Dossiê Jurídico - Contratos",
+      provas: 12,
+      ultimaAtualizacao: "10/04/2024",
+      timeline: [
+       "12/04/2024 - Prova 1 adicionada",
+       "10/04/2024 - Prova 2 adicionada",
+       "08/04/2024 - Prova 3 adicionada",
+       "05/04/2024 - Prova 4 adicionada",
+       "01/04/2024 - Prova 5 adicionada",
+      ],
+     },
+     {
+      id: "d2",
+      nome: "Dossiê Financeiro - Relatórios",
+      provas: 8,
+      ultimaAtualizacao: "08/04/2024",
+      timeline: [
+       "10/04/2024 - Prova 1 adicionada",
+       "07/04/2024 - Prova 2 adicionada",
+       "05/04/2024 - Prova 3 adicionada",
+       "02/04/2024 - Prova 4 adicionada",
+       "30/03/2024 - Prova 5 adicionada",
+      ],
+     },
+     {
+      id: "d3",
+      nome: "Dossiê Projetos - Entregas",
+      provas: 15,
+      ultimaAtualizacao: "12/04/2024",
+      timeline: [
+       "12/04/2024 - Prova 1 adicionada",
+       "11/04/2024 - Prova 2 adicionada",
+       "09/04/2024 - Prova 3 adicionada",
+       "07/04/2024 - Prova 4 adicionada",
+       "05/04/2024 - Prova 5 adicionada",
+      ],
+     },
+    ];
+
+    // Renderiza Dossiês
+    function renderDossies() {
+     const container = document.getElementById("lista-dossies");
+     container.innerHTML = "";
+     dossiesData.forEach((dossie) => {
+      const div = document.createElement("div");
+      div.className = "bg-purple-900/20 border border-purple-900 rounded-lg p-4 flex flex-col justify-between";
+      div.innerHTML = `
+       <div>
+        <h3 class="text-white font-normal text-lg truncate">${dossie.nome}</h3>
+        <p class="text-gray-400 text-sm mt-1">${dossie.provas} provas</p>
+        <p class="text-gray-400 text-xs mt-1">Última atualização: ${dossie.ultimaAtualizacao}</p>
+       </div>
+       <div class="mt-4 flex justify-between items-center flex-wrap gap-2">
+        <button class="flex items-center gap-2 bg-purple-700 hover:bg-purple-600 text-white rounded-md px-3 py-1 text-sm shadow-md transition focus:outline-none focus:ring-2 focus:ring-purple-600" data-id="${dossie.id}" data-action="exportar-zip" type="button">
+         <i aria-hidden="true" class="fas fa-box"></i> Exportar .zip
+        </button>
+        <button class="flex items-center gap-2 bg-purple-700 hover:bg-purple-600 text-white rounded-md px-3 py-1 text-sm shadow-md transition focus:outline-none focus:ring-2 focus:ring-purple-600" data-id="${dossie.id}" data-action="exportar-pdf" type="button">
+         <i aria-hidden="true" class="fas fa-file-signature"></i> Exportar .pdf assinado
+        </button>
+       </div>
+       <div aria-label="Linha do tempo de provas do ${dossie.nome}" class="mt-4 border-t border-purple-800 pt-2 text-xs text-gray-400 max-h-24 overflow-y-auto scrollbar-thin" tabindex="0">
+        <p><strong>Linha do tempo de provas:</strong></p>
+        <ul class="list-disc list-inside space-y-1">
+         ${dossie.timeline.map((item) => `<li>${item}</li>`).join("")}
+        </ul>
+       </div>
+      `;
+      container.appendChild(div);
+     });
+    }
+
+    // Eventos para ações dos dossiês
+    document.getElementById("lista-dossies").addEventListener("click", (e) => {
+     const btn = e.target.closest("button");
+     if (!btn) return;
+     const id = btn.getAttribute("data-id");
+     const action = btn.getAttribute("data-action");
+     const dossie = dossiesData.find((d) => d.id === id);
+     if (!dossie) return;
+
+     if (action === "exportar-zip") {
+      alert(`Exportando ZIP do ${dossie.nome}`);
+     } else if (action === "exportar-pdf") {
+      alert(`Exportando PDF assinado do ${dossie.nome}`);
+     }
+    });
+
+    // Registrar Nova Prova form funcionalidade
+    const fileInput = document.getElementById("file-upload");
+    const hashValue = document.getElementById("hash-value");
+    const timestampValue = document.getElementById("timestamp-value");
+    const idValue = document.getElementById("id-value");
+    const linkValue = document.getElementById("link-value");
+    const qrCode = document.getElementById("qr-code");
+    const downloadProofBtn = document.getElementById("download-proof-btn");
+    const formRegistrarProva = document.getElementById("form-registrar-prova");
+
+    fileInput.addEventListener("change", () => {
+     if (fileInput.files.length === 0) {
+      hashValue.textContent = "-";
+      timestampValue.textContent = "-";
+      idValue.textContent = "-";
+      linkValue.textContent = "-";
+      linkValue.href = "#";
+      qrCode.src = "https://placehold.co/100x100/png?text=QR+Code";
+      downloadProofBtn.disabled = true;
+      return;
+     }
+     const now = new Date();
+     const timestamp = now.toISOString().replace("T", " ").substring(0, 19);
+     const fakeHash = "a3f786850e387550fdab836ed7e6dc881de23001b";
+     const fakeId = "a1b2c3d4-e5f6-7890-abcd-ef1234567890";
+     const fakeLink = "https://verifica.prova.com/" + fakeId.substring(0, 8);
+
+     hashValue.textContent = fakeHash;
+     timestampValue.textContent = timestamp;
+     idValue.textContent = fakeId;
+     linkValue.textContent = fakeLink;
+     linkValue.href = fakeLink;
+     qrCode.src = `https://placehold.co/100x100/png?text=QR+Code`;
+     downloadProofBtn.disabled = false;
+    });
+
+    formRegistrarProva.addEventListener("submit", (e) => {
+     e.preventDefault();
+     if (fileInput.files.length === 0) {
+      alert("Por favor, selecione um arquivo para enviar.");
+      return;
+     }
+     const newProva = {
+      id: "p" + (provasData.length + 1),
+      nome: fileInput.files[0].name,
+      tipo: fileInput.files[0].name.split(".").pop().toUpperCase(),
+      data: new Date().toLocaleString("pt-BR", {
+       day: "2-digit",
+       month: "2-digit",
+       year: "numeric",
+       hour: "2-digit",
+       minute: "2-digit",
+      }),
+      status: document.getElementById("sign-checkbox").checked ? "Válido" : "Pendente",
+      statusColor: document.getElementById("sign-checkbox").checked ? "text-green-400" : "text-yellow-400",
+      icon:
+       fileInput.files[0].name.endsWith(".pdf")
+        ? "fa-file-pdf"
+        : fileInput.files[0].name.endsWith(".doc") || fileInput.files[0].name.endsWith(".docx")
+        ? "fa-file-word"
+        : fileInput.files[0].name.endsWith(".xls") || fileInput.files[0].name.endsWith(".xlsx")
+        ? "fa-file-excel"
+        : "fa-file",
+      iconColor:
+       fileInput.files[0].name.endsWith(".pdf")
+        ? "icon-green"
+        : fileInput.files[0].name.endsWith(".doc") || fileInput.files[0].name.endsWith(".docx")
+        ? "icon-blue"
+        : fileInput.files[0].name.endsWith(".xls") || fileInput.files[0].name.endsWith(".xlsx")
+        ? "icon-lilac"
+        : "icon-lilac",
+      hash: hashValue.textContent,
+      link: linkValue.textContent,
+     };
+     provasData.unshift(newProva);
+     renderProvas();
+     alert("Arquivo enviado com sucesso!");
+     formRegistrarProva.reset();
+     hashValue.textContent = "-";
+     timestampValue.textContent = "-";
+     idValue.textContent = "-";
+     linkValue.textContent = "-";
+     linkValue.href = "#";
+     qrCode.src = "https://placehold.co/100x100/png?text=QR+Code";
+     downloadProofBtn.disabled = true;
+     setActiveMenu("menu-minhas-provas");
+     showSection("menu-minhas-provas");
+    });
+
+    downloadProofBtn.addEventListener("click", () => {
+     alert("Comprovante baixado com sucesso!");
+    });
+
+    // Assinatura Digital form funcionalidade
+    const formAssinaturaDigital = document.getElementById("form-assinatura-digital");
+    formAssinaturaDigital.addEventListener("submit", (e) => {
+     e.preventDefault();
+     const fileInputDoc = document.getElementById("upload-doc");
+     if (fileInputDoc.files.length === 0) {
+      alert("Por favor, selecione um documento para assinatura.");
+      return;
+     }
+     alert("Documento enviado para assinatura!");
+     formAssinaturaDigital.reset();
+    });
+
+    // Segurança e Logs - Dados simulados
+    const logsData = [
+     { ip: "192.168.0.101", datetime: "12/04/2024 15:30", action: "Login realizado com sucesso" },
+     { ip: "192.168.0.101", datetime: "12/04/2024 15:45", action: "Registro de nova prova" },
+     { ip: "192.168.0.102", datetime: "11/04/2024 10:12", action: "Assinatura digital concluída" },
+     { ip: "192.168.0.103", datetime: "10/04/2024 09:00", action: "Alteração de configurações" },
+     { ip: "192.168.0.104", datetime: "09/04/2024 14:22", action: "Ativação de 2FA" },
+     { ip: "192.168.0.105", datetime: "08/04/2024 16:45", action: "Download de comprovante" },
+     { ip: "192.168.0.106", datetime: "07/04/2024 11:30", action: "Logout realizado" },
+    ];
+
+    // Renderiza logs
+    function renderLogs() {
+     const tbody = document.getElementById("logs-table-body");
+     tbody.innerHTML = "";
+     logsData.forEach((log) => {
+      const tr = document.createElement("tr");
+      tr.className = "border-b border-purple-800 hover:bg-purple-900/40";
+      tr.innerHTML = `
+       <td class="p-2 break-words">${log.ip}</td>
+       <td class="p-2">${log.datetime}</td>
+       <td class="p-2">${log.action}</td>
+      `;
+      tbody.appendChild(tr);
+     });
+    }
+
+    // Botões Segurança
+    document.getElementById("download-audit-btn").addEventListener("click", () => {
+     alert("Histórico de auditoria baixado com sucesso!");
+    });
+    document.getElementById("btn-2fa").addEventListener("click", () => {
+     alert("2FA ativado com sucesso!");
+    });
+
+    // Renderiza notificações
+    const notificacoesData = [
+     {
+      id: "n1",
+      icon: "fa-check-circle",
+      iconColor: "icon-green",
+      title: "Prova registrada com sucesso",
+      actions: [
+       { label: "Visualizar", action: () => alert("Visualizando prova registrada") },
+       { label: "Baixar", action: () => alert("Baixando prova registrada") },
+      ],
+     },
+     {
+      id: "n2",
+      icon: "fa-pen-nib",
+      iconColor: "icon-lilac",
+      title: "Assinatura concluída",
+      actions: [
+       { label: "Visualizar", action: () => alert("Visualizando assinatura concluída") },
+       { label: "Baixar", action: () => alert("Baixando assinatura concluída") },
+      ],
+     },
+     {
+      id: "n3",
+      icon: "fa-box",
+      iconColor: "icon-blue",
+      title: "Novo dossiê criado",
+      actions: [
+       { label: "Visualizar", action: () => alert("Visualizando novo dossiê") },
+       { label: "Exportar", action: () => alert("Exportando novo dossiê") },
+      ],
+     },
+    ];
+
+    function renderNotificacoes() {
+     const container = document.getElementById("lista-notificacoes");
+     container.innerHTML = "";
+     notificacoesData.forEach((not) => {
+      const div = document.createElement("div");
+      div.className = "flex items-center gap-3 bg-purple-900/20 border border-purple-900 rounded-md p-3";
+      div.setAttribute("role", "listitem");
+      div.innerHTML = `
+       <i aria-hidden="true" class="fas ${not.icon} ${not.iconColor} text-xl flex-shrink-0"></i>
+       <div class="flex-1">
+        <p class="text-white font-normal">${not.title}</p>
+        <div class="mt-1 flex gap-2">
+         ${not.actions
+           .map(
+            (a, i) =>
+             `<button class="text-purple-400 hover:text-purple-300 text-xs focus:outline-none focus:ring-2 focus:ring-purple-600 rounded px-1" data-notif-id="${not.id}" data-action-index="${i}" type="button">${a.label}</button>`
+           )
+           .join("")}
+        </div>
+       </div>
+      `;
+      container.appendChild(div);
+     });
+    }
+
+    document.getElementById("lista-notificacoes").addEventListener("click", (e) => {
+     const btn = e.target.closest("button");
+     if (!btn) return;
+     const notifId = btn.getAttribute("data-notif-id");
+     const actionIndex = parseInt(btn.getAttribute("data-action-index"), 10);
+     const notif = notificacoesData.find((n) => n.id === notifId);
+     if (!notif) return;
+     const action = notif.actions[actionIndex];
+     if (action && typeof action.action === "function") {
+      action.action();
+     }
+    });
+
+    // Configurações form
+    const formConfiguracoes = document.getElementById("form-configuracoes");
+    formConfiguracoes.addEventListener("submit", (e) => {
+     e.preventDefault();
+     const theme = document.getElementById("theme-select").value;
+     const language = document.getElementById("language-select").value;
+     const notifications = document.getElementById("notifications-toggle").checked;
+     // Salvar localStorage (simulado)
+     localStorage.setItem("app-theme", theme);
+     localStorage.setItem("app-language", language);
+     localStorage.setItem("app-notifications", notifications);
+     alert("Configurações salvas com sucesso!");
+    });
+
+    // Conta form
+    const formConta = document.getElementById("form-conta");
+    formConta.addEventListener("submit", (e) => {
+     e.preventDefault();
+     const nome = document.getElementById("nome-usuario").value.trim();
+     const email = document.getElementById("email-usuario").value.trim();
+     const senha = document.getElementById("senha-usuario").value;
+     if (!nome || !email) {
+      alert("Nome e email são obrigatórios.");
+      return;
+     }
+     // Simular validação e atualização
+     alert("Dados da conta atualizados com sucesso!");
+     formConta.reset();
+     // Recarregar dados simulados
+     document.getElementById("nome-usuario").value = nome;
+     document.getElementById("email-usuario").value = email;
+    });
+
+    // Inicializações
+    renderProvas();
+    renderDossies();
+    renderLogs();
+    renderNotificacoes();
+   })();
+  </script>
+ </body>
+</html>

@@ -197,19 +197,24 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       padding: 1rem 1.5rem;
       width: 100%;
       max-width: 768px;
       margin: 0 auto 3rem;
       transition: color 0.7s ease;
+      position: relative;
     }
     main h1 {
       font-weight: 600;
       font-size: 1.125rem;
       margin-bottom: 1.5rem;
       color: #f9fafb;
-      transition: color 0.7s ease;
+      transition: color 0.7s ease, opacity 0.5s ease;
+      text-align: center;
+      user-select: none;
+      position: relative;
+      z-index: 1;
     }
     form {
       width: 100%;
@@ -221,6 +226,8 @@
       gap: 0.75rem;
       box-shadow: 0 4px 12px rgba(0,0,0,0.6);
       transition: background-color 0.7s ease;
+      z-index: 2;
+      position: relative;
     }
     label {
       font-size: 0.75rem;
@@ -373,9 +380,7 @@
     }
     body.delphos header #main-header {
       background-color: #0f172a;
-      
     }
-
     body.delphos header #main-header #header-name {
       color: #ffffff;
       font-weight: 700;
@@ -385,7 +390,6 @@
     body.delphos header #main-header #header-ai {
       background-color: #fcfcfc;
       color: #0f172a;
-     
       font-size: 1.5rem;
       font-weight: 900;
     }
@@ -490,7 +494,6 @@
       object-fit: contain;
       user-select: none;
       flex-shrink: 0;
-  
       transition: filter 0.7s ease;
       position: relative;
       display: flex;
@@ -510,7 +513,7 @@
       object-fit: contain;
       filter: drop-shadow(0 0 6px #000000);
       transition: filter 0.7s ease;
-      display: none; /* Esconde a imagem atrás do SVG */
+      display: none;
     }
     .delphos-logo-svg {
       position: absolute;
@@ -653,6 +656,94 @@
         font-size: 1rem;
       }
     }
+    /* Chat bubbles container */
+    #chat-container {
+      width: 100%;
+      max-width: 768px;
+      margin: 0 auto 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 0 1.5rem;
+      overflow-y: auto;
+      max-height: 50vh;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+      z-index: 1;
+      scrollbar-width: none; /* Firefox */
+    }
+    #chat-container::-webkit-scrollbar {
+      display: none; /* Chrome, Safari e Edge */
+    }
+    /* Chat bubble base */
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.75rem 1rem;
+      border-radius: 1.25rem;
+      font-size: 1rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      user-select: text;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(15px);
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      animation-duration: 0.4s;
+    }
+    /* User bubble */
+    .chat-bubble.user {
+      align-self: flex-end;
+      background-color: #ffffff;
+      color: #1e293b;
+      border-bottom-right-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+      animation-name: slideUpFadeUser;
+    }
+    /* AI bubble */
+    .chat-bubble.ai {
+      align-self: flex-start;
+      background-color: #f3f4f6;
+      color: #111827;
+      border-bottom-left-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+      animation-name: slideUpFadeAI;
+    }
+    /* DELPHOS mode overrides */
+    body.delphos .chat-bubble.user {
+      background-color: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.8);
+    }
+    body.delphos .chat-bubble.ai {
+      background-color: #e0e7ff;
+      color: #0f172a;
+      box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+    }
+    @keyframes slideUpFadeUser {
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    @keyframes slideUpFadeAI {
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
   </style>
 </head>
 <body>
@@ -685,11 +776,14 @@
   <main>
     <h1 id="main-title">Como posso ajudar?</h1>
 
+    <div id="chat-container" aria-live="polite" aria-relevant="additions"></div>
+
     <form
       autocomplete="off"
       spellcheck="false"
       role="search"
       aria-label="Formulário para fazer perguntas"
+      id="chat-form"
     >
       <input type="text" id="query" name="query" placeholder="Pergunte qualquer coisa" autocomplete="off" />
       <div class="form-buttons" id="form-buttons">
@@ -761,6 +855,9 @@
       let headerAI = document.getElementById('header-ai');
       const mainTitle = document.getElementById('main-title');
       const formButtons = document.getElementById('form-buttons');
+      const chatContainer = document.getElementById('chat-container');
+      const chatForm = document.getElementById('chat-form');
+      const input = document.getElementById('query');
 
       // Dados do modo ATHENA
       const athena = {
@@ -770,7 +867,6 @@
         headerAI: "IA",
         headerAIAria: "IA",
         mainTitle: "Como posso ajudar?",
-        formLabel: "Pergunte qualquer coisa",
         formButtons: [
           { label: "Anexar", icon: "fas fa-paperclip", aria: "Anexar" },
           { label: "Pesquisar", icon: "fas fa-globe", aria: "Pesquisar" },
@@ -794,7 +890,6 @@
         headerAI: "IA",
         headerAIAria: "IA",
         mainTitle: "Como Delphos pode ajudar você?",
-        formLabel: "Digite sua consulta",
         formButtons: [
           { label: "Enviar", icon: "fas fa-upload", aria: "Enviar arquivo" },
           { label: "Explorar", icon: "fas fa-search", aria: "Explorar" },
@@ -958,6 +1053,7 @@
             headerAI.setAttribute('aria-label', athena.headerAIAria);
 
             mainTitle.textContent = athena.mainTitle;
+            mainTitle.style.opacity = '1';
 
             clearChildren(formButtons);
             athena.formButtons.forEach(btnData => {
@@ -974,10 +1070,10 @@
             });
 
             modeToggleBtn.setAttribute('aria-pressed', 'false');
-            modeToggleBtn.innerHTML = `<i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="ml-1">Delphos</span>`;
+            modeToggleBtn.innerHTML = '<i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="ml-1">Delphos</span>';
 
-            const input = document.getElementById('query');
             input.placeholder = "Pergunte qualquer coisa";
+            clearChat();
           });
         } else if (mode === 'delphos') {
           body.classList.add('delphos');
@@ -1021,6 +1117,7 @@
             headerAI.setAttribute('aria-label', delphos.headerAIAria);
 
             mainTitle.textContent = delphos.mainTitle;
+            mainTitle.style.opacity = '1';
 
             clearChildren(formButtons);
             delphos.formButtons.forEach(btnData => {
@@ -1037,13 +1134,55 @@
             });
 
             modeToggleBtn.setAttribute('aria-pressed', 'true');
-            modeToggleBtn.innerHTML = `<i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="ml-1">Athena</span>`;
+            modeToggleBtn.innerHTML = '<i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="ml-1">Athena</span>';
 
-            const input = document.getElementById('query');
             input.placeholder = "Digite sua consulta";
+            clearChat();
           });
         }
       }
+
+      function clearChat() {
+        clearChildren(chatContainer);
+        mainTitle.style.opacity = '1';
+      }
+
+      function appendMessage(text, sender) {
+        if (!text.trim()) return;
+        if (chatContainer.children.length === 0) {
+          // Hide the main title on first message
+          mainTitle.style.opacity = '0';
+        }
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${sender}`;
+        bubble.textContent = text;
+        chatContainer.appendChild(bubble);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      // Simula resposta da IA (apenas para demo)
+      function simulateAIResponse(userText) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve(`Resposta da IA para: "${userText}"`);
+          }, 1000);
+        });
+      }
+
+      chatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const userInput = input.value.trim();
+        if (!userInput) return;
+        appendMessage(userInput, 'user');
+        input.value = '';
+        input.disabled = true;
+
+        const aiResponse = await simulateAIResponse(userInput);
+        appendMessage(aiResponse, 'ai');
+
+        input.disabled = false;
+        input.focus();
+      });
 
       modeToggleBtn.addEventListener('click', () => {
         if (currentMode === 'athena') {
