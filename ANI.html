@@ -1,222 +1,1328 @@
-<html lang="en">
+<html lang="pt-BR" class="transition-colors duration-700">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ATHENA AI - Refined Smooth Opening Animation</title>
+  <title>ATHENA AI / DELPHOS AI Alternar</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;400&display=swap"
     rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
   />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
   <style>
     body {
-      margin: 0;
-      height: 100vh;
-      background: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      font-family: 'Playfair Display', serif;
-      color: #111111;
-      user-select: none;
-    }
-
-    .container {
+      background-color: #000000;
+      color: #e5e7eb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
+      transition: background-color 0.7s ease, color 0.7s ease;
+      margin: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+    header {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
       align-items: center;
-      gap: 1.5rem;
+      justify-content: space-between;
+      position: relative;
+      z-index: 20;
+      background-color: #000;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-image {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .logo-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 1.5rem;
+      letter-spacing: 0.12em;
+      color: #fff;
+      user-select: text;
+    }
+    .logo-ai {
+      background-color: #000;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 9999px;
+      width: 1.75rem;
+      height: 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      box-shadow: 0 0 8px #ffffff88;
+      font-size: 1rem;
+      user-select: text;
+      flex-shrink: 0;
+    }
+    main {
+      flex-grow: 1;
+      max-width: 768px;
+      width: 100%;
+      margin: 1.5rem auto 3rem;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      z-index: 10;
+    }
+    #main-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #f9fafb;
       text-align: center;
-      perspective: 800px;
+      user-select: none;
+      transition: opacity 0.5s ease;
+      margin: 0;
     }
-
-    /* Helmet wrapper with smooth fade, scale and subtle 3D tilt */
-    .helmet-wrapper {
-      width: 96px;
-      height: 96px;
+    #chat-container {
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: 60vh;
+      padding: 0 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    #chat-container::-webkit-scrollbar {
+      width: 8px;
+    }
+    #chat-container::-webkit-scrollbar-thumb {
+      background-color: rgba(255 255 255 / 0.2);
+      border-radius: 4px;
+    }
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.75rem 1rem;
+      border-radius: 1.25rem;
+      font-size: 1rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      user-select: text;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       opacity: 0;
-      transform: scale(0.85) rotateX(15deg) rotateY(-10deg);
-      animation: helmetFadeScaleRotate 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      will-change: transform, opacity;
-      background: transparent;
-      box-shadow: none;
-      transition: filter 0.3s ease;
+      transform: translateY(15px);
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      animation-duration: 0.4s;
+      word-break: break-word;
+      position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
-    @media (min-width: 640px) {
-      .helmet-wrapper {
-        width: 144px;
-        height: 144px;
+    .chat-bubble.user {
+      align-self: flex-end;
+      background-color: #fff;
+      color: #1e293b;
+      border-bottom-right-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+      animation-name: slideUpFadeUser;
+      max-width: 90%;
+    }
+    .chat-bubble.ai {
+      align-self: flex-start;
+      background-color: #f3f4f6;
+      color: #111827;
+      border-bottom-left-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+      animation-name: slideUpFadeAI;
+      max-width: 90%;
+    }
+    @keyframes slideUpFadeUser {
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
       }
     }
-    .helmet-wrapper:hover {
-      filter: drop-shadow(0 0 8px rgba(0,0,0,0.12));
-      cursor: default;
-    }
-
-    .helmet-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: transparent;
-      border-radius: 0;
-      display: block;
-      transform: scaleX(-1);
-      /* Flip horizontally to face left */
-      filter: drop-shadow(0 0 3px rgba(0,0,0,0.1));
-      transition: filter 0.3s ease;
-    }
-    .helmet-wrapper:hover .helmet-img {
-      filter: drop-shadow(0 0 8px rgba(0,0,0,0.18));
-    }
-
-    @keyframes helmetFadeScaleRotate {
-      0% {
+    @keyframes slideUpFadeAI {
+      from {
         opacity: 0;
-        transform: scale(0.85) rotateX(15deg) rotateY(-10deg);
+        transform: translateY(15px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    form {
+      display: flex;
+      gap: 0.5rem;
+      background-color: #1f1f21;
+      border-radius: 1.5rem;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+    input[type="text"] {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 1rem;
+      font-family: inherit;
+      padding: 0.5rem 0.75rem;
+      border-radius: 9999px;
+      user-select: text;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    input[type="text"]::placeholder {
+      color: #9ca3af;
+      transition: color 0.3s ease;
+    }
+    button.icon-btn {
+      background: transparent;
+      border: none;
+      color: #d1d5db;
+      cursor: pointer;
+      font-size: 1.25rem;
+      padding: 0.25rem;
+      border-radius: 50%;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    button.icon-btn:hover {
+      background-color: #4b5563;
+      color: #f9fafb;
+    }
+    #send-button {
+      background-color: #d97706;
+      color: #1e293b;
+      font-weight: 700;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    #send-button:hover {
+      background-color: #fbbf24;
+    }
+    #mic-btn {
+      background: transparent;
+      border: none;
+      color: #d1d5db;
+      cursor: pointer;
+      font-size: 1.25rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 1.5px #d1d5db;
+      width: 2.5rem;
+      height: 2.5rem;
+      position: relative;
+      overflow: visible;
+    }
+    #mic-btn.recording {
+      color: #dc2626;
+      box-shadow: 0 0 8px #dc2626;
+      animation: pulse 1.5s infinite;
+    }
+    #mic-btn:hover {
+      background-color: #4b5563;
+      color: #f9fafb;
+      box-shadow: 0 0 0 1.5px #f9fafb;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 8px #dc2626, 0 0 16px #dc2626;
       }
       50% {
-        opacity: 1;
-        transform: scale(1.1) rotateX(0deg) rotateY(0deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotateX(5deg) rotateY(-5deg);
+        box-shadow: 0 0 16px #dc2626, 0 0 24px #dc2626;
       }
     }
-
-    /* Text container with requested design and smooth fade/slide */
-    .text-row {
+    #mic-btn .bars {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 8px;
+      width: 14px;
+    }
+    #mic-btn .bar {
+      width: 2px;
+      background-color: currentColor;
+      border-radius: 1px;
+      animation: bounce 1.2s infinite ease-in-out;
+      transform-origin: bottom center;
+    }
+    #mic-btn.recording .bar:nth-child(1) {
+      animation-delay: 0s;
+      height: 4px;
+    }
+    #mic-btn.recording .bar:nth-child(2) {
+      animation-delay: 0.15s;
+      height: 6px;
+    }
+    #mic-btn.recording .bar:nth-child(3) {
+      animation-delay: 0.3s;
+      height: 8px;
+    }
+    #mic-btn.recording .bar:nth-child(4) {
+      animation-delay: 0.45s;
+      height: 6px;
+    }
+    #mic-btn.recording .bar:nth-child(5) {
+      animation-delay: 0.6s;
+      height: 4px;
+    }
+    @keyframes bounce {
+      0%, 100% {
+        transform: scaleY(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scaleY(1.8);
+        opacity: 1;
+      }
+    }
+    #menu-toggle {
+      background: transparent;
+      border: none;
+      color: #d1d5db;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 50%;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #menu-toggle:hover {
+      background-color: #4b5563;
+      color: #f9fafb;
+    }
+    #menu {
+      position: absolute;
+      top: 100%;
+      right: 1.5rem;
+      background-color: #1f1f21;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+      padding: 0.5rem 0;
+      display: none;
+      flex-direction: column;
+      min-width: 160px;
+      z-index: 30;
+    }
+    #menu.show {
+      display: flex;
+    }
+    #menu button {
+      background: transparent;
+      border: none;
+      color: #d1d5db;
+      padding: 0.5rem 1rem;
+      text-align: left;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      user-select: none;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: textFadeUp 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      animation-delay: 3.6s;
-      will-change: transform, opacity;
-      user-select: text;
     }
-
-    @keyframes textFadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    #menu button:hover {
+      background-color: #4b5563;
+      color: #f9fafb;
     }
-
-    /* ATHENA text styling */
-    .athena-text {
-      font-weight: 100;
-      font-size: 1.875rem; /* text-3xl */
-      letter-spacing: 0.12em;
-      color: #111111;
-      user-select: text;
-      font-family: 'Playfair Display', serif;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-    @media (min-width: 640px) {
-      .athena-text {
-        font-size: 2.25rem; /* text-4xl */
-      }
-    }
-    .athena-text:hover {
-      color: #000000;
-      cursor: default;
-    }
-
-    /* AI badge styling */
-    .ai-badge {
-      background: #000000;
-      color: #ffffff;
-      font-weight: 600;
-      width: 36px; /* w-9 */
-      height: 36px; /* h-9 */
+    #mode-toggle-menu {
+      margin-top: 0.25rem;
       border-radius: 9999px;
+      border: 1.5px solid #d1d5db;
+      padding: 0.25rem 0.75rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      background-color: transparent;
+      color: #d1d5db;
+      cursor: pointer;
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 1.25rem; /* text-xl */
-      user-select: text;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      gap: 0.5rem;
+      user-select: none;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      justify-content: center;
+    }
+    #mode-toggle-menu[aria-pressed="true"] {
+      background-color: #facc15;
+      color: #1e293b;
+      border-color: #b45309;
+      box-shadow: 0 0 12px #b45309;
+    }
+    #mode-toggle-menu:hover {
+      background-color: #4b5563;
+      color: #f9fafb;
+      border-color: #d97706;
+    }
+    #mode-toggle-menu[aria-pressed="true"]:hover {
+      background-color: #fbbf24;
+      color: #1e293b;
+      border-color: #92400e;
+      box-shadow: 0 0 16px #92400e;
+    }
+    @media (max-width: 640px) {
+      header {
+        padding: 0.75rem 1rem;
+      }
+      .logo-image {
+        width: 48px;
+        height: 48px;
+      }
+      .logo-name {
+        font-size: 1.25rem;
+      }
+      .logo-ai {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.875rem;
+      }
+      main {
+        margin: 1rem auto 2rem;
+        padding: 0 0.75rem;
+      }
+      #main-title {
+        font-size: 1.125rem;
+      }
+      form {
+        padding: 0.5rem 0.75rem;
+      }
+      input[type="text"] {
+        font-size: 1rem;
+        padding: 0.5rem 0.75rem;
+      }
+      #send-button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+      }
+      #mic-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 1.1rem;
+        padding: 0.2rem 0.4rem;
+      }
+      #menu {
+        right: 1rem;
+        min-width: 140px;
+      }
+      #menu button {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.75rem;
+      }
+      #mode-toggle-menu {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.5rem;
+      }
+    }
+    body.delphos {
+      background-color: #0f172a;
+      color: #cbd5e1;
+    }
+    body.delphos header {
+      background-color: #0f172a;
+      box-shadow: 0 4px 12px rgba(30, 41, 59, 0.9);
+    }
+    body.delphos .logo-name {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+    }
+    body.delphos .logo-ai {
+      background-color: #fcfcfc;
+      color: #0f172a;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 0 8px #ffffffcc;
+    }
+    body.delphos main h1 {
+      color: #e0e7ff;
+    }
+    body.delphos form {
+      background-color: #1e293b;
+      box-shadow: 0 4px 12px rgba(30, 41, 59, 0.9);
+    }
+    body.delphos input[type="text"] {
+      background-color: #0f172a;
+      border-color: transparent;
+      color: #cbd5e1;
+    }
+    body.delphos input[type="text"]::placeholder {
+      color: #94a3b8;
+    }
+    body.delphos button.icon-btn {
+      color: #cbd5e1;
+    }
+    body.delphos button.icon-btn:hover {
+      background-color: #475569;
+      color: #e0e7ff;
+    }
+    body.delphos #send-button {
+      background-color: #facc15;
+      color: #0f172a;
+    }
+    body.delphos #send-button:hover {
+      background-color: #fde68a;
+    }
+    body.delphos #menu {
+      background-color: #1e293b;
+      box-shadow: 0 4px 12px rgba(30, 41, 59, 0.9);
+    }
+    body.delphos #menu button {
+      color: #cbd5e1;
+    }
+    body.delphos #menu button:hover {
+      background-color: #475569;
+      color: #e0e7ff;
+    }
+    body.delphos #mode-toggle-menu {
+      border-color: #cbd5e1;
+      color: #cbd5e1;
+      background-color: transparent;
+    }
+    body.delphos #mode-toggle-menu[aria-pressed="true"] {
+      background-color: #facc15;
+      color: #0f172a;
+      border-color: #b45309;
+      box-shadow: 0 0 12px #b45309;
+    }
+    #voice-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.95) 100%);
+      backdrop-filter: blur(6px);
+      z-index: 50;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #e0e7ff;
+      font-family: 'Montserrat', sans-serif;
+      user-select: none;
+      padding: 1rem;
+      text-align: center;
+    }
+    #voice-overlay.active {
+      display: flex;
+    }
+    #voice-overlay .listening-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 8px #7c3aed;
+    }
+    #voice-overlay .pulse-circle {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.3);
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.7);
+      animation: pulseGlow 2.5s infinite ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    #voice-overlay .pulse-circle .icon {
+      font-size: 3.5rem;
+      color: #7c3aed;
+      filter: drop-shadow(0 0 4px #7c3aed);
+      z-index: 10;
+    }
+    #voice-overlay .pulse-circle::before,
+    #voice-overlay .pulse-circle::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(124, 58, 237, 0.5);
+      animation: pulseWave 2.5s infinite ease-in-out;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    #voice-overlay .pulse-circle::before {
+      width: 160px;
+      height: 160px;
+      top: -10px;
+      left: -10px;
+      animation-delay: 0s;
+    }
+    #voice-overlay .pulse-circle::after {
+      width: 180px;
+      height: 180px;
+      top: -20px;
+      left: -20px;
+      animation-delay: 1.25s;
+    }
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.7);
+        background: rgba(124, 58, 237, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(124, 58, 237, 1);
+        background: rgba(124, 58, 237, 0.5);
+      }
+    }
+    @keyframes pulseWave {
+      0% {
+        transform: scale(0.8);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+    #voice-control-bar {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+      user-select: none;
+    }
+    #voice-control-bar button {
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      cursor: pointer;
+      font-size: 2.5rem;
+      padding: 0;
+      border-radius: 50%;
+      width: 3.75rem;
+      height: 3.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
       flex-shrink: 0;
-      opacity: 0;
-      transform: translateX(20px);
-      animation: aiSlideIn 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      animation-delay: 4.95s;
-      box-shadow: 0 0 6px rgba(0,0,0,0.15);
-      will-change: transform, opacity, box-shadow;
+      transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 6px #ffffff88;
     }
-    .ai-badge:hover {
-      background-color: #222222;
-      box-shadow: 0 0 12px rgba(0,0,0,0.25);
-      cursor: default;
+    #voice-control-bar button:hover {
+      color: #7c3aed;
+      border-color: #7c3aed;
+      box-shadow: 0 0 12px #7c3aed;
     }
-    @media (min-width: 640px) {
-      .ai-badge {
-        width: 40px; /* w-10 */
-        height: 40px; /* h-10 */
-        font-size: 1.5rem; /* text-2xl */
+    #voice-control-bar #voice-mic-btn.recording {
+      color: #dc2626;
+      border-color: #dc2626;
+      box-shadow: 0 0 16px #dc2626;
+      animation: pulse 1.5s infinite;
+    }
+    @media (max-width: 640px) {
+      #voice-control-bar {
+        bottom: 1rem;
+        right: 1rem;
       }
-    }
-
-    @keyframes aiSlideIn {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    /* Subtle elegant underline animation below text */
-    .underline {
-      width: 0;
-      height: 2px;
-      background: #111111;
-      margin: 0 auto;
-      margin-top: 0;
-      border-radius: 1px;
-      animation: underlineExpand 2.2s ease forwards;
-      animation-delay: 5.8s;
-      will-change: width;
-    }
-    @keyframes underlineExpand {
-      to {
-        width: 60px;
+      #voice-control-bar button {
+        font-size: 2rem;
+        width: 3rem;
+        height: 3rem;
       }
     }
   </style>
 </head>
 <body>
-  <main aria-label="ATHENA AI opening animation" class="container" role="main">
-    <div aria-hidden="true" class="helmet-wrapper" tabindex="-1">
+  <header>
+    <div class="logo-container" role="banner" aria-label="Logo ATHENA AI">
       <img
-        src="https://storage.googleapis.com/a1aa/image/49508cd8-f9f8-4247-0ee2-4c5cdfd1efc9.jpg"
-        alt="Black outline drawing of a Spartan helmet facing left with a crest on top, transparent background"
-        class="helmet-img"
+        id="logo-image"
+        src="https://storage.googleapis.com/a1aa/image/c15194d4-99ef-41cf-a6bc-8035c6f2d332.jpg"
+        alt="Desenho em contorno preto de um capacete espartano virado para a direita com uma crista no topo"
+        class="logo-image"
         decoding="async"
-        draggable="false"
         loading="lazy"
-        width="144"
-        height="144"
+        draggable="false"
       />
+      <div class="logo-text">
+        <span id="header-name" class="logo-name">ATHENA</span>
+        <span id="header-ai" class="logo-ai" aria-label="IA">IA</span>
+      </div>
     </div>
-    <div class="text-row">
-      <span class="athena-text select-text" aria-label="ATHENA">
-        ATHENA
-      </span>
-      <span class="ai-badge select-text" aria-label="Artificial Intelligence">
-        AI
-      </span>
-    </div>
-    <div aria-hidden="true" class="underline"></div>
+    <button id="menu-toggle" aria-label="Abrir menu de opções" aria-expanded="false" aria-controls="menu">
+      <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+    </button>
+    <nav id="menu" role="menu" aria-label="Menu de opções">
+      <button type="button" id="mode-toggle-menu" aria-pressed="false" role="menuitem" aria-label="Alternar entre os modos Athena e Delphos">
+        <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+        <span>Delphos</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <h1 id="main-title">Como posso ajudar?</h1>
+
+    <div id="chat-container" aria-live="polite" aria-relevant="additions"></div>
+
+    <form autocomplete="off" spellcheck="false" role="search" aria-label="Formulário para fazer perguntas" id="chat-form">
+      <input type="text" id="message-input" name="query" placeholder="Pergunte qualquer coisa" autocomplete="off" />
+      <button id="voice-mic-btn" aria-label="Ativar modo de voz completo" title="Ativar modo de voz completo" type="button">
+        <i class="fas fa-phone-alt"></i>
+      </button>
+      <button type="button" id="mic-btn" aria-label="Gravar áudio e transcrever para o campo de texto">
+        <i class="fas fa-microphone" aria-hidden="true"></i>
+        <div class="bars" aria-hidden="true">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </button>
+      <button type="submit" id="send-button" aria-label="Enviar pergunta">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+      </button>
+    </form>
   </main>
 
+  <div id="voice-overlay" role="region" aria-live="assertive" aria-label="Modo de escuta ativa">
+    <div class="listening-text" id="listening-text">Estou ouvindo...</div>
+    <div class="pulse-circle" aria-hidden="true">
+      <i class="fas fa-microphone icon"></i>
+    </div>
+    <button
+      id="mute-button"
+      aria-pressed="true"
+      aria-label="Microfone desativado, clique para ativar"
+      type="button"
+      class="w-16 h-16 rounded-full flex items-center justify-center bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-4 focus:ring-red-300 relative"
+    >
+      <i class="fas fa-microphone-slash text-red-600 text-2xl relative z-10"></i>
+      <svg
+        aria-hidden="true"
+        class="absolute inset-0 w-full h-full"
+        viewBox="0 0 64 64"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <line
+          x1="12"
+          y1="52"
+          x2="52"
+          y2="12"
+          stroke="#DC2626"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+
+    <button
+      id="hangup-button"
+      aria-label="Encerrar chamada"
+      type="button"
+      class="w-16 h-16 rounded-full flex items-center justify-center bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-400"
+    >
+      <i class="fas fa-times text-black text-2xl"></i>
+    </button>
+  </div>
+
+  <div id="voice-response-text" aria-live="polite" aria-atomic="true" aria-relevant="additions"></div>
+
+  <div id="voice-control-bar" role="region" aria-label="Controles de voz"></div>
+
   <script>
-    // Redirect to chat.html after 10 seconds
-    setTimeout(() => {
-      window.location.href = 'chat.html';
-    }, 10000);
+    (() => {
+      const body = document.body;
+      const menuToggleBtn = document.getElementById('menu-toggle');
+      const menu = document.getElementById('menu');
+      const modeToggleMenuBtn = document.getElementById('mode-toggle-menu');
+      const logoImage = document.getElementById('logo-image');
+      const headerName = document.getElementById('header-name');
+      const headerAI = document.getElementById('header-ai');
+      const mainTitle = document.getElementById('main-title');
+      const chatContainer = document.getElementById('chat-container');
+      const chatForm = document.getElementById('chat-form');
+      const input = document.getElementById('message-input');
+      const micBtn = document.getElementById('mic-btn');
+      const voiceMicBtn = document.getElementById('voice-mic-btn');
+      const sendButton = document.getElementById('send-button');
+
+      const voiceOverlay = document.getElementById('voice-overlay');
+      const listeningText = document.getElementById('listening-text');
+      const voiceResponseText = document.getElementById('voice-response-text');
+      const voiceControlBar = document.getElementById('voice-control-bar');
+      const muteButton = document.getElementById('mute-button');
+      const hangupButton = document.getElementById('hangup-button');
+
+      const modes = {
+        athena: {
+          logoSrc: "https://storage.googleapis.com/a1aa/image/c15194d4-99ef-41cf-a6bc-8035c6f2d332.jpg",
+          logoAlt: "Desenho em contorno preto de um capacete espartano virado para a direita com uma crista no topo",
+          headerName: "ATHENA",
+          headerAI: "IA",
+          mainTitle: "Como posso ajudar?",
+          modeToggleLabel: "Delphos",
+          modeToggleAriaPressed: "false",
+          modeToggleIcon: "fas fa-exchange-alt",
+          placeholder: "Pergunte qualquer coisa"
+        },
+        delphos: {
+          logoSrc: "https://placehold.co/56x56/png?text=Delphos+Logo",
+          logoAlt: "Ícone abstrato de olho off-white com formas sobrepostas em fundo transparente",
+          headerName: "DELPHOS",
+          headerAI: "IA",
+          mainTitle: "Como Delphos pode ajudar você?",
+          modeToggleLabel: "Athena",
+          modeToggleAriaPressed: "true",
+          modeToggleIcon: "fas fa-exchange-alt",
+          placeholder: "Digite sua consulta"
+        }
+      };
+
+      let currentMode = 'athena';
+
+      function setMode(mode) {
+        if (mode === currentMode) return;
+        currentMode = mode;
+        const data = modes[mode];
+
+        if (mode === 'delphos') {
+          body.classList.add('delphos');
+        } else {
+          body.classList.remove('delphos');
+        }
+
+        logoImage.src = data.logoSrc;
+        logoImage.alt = data.logoAlt;
+
+        headerName.textContent = data.headerName;
+        headerAI.textContent = data.headerAI;
+
+        mainTitle.textContent = data.mainTitle;
+        mainTitle.style.opacity = '1';
+
+        input.placeholder = data.placeholder;
+
+        modeToggleMenuBtn.setAttribute('aria-pressed', data.modeToggleAriaPressed);
+        modeToggleMenuBtn.innerHTML = `<i class="${data.modeToggleIcon}" aria-hidden="true"></i><span>${data.modeToggleLabel}</span>`;
+
+        closeMenu();
+        clearChat();
+      }
+
+      function clearChat() {
+        chatContainer.innerHTML = '';
+        mainTitle.style.opacity = '1';
+      }
+
+      function appendMessage(text, sender, editable = false) {
+        if (!text.trim()) return;
+        if (chatContainer.children.length === 0) {
+          mainTitle.style.opacity = '0';
+        }
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${sender}`;
+        if (editable) {
+          bubble.contentEditable = "true";
+          bubble.spellcheck = false;
+          bubble.setAttribute('aria-label', 'Mensagem de áudio transcrita, edite se desejar');
+          bubble.textContent = text;
+          bubble.style.outline = '2px solid #fbbf24';
+          bubble.style.cursor = 'text';
+          bubble.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              bubble.blur();
+              sendEditedMessage(bubble);
+            }
+          });
+          bubble.addEventListener('blur', () => {
+            sendEditedMessage(bubble);
+          });
+        } else {
+          bubble.textContent = text;
+        }
+        chatContainer.appendChild(bubble);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        requestAnimationFrame(() => {
+          bubble.style.opacity = '1';
+          bubble.style.transform = 'translateY(0) scale(1)';
+        });
+        return bubble;
+      }
+
+      function sendEditedMessage(bubble) {
+        if (!bubble) return;
+        const text = bubble.textContent.trim();
+        if (!text) {
+          bubble.remove();
+          if (chatContainer.children.length === 0) mainTitle.style.opacity = '1';
+          return;
+        }
+        bubble.contentEditable = false;
+        bubble.style.outline = 'none';
+        bubble.style.cursor = 'default';
+        bubble.removeEventListener('keydown', () => {});
+        bubble.removeEventListener('blur', () => {});
+        input.disabled = true;
+        micBtn.disabled = true;
+        voiceMicBtn.disabled = true;
+        simulateAIResponse(text).then(aiResponse => {
+          appendMessage(aiResponse, 'ai');
+          input.disabled = false;
+          micBtn.disabled = false;
+          voiceMicBtn.disabled = false;
+          input.focus();
+        });
+      }
+
+      function simulateAIResponse(userText) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve(`Resposta da IA para: "${userText}"`);
+          }, 1000);
+        });
+      }
+
+      chatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const userInput = input.value.trim();
+        if (!userInput) return;
+        appendMessage(userInput, 'user');
+        input.value = '';
+        input.disabled = true;
+        micBtn.disabled = true;
+        voiceMicBtn.disabled = true;
+
+        const aiResponse = await simulateAIResponse(userInput);
+        appendMessage(aiResponse, 'ai');
+
+        input.disabled = false;
+        micBtn.disabled = false;
+        voiceMicBtn.disabled = false;
+        input.focus();
+      });
+
+      function toggleMenu() {
+        const expanded = menuToggleBtn.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      }
+      function openMenu() {
+        menu.classList.add('show');
+        menuToggleBtn.setAttribute('aria-expanded', 'true');
+        document.addEventListener('click', outsideClickListener);
+      }
+      function closeMenu() {
+        menu.classList.remove('show');
+        menuToggleBtn.setAttribute('aria-expanded', 'false');
+        document.removeEventListener('click', outsideClickListener);
+      }
+      function outsideClickListener(e) {
+        if (!menu.contains(e.target) && e.target !== menuToggleBtn) {
+          closeMenu();
+        }
+      }
+
+      menuToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      modeToggleMenuBtn.addEventListener('click', () => {
+        setMode(currentMode === 'athena' ? 'delphos' : 'athena');
+      });
+
+      // Recognition for voice-mic-btn (full voice mode: capture, transcribe, send, speak)
+      let recognitionVoiceMode = null;
+      let isRecordingVoiceMode = false;
+      let currentTranscriptionBubbleVoiceMode = null;
+
+      // Recognition for mic-btn (capture, transcribe, fill input only)
+      let recognitionTranscribeOnly = null;
+      let isRecordingTranscribeOnly = false;
+
+      // Initialize recognition for voice-mic-btn
+      function initRecognitionVoiceMode() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) return null;
+        const recog = new SpeechRecognition();
+        recog.lang = 'pt-BR';
+        recog.interimResults = true;
+        recog.maxAlternatives = 1;
+        return recog;
+      }
+
+      // Initialize recognition for mic-btn
+      function initRecognitionTranscribeOnly() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) return null;
+        const recog = new SpeechRecognition();
+        recog.lang = 'pt-BR';
+        recog.interimResults = true;
+        recog.maxAlternatives = 1;
+        return recog;
+      }
+
+      recognitionVoiceMode = initRecognitionVoiceMode();
+      recognitionTranscribeOnly = initRecognitionTranscribeOnly();
+
+      // Voice Mode (voice-mic-btn) handlers
+      if (recognitionVoiceMode) {
+        recognitionVoiceMode.addEventListener('start', () => {
+          isRecordingVoiceMode = true;
+          voiceMicBtn.classList.add('recording');
+          voiceMicBtn.setAttribute('aria-label', 'Gravando áudio, clique para parar');
+          listeningText.textContent = 'Estou ouvindo...';
+          currentTranscriptionBubbleVoiceMode = appendMessage('', 'user', true);
+          input.disabled = true;
+          micBtn.disabled = true;
+          voiceMicBtn.disabled = false;
+          chatForm.style.pointerEvents = 'none';
+          chatForm.style.userSelect = 'none';
+          input.value = '';
+        });
+
+        recognitionVoiceMode.addEventListener('end', () => {
+          isRecordingVoiceMode = false;
+          voiceMicBtn.classList.remove('recording');
+          voiceMicBtn.setAttribute('aria-label', 'Ativar modo de voz completo');
+          input.disabled = false;
+          micBtn.disabled = false;
+          voiceMicBtn.disabled = false;
+          chatForm.style.pointerEvents = 'auto';
+          chatForm.style.userSelect = 'auto';
+          if (currentTranscriptionBubbleVoiceMode) {
+            if (!currentTranscriptionBubbleVoiceMode.textContent.trim()) {
+              currentTranscriptionBubbleVoiceMode.remove();
+              if (chatContainer.children.length === 0) mainTitle.style.opacity = '1';
+            }
+            currentTranscriptionBubbleVoiceMode = null;
+          }
+          input.focus();
+        });
+
+        recognitionVoiceMode.addEventListener('error', (event) => {
+          isRecordingVoiceMode = false;
+          voiceMicBtn.classList.remove('recording');
+          voiceMicBtn.setAttribute('aria-label', 'Ativar modo de voz completo');
+          alert('Erro no reconhecimento de voz: ' + event.error);
+          if (currentTranscriptionBubbleVoiceMode) {
+            currentTranscriptionBubbleVoiceMode.remove();
+            currentTranscriptionBubbleVoiceMode = null;
+          }
+          input.disabled = false;
+          micBtn.disabled = false;
+          voiceMicBtn.disabled = false;
+          chatForm.style.pointerEvents = 'auto';
+          chatForm.style.userSelect = 'auto';
+          input.focus();
+        });
+
+        recognitionVoiceMode.addEventListener('result', (event) => {
+          let interimTranscript = '';
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              if (currentTranscriptionBubbleVoiceMode) {
+                currentTranscriptionBubbleVoiceMode.textContent = transcript.trim();
+                currentTranscriptionBubbleVoiceMode.contentEditable = false;
+                currentTranscriptionBubbleVoiceMode.style.outline = 'none';
+                currentTranscriptionBubbleVoiceMode.style.cursor = 'default';
+                processVoiceInputVoiceMode(currentTranscriptionBubbleVoiceMode.textContent);
+                currentTranscriptionBubbleVoiceMode = null;
+              } else {
+                processVoiceInputVoiceMode(transcript.trim());
+              }
+            } else {
+              interimTranscript += transcript;
+              if (currentTranscriptionBubbleVoiceMode) {
+                currentTranscriptionBubbleVoiceMode.textContent = interimTranscript.trim();
+              }
+            }
+          }
+        });
+      }
+
+      async function processVoiceInputVoiceMode(text) {
+        if (!text.trim()) return;
+        appendMessage(text, 'user');
+        recognitionVoiceMode.stop();
+        listeningText.textContent = 'Processando...';
+        voiceMicBtn.classList.remove('recording');
+        try {
+          const aiResponse = await simulateAIResponse(text);
+          appendMessage(aiResponse, 'ai');
+          speakText(aiResponse);
+        } catch (e) {
+          listeningText.textContent = 'Erro ao processar.';
+          voiceMicBtn.classList.remove('recording');
+        }
+      }
+
+      // Transcribe Only Mode (mic-btn) handlers
+      if (recognitionTranscribeOnly) {
+        recognitionTranscribeOnly.addEventListener('start', () => {
+          isRecordingTranscribeOnly = true;
+          micBtn.classList.add('recording');
+          micBtn.setAttribute('aria-label', 'Gravando áudio, clique para parar');
+          input.disabled = true;
+          voiceMicBtn.disabled = true;
+          chatForm.style.pointerEvents = 'none';
+          chatForm.style.userSelect = 'none';
+        });
+
+        recognitionTranscribeOnly.addEventListener('end', () => {
+          isRecordingTranscribeOnly = false;
+          micBtn.classList.remove('recording');
+          micBtn.setAttribute('aria-label', 'Gravar áudio e transcrever para o campo de texto');
+          input.disabled = false;
+          voiceMicBtn.disabled = false;
+          chatForm.style.pointerEvents = 'auto';
+          chatForm.style.userSelect = 'auto';
+          input.focus();
+        });
+
+        recognitionTranscribeOnly.addEventListener('error', (event) => {
+          isRecordingTranscribeOnly = false;
+          micBtn.classList.remove('recording');
+          micBtn.setAttribute('aria-label', 'Gravar áudio e transcrever para o campo de texto');
+          alert('Erro no reconhecimento de voz: ' + event.error);
+          input.disabled = false;
+          voiceMicBtn.disabled = false;
+          chatForm.style.pointerEvents = 'auto';
+          chatForm.style.userSelect = 'auto';
+          input.focus();
+        });
+
+        recognitionTranscribeOnly.addEventListener('result', (event) => {
+          let interimTranscript = '';
+          let finalTranscript = '';
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalTranscript += transcript;
+            } else {
+              interimTranscript += transcript;
+            }
+          }
+          // Update input with interim + final transcript
+          input.value = finalTranscript + interimTranscript;
+        });
+      }
+
+      // voice-mic-btn click: toggle full voice mode and toggle voice-overlay visibility
+      voiceMicBtn.addEventListener('click', () => {
+        if (voiceOverlay.classList.contains('active')) {
+          // Stop voice mode
+          voiceOverlay.classList.remove('active');
+          if (recognitionVoiceMode && isRecordingVoiceMode) {
+            recognitionVoiceMode.stop();
+          }
+          input.disabled = false;
+          micBtn.disabled = false;
+          voiceMicBtn.classList.remove('recording');
+          voiceMicBtn.setAttribute('aria-label', 'Ativar modo de voz completo');
+        } else {
+          // Start voice mode
+          voiceOverlay.classList.add('active');
+          if (recognitionVoiceMode && !isRecordingVoiceMode) {
+            recognitionVoiceMode.start();
+          }
+          input.disabled = true;
+          micBtn.disabled = true;
+          voiceMicBtn.classList.add('recording');
+          voiceMicBtn.setAttribute('aria-label', 'Gravando áudio, clique para parar');
+        }
+      });
+
+      // mic-btn click: toggle transcribe only mode
+      micBtn.addEventListener('click', () => {
+        if (!recognitionTranscribeOnly) return;
+        if (isRecordingTranscribeOnly) {
+          recognitionTranscribeOnly.stop();
+        } else {
+          recognitionTranscribeOnly.start();
+        }
+      });
+
+      // Speech synthesis for voice-mic-btn mode
+      let speechSynthesisUtterance = null;
+      let speechSynthesisInstance = window.speechSynthesis;
+      let isSpeaking = false;
+      let voicesList = [];
+
+      function loadVoices() {
+        voicesList = speechSynthesisInstance.getVoices();
+        if (!voicesList.length) {
+          speechSynthesisInstance.onvoiceschanged = () => {
+            voicesList = speechSynthesisInstance.getVoices();
+          };
+        }
+      }
+      loadVoices();
+
+      function selectVoice() {
+        if (!voicesList.length) return null;
+        let filtered = voicesList.filter(v => v.lang.startsWith('pt-BR'));
+        filtered = filtered.filter(v => /female|woman|woman/i.test(v.name) || /female|woman|woman/i.test(v.voiceURI));
+        if (filtered.length === 0) filtered = voicesList.filter(v => v.lang.startsWith('pt-BR'));
+        return filtered[0] || voicesList[0];
+      }
+
+      function speakText(text) {
+        if (!text) return;
+        if (speechSynthesisInstance.speaking) {
+          speechSynthesisInstance.cancel();
+        }
+        speechSynthesisUtterance = new SpeechSynthesisUtterance(text);
+        speechSynthesisUtterance.lang = 'pt-BR';
+        speechSynthesisUtterance.rate = 1;
+        speechSynthesisUtterance.voice = selectVoice();
+        speechSynthesisUtterance.onstart = () => {
+          isSpeaking = true;
+          listeningText.textContent = 'Falando...';
+          voiceResponseText.classList.add('active');
+          voiceMicBtn.classList.remove('recording');
+        };
+        speechSynthesisUtterance.onend = () => {
+          isSpeaking = false;
+          listeningText.textContent = 'Estou ouvindo...';
+          voiceMicBtn.classList.add('recording');
+          voiceResponseText.classList.remove('active');
+          voiceResponseText.textContent = '';
+          recognitionVoiceMode.start();
+        };
+        speechSynthesisUtterance.onerror = () => {
+          isSpeaking = false;
+          listeningText.textContent = 'Erro na fala.';
+          voiceMicBtn.classList.remove('recording');
+          voiceResponseText.classList.remove('active');
+          voiceResponseText.textContent = '';
+          recognitionVoiceMode.start();
+        };
+        let charIndex = 0;
+        const displayInterval = 50;
+        voiceResponseText.textContent = '';
+        const displayTimer = setInterval(() => {
+          if (charIndex < text.length) {
+            voiceResponseText.textContent += text.charAt(charIndex);
+            charIndex++;
+            voiceResponseText.scrollTop = voiceResponseText.scrollHeight;
+          } else {
+            clearInterval(displayTimer);
+          }
+        }, displayInterval);
+        speechSynthesisInstance.speak(speechSynthesisUtterance);
+      }
+
+      function stopSpeaking() {
+        if (speechSynthesisInstance.speaking) {
+          speechSynthesisInstance.cancel();
+        }
+        isSpeaking = false;
+      }
+
+      // Voice Overlay Buttons functionality
+
+      // Mute button toggles microphone on/off during voice mode
+      let micMuted = true;
+      muteButton.addEventListener('click', () => {
+        micMuted = !micMuted;
+        if (micMuted) {
+          muteButton.setAttribute('aria-pressed', 'true');
+          muteButton.setAttribute('aria-label', 'Microfone desativado, clique para ativar');
+          muteButton.querySelector('i').classList.add('text-red-600');
+          muteButton.querySelector('i').classList.remove('text-green-600');
+          if (recognitionVoiceMode && isRecordingVoiceMode) {
+            recognitionVoiceMode.stop();
+          }
+          listeningText.textContent = 'Microfone desativado';
+        } else {
+          muteButton.setAttribute('aria-pressed', 'false');
+          muteButton.setAttribute('aria-label', 'Microfone ativado, clique para desativar');
+          muteButton.querySelector('i').classList.remove('text-red-600');
+          muteButton.querySelector('i').classList.add('text-green-600');
+          if (recognitionVoiceMode && !isRecordingVoiceMode) {
+            recognitionVoiceMode.start();
+          }
+          listeningText.textContent = 'Microfone ativado, estou ouvindo...';
+        }
+      });
+
+      // Hangup button closes voice overlay and stops recognition and speech
+      hangupButton.addEventListener('click', () => {
+        voiceOverlay.classList.remove('active');
+        if (recognitionVoiceMode && isRecordingVoiceMode) {
+          recognitionVoiceMode.stop();
+        }
+        stopSpeaking();
+        input.disabled = false;
+        micBtn.disabled = false;
+        voiceMicBtn.classList.remove('recording');
+        voiceMicBtn.setAttribute('aria-label', 'Ativar modo de voz completo');
+        muteButton.setAttribute('aria-pressed', 'true');
+        muteButton.setAttribute('aria-label', 'Microfone desativado, clique para ativar');
+        muteButton.querySelector('i').classList.add('text-red-600');
+        muteButton.querySelector('i').classList.remove('text-green-600');
+        micMuted = true;
+        listeningText.textContent = 'Estou ouvindo...';
+      });
+
+      setMode('athena');
+    })();
   </script>
 </body>
 </html>
